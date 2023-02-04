@@ -1,0 +1,1163 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/04-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:56 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>XeMart - Ecommerce Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="/css/assets/animate.css">
+
+    <!-- Owl Slider -->
+    <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/css/assets/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/assets/responsive.css">
+
+</head>
+<body>
+
+<header th:replace="header.html :: header"></header>
+
+<!-- Mobile Menu -->
+<section class="mobile-menu-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mobile-menu">
+                    <nav id="dropdown">
+                        <a href="#"><img src="/images/logo.png" alt=""></a>
+                        <a href="#"><span>Sign In</span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="/itemList">Home</a>
+                                <ul class="list-unstyled">
+                                    <li><a href="index.html">Home Style 1</a></li>
+                                    <li><a href="02-home-two.html">Home Style 2</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Pages</a>
+                                <ul class="list-unstyled">
+                                    <li><a href="03-about-us.html">About Us</a></li>
+                                    <li><a href="04-category.html">Category</a></li>
+                                    <li><a href="05-single-product.html">Single Product</a></li>
+                                    <li><a href="06-shopping-cart.html">Shopping Cart</a></li>
+                                    <li><a href="07-checkout.html">Checkout</a></li>
+                                    <li><a href="08-login.html">Log In</a></li>
+                                    <li><a href="09-register.html">Register</a></li>
+                                    <li><a href="10-wishlist.html">Wishlist</a></li>
+                                    <li><a href="11-compare.html">Compare</a></li>
+                                    <li><a href="15-track-order.html">Track Order</a></li>
+                                    <li><a href="12-terms-condition.html">Terms & Condition</a></li>
+                                    <li><a href="13-faq.html">Faq</a></li>
+                                    <li><a href="14-404.html">404</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Blog</a>
+                                <ul class="list-unstyled">
+                                    <li><a href="16-blog-one.html">Blog Style 1</a></li>
+                                    <li><a href="17-blog-two.html">Blog Style 2</a></li>
+                                    <li><a href="18-blog-three.html">Blog Style 3</a></li>
+                                    <li><a href="19-blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="20-contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Mobile Menu -->
+
+<!-- Breadcrumb Area -->
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-box text-center">
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item"><a href="itemList">중고</a></li>
+                        <li class="list-inline-item"><span>||</span> 거래</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Breadcrumb Area -->
+
+<!-- Category Area -->
+<section class="category">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="category-box">
+                    <div class="sec-title">
+                        <h6>Categories</h6>
+                    </div>
+                    <!-- accordion -->
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse1">
+                                    <span>남성의류</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse1" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 100)}">
+                                            <i class="fa fa-angle-right"></i> 남성 상의</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 100, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 남성 상의</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}"
+                                               th:href="@{itemList(category = 101)}"><i
+                                                class="fa fa-angle-right"></i> 남성 하의</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 101, SEARCH = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 남성 하의</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 102)}">
+                                            <i class="fa fa-angle-right"></i> 남성 속옷</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 102, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 남성 속옷</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 103)}">
+                                            <i class="fa fa-angle-right"></i> 남성 기타의류</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 103, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 남성 기타의류</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse2">
+                                    <span>여성의류</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse2" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 200)}">
+                                            <i class="fa fa-angle-right"></i> 여성 상의</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 200, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 여성 상의</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}"
+                                               th:href="@{itemList(category = 201)}"><i
+                                                class="fa fa-angle-right"></i> 여성 하의</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 201, SEARCH = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 여성 하의</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 202)}">
+                                            <i class="fa fa-angle-right"></i> 여성 속옷</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 202, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 여성 속옷</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 203)}">
+                                            <i class="fa fa-angle-right"></i> 여성 기타의류</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 203, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 여성 기타의류</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse3">
+                                    <span>신발</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse3" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 300)}">
+                                            <i class="fa fa-angle-right"></i> 스니커즈</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 300, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 스니커즈</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}"
+                                               th:href="@{itemList(category = 301)}"><i
+                                                class="fa fa-angle-right"></i> 남성화</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 301, SEARCH = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 남성화</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 302)}">
+                                            <i class="fa fa-angle-right"></i> 여성화</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 302, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 여성화</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 303)}">
+                                            <i class="fa fa-angle-right"></i> 기타신발</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 303, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 기타신발</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse4">
+                                    <span>액세서리/잡화</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse4" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 400)}">
+                                            <i class="fa fa-angle-right"></i> 시계</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 400, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 시계</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}"
+                                               th:href="@{itemList(category = 401)}"><i
+                                                class="fa fa-angle-right"></i> 쥬얼리</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 401, SEARCH = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 쥬얼리</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 402)}">
+                                            <i class="fa fa-angle-right"></i> 지갑</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 402, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 지갑</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 403)}">
+                                            <i class="fa fa-angle-right"></i> 안경/선글라스</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 403, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 안경/선글라스</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 404)}">
+                                            <i class="fa fa-angle-right"></i> 기타 액세서리</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 404, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 기타 액세서리</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse5">
+                                    <span>디지털/가전</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse5" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 500)}">
+                                            <i class="fa fa-angle-right"></i> 모바일</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 500, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 모바일</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}"
+                                               th:href="@{itemList(category = 501)}"><i
+                                                class="fa fa-angle-right"></i> 가전제품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 501, SEARCH = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 가전제품</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 502)}">
+                                            <i class="fa fa-angle-right"></i> 오디오/영상/관련기기</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 502, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 오디오/영상/관련기기</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 503)}">
+                                            <i class="fa fa-angle-right"></i> PC/노트북</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 503, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> PC/노트북</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 504)}">
+                                            <i class="fa fa-angle-right"></i> 게임/타이틀</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 504, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 게임/타이틀</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 505)}">
+                                            <i class="fa fa-angle-right"></i> 기타 전자기기</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 505, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 기타 전자기기</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse6">
+                                    <span>스포츠/레저</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse6" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 600)}">
+                                            <i class="fa fa-angle-right"></i> 골프</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 600, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 골프</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}"
+                                               th:href="@{itemList(category = 601)}"><i
+                                                class="fa fa-angle-right"></i> 캠핑</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 601, SEARCH = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 캠핑</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 602)}">
+                                            <i class="fa fa-angle-right"></i> 낚시</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 602, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 낚시</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 603)}">
+                                            <i class="fa fa-angle-right"></i> 축구</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 603, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 축구</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 604)}">
+                                            <i class="fa fa-angle-right"></i> 자전거</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 604, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 자전거</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 605)}">
+                                            <i class="fa fa-angle-right"></i> 기타 스포츠/레저 용품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 605, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 기타 스포츠/레저 용품</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse7">
+                                    <span>도서/티켓/문구</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse7" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 700)}">
+                                            <i class="fa fa-angle-right"></i> 도서</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 700, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 도서</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}"
+                                               th:href="@{itemList(category = 701)}"><i
+                                                class="fa fa-angle-right"></i> 문구</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 701, SEARCH = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 문구</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 702)}">
+                                            <i class="fa fa-angle-right"></i> 기프티콘/쿠폰</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 702, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 기프티콘/쿠폰</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 703)}">
+                                            <i class="fa fa-angle-right"></i> 상품권</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 703, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 상품권</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 704)}">
+                                            <i class="fa fa-angle-right"></i> 티켓</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 704, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 티켓</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse8">
+                                    <span>뷰티/미용</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse8" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 800)}">
+                                            <i class="fa fa-angle-right"></i> 스킨케어</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 800, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 스킨케어</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}"
+                                               th:href="@{itemList(category = 801)}"><i
+                                                class="fa fa-angle-right"></i> 메이크업</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 801, SEARCH = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 메이크업</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 802)}">
+                                            <i class="fa fa-angle-right"></i> 바디/헤어케어</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 802, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 바디/헤어케어</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 803)}">
+                                            <i class="fa fa-angle-right"></i> 향수/아로마</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 803, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 향수/아로마</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 804)}">
+                                            <i class="fa fa-angle-right"></i> 남성 화장품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 804, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 남성 화장품</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 805)}">
+                                            <i class="fa fa-angle-right"></i> 기타 뷰티/미용 용품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 805, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 기타 뷰티/미용 용품</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse9">
+                                    <span>생활/가공식품</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse9" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 900)}">
+                                            <i class="fa fa-angle-right"></i> 주방용품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 900, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 주방용품</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}"
+                                               th:href="@{itemList(category = 901)}"><i
+                                                class="fa fa-angle-right"></i> 생활용품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 901, SEARCH = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 생활용품</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 902)}">
+                                            <i class="fa fa-angle-right"></i> 식품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 902, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 식품</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 903)}">
+                                            <i class="fa fa-angle-right"></i> 산업용품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 903, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 산업용품</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse10">
+                                    <span>유아동</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse10" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 1000)}">
+                                            <i class="fa fa-angle-right"></i> 베이비의류(0~2세)</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 1000, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 베이비의류(0~2세)</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 1001)}"><i
+                                                class="fa fa-angle-right"></i> 남아의류(3세~)</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 1001, SEARCH = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 남아의류(3세~)</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 1002)}">
+                                            <i class="fa fa-angle-right"></i> 여아의류(3세~)</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 1002, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 여아의류(3세~)</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 1003)}">
+                                            <i class="fa fa-angle-right"></i> 교육/완구/인형</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 1003, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 교육/완구/인형</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 1004)}">
+                                            <i class="fa fa-angle-right"></i> 이유용품/유아식기</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 1004, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 이유용품/유아식기</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 1005)}">
+                                            <i class="fa fa-angle-right"></i> 기타 유아동 용품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 1005, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 기타 유아동 용품</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse11">
+                                    <span>반려동물용품</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse11" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 1100)}">
+                                            <i class="fa fa-angle-right"></i> 강아지 용품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 1100, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 강아지 용품</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 1101)}"><i
+                                                class="fa fa-angle-right"></i> 강아지 사료/간식</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 1101, SEARCH = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 강아지 사료/간식</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 1102)}">
+                                            <i class="fa fa-angle-right"></i> 고양이 용품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 1102, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 고양이 용품</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 1103)}">
+                                            <i class="fa fa-angle-right"></i> 고양이 사료/간식</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 1103, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 고양이 사료/간식</a>
+                                        </li>
+                                        <li><a th:if="${session.search eq null}" th:href="@{itemList(category = 1104)}">
+                                            <i class="fa fa-angle-right"></i> 기타 반려동물 용품</a>
+                                            <a th:if="${session.search ne null}"
+                                               th:href="@{itemList(category = 1104, search = ${session.search.search})}">
+                                                <i class="fa fa-angle-right"></i> 기타 반려동물 용품</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cat-brand">
+                    <div class="sec-title">
+                        <h6>Brands</h6>
+                    </div>
+                    <div class="brand-box">
+                        <ul class="list-unstyled">
+                            <li><input type="checkbox" id="samsung" name="name"><label for="samsung">Samsung</label>
+                            </li>
+                            <li><input type="checkbox" id="apple" name="name"><label for="apple">Apple</label></li>
+                            <li><input type="checkbox" id="sony" name="name"><label for="sony">Sony</label></li>
+                            <li><input type="checkbox" id="onep" name="name"><label for="onep">One Plus</label></li>
+                            <li><input type="checkbox" id="hua" name="name"><label for="hua">Huawei</label></li>
+                            <li><input type="checkbox" id="whi" name="name"><label for="whi">Whirlpool</label></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pro-tag">
+                    <div class="sec-title">
+                        <h6>Product Tag</h6>
+                    </div>
+                    <div class="tag-box">
+                        <a href="#">Shirt</a>
+                        <a href="#">Smartphone</a>
+                        <a href="#">Camera</a>
+                        <a href="#">Pant</a>
+                        <a href="#">Glass</a>
+                        <a href="#">Smart Led Tv</a>
+                        <a href="#">Watch</a>
+                        <a href="#">Micro Oven</a>
+                        <a href="#">Toy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="product-box">
+                    <div class="cat-box d-flex justify-content-between">
+                        <!-- Nav tabs -->
+                        <div class="view">
+                        </div>
+                        <div class="page">
+                            <p>Page [[${paging.page}]] of [[${paging.maxPage}]]</p>
+                        </div>
+                    </div>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="grid" role="tabpanel">
+                            <div th:if="${itemList.isEmpty()}" style="text-align: center; display: block">
+                                <p style="font-size: 28px; margin-bottom: 20px; color:#5677fc; font-weight: 700;">'[[${session.search.search}]]'</p>
+                                <span style="font-size: 15px; font-weight: bold;">에 대한 검색 항목이 없습니다.</span>
+                            </div>
+                            <div class="row" id="ItemListArea">
+                                <div th:each="itemList : ${itemList}" class="col-lg-4 col-md-6"
+                                     style="display : inline">
+                                    <div class="tab-item">
+                                        <div class="tab-img">
+                                            <a th:href="@{itemView(itemNum=${itemList.itemNum})}"><img class="main-img img-fluid"
+                                                                                                       th:src="@{/itemPhoto/{itemPhoto}(itemPhoto=${itemList.itemPhotoName})}" style="width:252.98px; height:252.98px;"
+                                                                                                       alt="" onerror="this.src='/images/noimg.jpg';" ></a>
+                                            <div class="layer-box" th:id="itemLike">
+                                                <a th:if="${session.login ne null}" href='javascript:void(0);' class="it-fav" data-toggle="tooltip"
+                                                   onclick="itemLike([[${itemView.itemNum}]])" data-placement="left"
+                                                   title="좋아요"><img src="/images/it-fav.png" alt=""></a>
+                                                <a th:if="${session.login eq null}" href='javascript:void(0);' class="it-fav" data-toggle="tooltip"
+                                                   data-placement="left" onclick="itemLikeError()"
+                                                   title="좋아요"><img src="/images/it-fav.png" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="tab-heading">
+                                            <p><a th:href="@{itemView(itemNum=${itemList.itemNum})}"
+                                                  style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 230px; font-size : 20px">[[${itemList.itemName}]]</a></p>
+                                        </div>
+                                        <div class="img-content d-flex justify-content-between" style="text-align: justify;">
+                                            <div>
+                                                <ul class="list-unstyled list-inline price">
+                                                    <li class="list-inline-item"
+                                                        style="padding-bottom : 6px; font-size : 18px">[[${itemList.itemPrice}]]원
+                                                    </li>
+                                                    <li class="list-inline-item"></li>
+                                                </ul>
+                                                <ul class="list-unstyled list-inline fav">
+                                                    <li class="list-inline-item">[[${itemList.itRegion}]]</li>
+                                                </ul>
+
+                                            </div>
+                                            <div style="text-align: right">
+                                                <ul class="list-unstyled list-inline fav" style="margin-bottom: 10px; margin-top:2px;">
+                                                    <li class="list-inline-item">[[${itemList.itDate}]]</li>
+                                                </ul>
+                                                <ul class="list-unstyled list-inline fav">
+
+                                                    <li class="list-inline-item">좋아요수[[${itemList.itemLike}]]</li>
+                                                </ul>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="list" role="tabpanel">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="tab-item2">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-12">
+                                                <div class="tab-img">
+                                                    <img class="main-img img-fluid" src="/images/tab-1.png" alt="">
+                                                    <img class="sec-img img-fluid" src="/images/tab-16.png" alt="">
+                                                    <span class="sale">Sale</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12">
+                                                <div class="item-heading d-flex justify-content-between">
+                                                    <div class="item-top">
+                                                        <ul class="list-unstyled list-inline cate">
+                                                            <li class="list-inline-item"><a href="#">Home Appliance,</a>
+                                                            </li>
+                                                            <li class="list-inline-item"><a href="#">Smart Led</a></li>
+                                                        </ul>
+                                                        <p><a href="#">Samsung Smart Led Tv 42"</a></p>
+                                                        <ul class="list-unstyled list-inline fav">
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-price">
+                                                        <ul class="list-unstyled list-inline price">
+                                                            <li class="list-inline-item">$120.00</li>
+                                                            <li class="list-inline-item">$150.00</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="item-content">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem
+                                                        atque dolores aliquid culpa maiores beatae est quod officia
+                                                        veniam fugit? Molestiae, illum voluptatibus nisi error
+                                                        recusandae cum expedita. Laborum, expedita!</p>
+                                                    <a href="#" class="it-cart"><span class="it-img"><img
+                                                            src="/images/it-cart.png" alt=""></span><span
+                                                            class="it-title">Add To Cart</span></a>
+                                                    <a href="#" class="it-fav" data-toggle="tooltip"
+                                                       data-placement="top" title="Favourite"><img
+                                                            src="/images/it-fav.png" alt=""></a>
+                                                    <a href="#" class="it-comp" data-toggle="tooltip"
+                                                       data-placement="top" title="Compare"><img
+                                                            src="/images/it-comp.png" alt=""></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="tab-item2">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-12">
+                                                <div class="tab-img">
+                                                    <img class="main-img img-fluid" src="/images/tab-2.png" alt="">
+                                                    <img class="sec-img img-fluid" src="/images/tab-16.png" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12">
+                                                <div class="item-heading d-flex justify-content-between">
+                                                    <div class="item-top">
+                                                        <ul class="list-unstyled list-inline cate">
+                                                            <li class="list-inline-item"><a href="#">Home Appliance,</a>
+                                                            </li>
+                                                            <li class="list-inline-item"><a href="#">Smart Led</a></li>
+                                                        </ul>
+                                                        <p><a href="#">Samsung Smart Led Tv 42"</a></p>
+                                                        <ul class="list-unstyled list-inline fav">
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-price">
+                                                        <ul class="list-unstyled list-inline price">
+                                                            <li class="list-inline-item">$120.00</li>
+                                                            <li class="list-inline-item">$150.00</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="item-content">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem
+                                                        atque dolores aliquid culpa maiores beatae est quod officia
+                                                        veniam fugit? Molestiae, illum voluptatibus nisi error
+                                                        recusandae cum expedita. Laborum, expedita!</p>
+                                                    <a href="#" class="it-cart"><span class="it-img"><img
+                                                            src="/images/it-cart.png" alt=""></span><span
+                                                            class="it-title">Add To Cart</span></a>
+                                                    <a href="#" class="it-fav" data-toggle="tooltip"
+                                                       data-placement="top" title="Favourite"><img
+                                                            src="/images/it-fav.png" alt=""></a>
+                                                    <a href="#" class="it-comp" data-toggle="tooltip"
+                                                       data-placement="top" title="Compare"><img
+                                                            src="/images/it-comp.png" alt=""></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="tab-item2">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-12">
+                                                <div class="tab-img">
+                                                    <img class="main-img img-fluid" src="/images/tab-3.png" alt="">
+                                                    <img class="sec-img img-fluid" src="/images/tab-16.png" alt="">
+                                                    <span class="new">New</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12">
+                                                <div class="item-heading d-flex justify-content-between">
+                                                    <div class="item-top">
+                                                        <ul class="list-unstyled list-inline cate">
+                                                            <li class="list-inline-item"><a href="#">Home Appliance,</a>
+                                                            </li>
+                                                            <li class="list-inline-item"><a href="#">Smart Led</a></li>
+                                                        </ul>
+                                                        <p><a href="#">Samsung Smart Led Tv 42"</a></p>
+                                                        <ul class="list-unstyled list-inline fav">
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-price">
+                                                        <ul class="list-unstyled list-inline price">
+                                                            <li class="list-inline-item">$120.00</li>
+                                                            <li class="list-inline-item">$150.00</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="item-content">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem
+                                                        atque dolores aliquid culpa maiores beatae est quod officia
+                                                        veniam fugit? Molestiae, illum voluptatibus nisi error
+                                                        recusandae cum expedita. Laborum, expedita!</p>
+                                                    <a href="#" class="it-cart"><span class="it-img"><img
+                                                            src="/images/it-cart.png" alt=""></span><span
+                                                            class="it-title">Add To Cart</span></a>
+                                                    <a href="#" class="it-fav" data-toggle="tooltip"
+                                                       data-placement="top" title="Favourite"><img
+                                                            src="/images/it-fav.png" alt=""></a>
+                                                    <a href="#" class="it-comp" data-toggle="tooltip"
+                                                       data-placement="top" title="Compare"><img
+                                                            src="/images/it-comp.png" alt=""></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="tab-item2">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-12">
+                                                <div class="tab-img">
+                                                    <img class="main-img img-fluid" src="/images/tab-4.png" alt="">
+                                                    <img class="sec-img img-fluid" src="/images/tab-16.png" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12">
+                                                <div class="item-heading d-flex justify-content-between">
+                                                    <div class="item-top">
+                                                        <ul class="list-unstyled list-inline cate">
+                                                            <li class="list-inline-item"><a href="#">Home Appliance,</a>
+                                                            </li>
+                                                            <li class="list-inline-item"><a href="#">Smart Led</a></li>
+                                                        </ul>
+                                                        <p><a href="#">Samsung Smart Led Tv 42"</a></p>
+                                                        <ul class="list-unstyled list-inline fav">
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-price">
+                                                        <ul class="list-unstyled list-inline price">
+                                                            <li class="list-inline-item">$120.00</li>
+                                                            <li class="list-inline-item">$150.00</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="item-content">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem
+                                                        atque dolores aliquid culpa maiores beatae est quod officia
+                                                        veniam fugit? Molestiae, illum voluptatibus nisi error
+                                                        recusandae cum expedita. Laborum, expedita!</p>
+                                                    <a href="#" class="it-cart"><span class="it-img"><img
+                                                            src="/images/it-cart.png" alt=""></span><span
+                                                            class="it-title">Add To Cart</span></a>
+                                                    <a href="#" class="it-fav" data-toggle="tooltip"
+                                                       data-placement="top" title="Favourite"><img
+                                                            src="/images/it-fav.png" alt=""></a>
+                                                    <a href="#" class="it-comp" data-toggle="tooltip"
+                                                       data-placement="top" title="Compare"><img
+                                                            src="/images/it-comp.png" alt=""></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pagination-box text-center">
+                        <ul class="list-unstyled list-inline">
+
+                            <th:block th:if="${paging.page != paging.startRow}">
+                                <li class="list-inline-item"><a th:href="@{itemList(page=1, limit=${paging.limit}, search=${session.search.search})}"><i class="fa fa-angle-double-left"></i></a></li>
+                            </th:block>
+                            <th:block th:if="${paging.page <= 1}">
+                                <li th:if="${session.category ne null} and ${session.search.search eq null}"
+                                    class="list-inline-item"></li>
+                                <li th:if="${session.category ne null} and ${session.search.search ne null}"
+                                    class="list-inline-item"></li>
+                                <li th:if="${session.category eq null} and ${session.search.search eq null}"
+                                    class="list-inline-item"></li>
+                                <li th:if="${session.category eq null} and ${session.search.search ne null}"
+                                    class="list-inline-item"></li>
+                            </th:block>
+                            <th:block th:if="${paging.page > 1}">
+
+                                <li class="list-inline-item"><a
+                                        th:if="${session.category ne null} and ${session.search eq null}"
+                                        th:href="@{itemList(page=${paging.page - 1}, limit=${paging.limit}, category=${session.category.caSeq})}"><i
+                                        class="fa fa-angle-left"></i></a><a
+                                        th:if="${session.category ne null} and ${session.search ne null}"
+                                        th:href="@{itemList(page=${paging.page - 1}, limit=${paging.limit}, category=${session.category.caSeq}, search=${session.search.search})}"><i
+                                        class="fa fa-angle-left"></i></a>
+                                </li>
+                                <li class="list-inline-item"><a
+                                        th:if="${session.category eq null} and ${session.search eq null}"
+                                        th:href="@{itemList(page=${paging.page - 1}, limit=${paging.limit})}"><i
+                                        class="fa fa-angle-left"></i></a><a
+                                        th:if="${session.category eq null} and ${session.search ne null}"
+                                        th:href="@{itemList(page=${paging.page - 1}, limit=${paging.limit}, search=${session.search.search})}"><i
+                                        class="fa fa-angle-left"></i></a>
+                                </li>
+                            </th:block>
+
+                            <th:block th:each="i : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+                                <th:block th:if="${paging.page == i}">
+                                    <li class="active list-inline-item"><a href="#">[[${i}]]</a></li>
+                                </th:block>
+                                <th:block th:if="${paging.page != i}">
+                                    <li class="list-inline-item"><a
+                                            th:if="${session.category ne null} and ${session.search.search ne null}"
+                                            th:href="@{itemList(page=${i}, limit=${paging.limit}, category=${session.category.caSeq}, search=${session.search.search})}">[[${i}]]</a><a
+                                            th:if="${session.category ne null} and ${session.search.search eq null}"
+                                            th:href="@{itemList(page=${i}, limit=${paging.limit}, category=${session.category.caSeq})}">[[${i}]]</a>
+
+                                    </li>
+                                    <li class="list-inline-item"><a
+                                            th:if="${session.category eq null} and ${session.search.search eq null}"
+                                            th:href="@{itemList(page=${i}, limit=${paging.limit})}">[[${i}]]</a><a
+                                            th:if="${session.category eq null} and ${session.search.search ne null}"
+                                            th:href="@{itemList(page=${i}, limit=${paging.limit}, search=${session.search.search})}">[[${i}]]</a>
+                                    </li>
+                                </th:block>
+                            </th:block>
+
+
+                            <th:block th:if="${paging.page < paging.maxPage}">
+                                <li class="list-inline-item"><a
+                                        th:if="${session.category ne null} and ${session.search.search eq null}"
+                                        th:href="@{itemList(page=${paging.page + 1}, limit=${paging.limit}, category=${session.category.caSeq})}"><i
+                                        class="fa fa-angle-right"></i></a><a
+                                        th:if="${session.category ne null} and ${session.search.search ne null}"
+                                        th:href="@{itemList(page=${paging.page + 1}, limit=${paging.limit}, category=${session.category.caSeq}, search=${session.search.search})}"><i
+                                        class="fa fa-angle-right"></i></a>
+                                </li>
+                                <li class="list-inline-item"><a
+                                        th:if="${session.category eq null} and ${session.search.search eq null}"
+                                        th:href="@{itemList(page=${paging.page + 1}, limit=${paging.limit})}"><i
+                                        class="fa fa-angle-right"></i></a><a
+                                        th:if="${session.category eq null} and ${session.search.search ne null}"
+                                        th:href="@{itemList(page=${paging.page + 1}, limit=${paging.limit}, search=${session.search.search})}"><i
+                                        class="fa fa-angle-right"></i></a>
+                                </li>
+                            </th:block>
+                            <th:block th:if="${paging.page != paging.maxPage}">
+                                <li class="list-inline-item"><a th:href="@{itemList(page=${paging.maxPage}, limit=${paging.limit}, search=${session.search.search})}"><i
+                                        class="fa fa-angle-double-right"></i></a></li>
+                            </th:block>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Category Area -->
+
+<!-- Footer Area -->
+<section class="footer-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="f-contact">
+                    <h5>Contact Info</h5>
+                    <div class="f-add">
+                        <i class="fa fa-map-marker"></i>
+                        <span>Address :</span>
+                        <p>795 South Park Avenue, New York, NY USA 94107</p>
+                    </div>
+                    <div class="f-email">
+                        <i class="fa fa-envelope"></i>
+                        <span>Email :</span>
+                        <p>enquery@domain.com</p>
+                    </div>
+                    <div class="f-phn">
+                        <i class="fa fa-phone"></i>
+                        <span>Phone :</span>
+                        <p>+1 908 875 7678</p>
+                    </div>
+                    <div class="f-social">
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-cat">
+                    <h5>카테고리</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-link">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-sup">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="footer-btm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-right">
+                <img src="/images/payment.png" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="back-to-top text-center">
+        <img src="/images/backtotop.png" alt="" class="img-fluid">
+    </div>
+</section>
+<!-- End Footer Area -->
+
+
+<!-- =========================================
+JavaScript Files
+========================================== -->
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+<!-- jQuery JS -->
+<script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/js/assets/popper.min.js"></script>
+<script src="/js/assets/bootstrap.min.js"></script>
+
+<!-- Owl Slider -->
+<script src="/js/assets/owl.carousel.min.js"></script>
+
+<!-- Wow Animation -->
+<script src="/js/assets/wow.min.js"></script>
+
+<!-- Price Filter -->
+<script src="/js/assets/price-filter.js"></script>
+
+<!-- Mean Menu -->
+<script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/js/plugins.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+
+<script>
+    function itemLikeError(){
+        alert('로그인 후 이용해주세요');
+    }
+</script>
+
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/04-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:57 GMT -->
+</html>

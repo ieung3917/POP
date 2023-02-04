@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sss.pop.dao.itemDAO">
+
+    <!-- 카테고리 찾기 -->
+    <select id="caSeqFind" parameterType="category" resultType="int">
+        SELECT CASEQ FROM CATEGORY WHERE CAMAIN = #{caMain} AND CASUB = #{caSub}
+    </select>
+
+    <!-- 판매지역 찾기 -->
+    <select id="reSeqFind" parameterType="region" resultType="int">
+        SELECT RESEQ FROM REGION WHERE RECITY = #{reCity} AND RENINE = #{reNine}
+    </select>
+
+    <select id="itemNumCheck" parameterType="item" resultType="int">
+        SELECT ITEMNUM FROM ITEM WHERE ITEMNUM = ITEM_SEQ.CURRVAL
+    </select>
+
+    <!-- 중고물품 판매 등록 -->
+    <insert id="itemAdd" parameterType="item">
+        INSERT INTO ITEM
+        VALUES (ITEM_SEQ.NEXTVAL, #{itemName}, #{itemContent}, #{itemPrice}, #{itemRegion}, #{itemPhotoName, jdbcType = NVARCHAR},
+                #{itemCategory}, #{itemSeller}, 0, 0, SYSDATE, 0, #{itemPhoto1Name, jdbcType = NVARCHAR}, #{itemPhoto2Name, jdbcType = NVARCHAR}, #{itemPhoto3Name, jdbcType = NVARCHAR}, '')
+    </insert>
+
+    <!-- item갯수 확인하기 카테고리 X / 검색 X -->
+    <select id="itemCount" resultType="int">
+        SELECT count(*) FROM ITEMLIST WHERE ITEMCHECK = 0
+    </select>
+
+    <!-- item갯수 확인하기 카테고리 O / 검색 X -->
+    <select id="itemCountC" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM (SELECT * FROM ITEMLIST WHERE ITEMCATEGORY = #{cate.caSeq})
+        WHERE ITEMCHECK = 0
+    </select>
+
+    <!-- item갯수 확인하기 카테고리 X / 검색 O -->
+    <select id="itemCountS" parameterType="String" resultType="int">
+        SELECT count(*)
+        FROM (SELECT *
+              FROM ITEMLIST
+              WHERE (ITEMNAME LIKE '%' || #{search} || '%')
+                 OR (ITEMCONTENT LIKE '%' || #{search} || '%'))
+        WHERE ITEMCHECK = 0
+    </select>
+
+    <!-- item갯수 확인하기 카테고리 O / 검색 O -->
+    <select id="itemCountSC" parameterType="Map" resultType="int">
+        SELECT count(*)
+        FROM (SELECT *
+              FROM (SELECT *
+                    FROM ITEMLIST
+                    WHERE (ITEMNAME LIKE '%' || #{sear.search} || '%')
+                       OR (ITEMCONTENT LIKE '%' || #{sear.search} || '%'))
+              WHERE ITEMCATEGORY = #{cate.caSeq})
+        WHERE ITEMCHECK = 0
+    </select>
+
+    <!-- 중고물품 리스트 카테고리 X / 검색 X itmecheck가 0인경우만 출력 -->
+    <select id="itemList" parameterType="paging" resultType="item">
+        SELECT *
+        FROM (SELECT ROWNUM RN, K.* FROM (SELECT * FROM ITEM WHERE ITEMCHECK = 0 ORDER BY ITEMDATE DESC) K)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+    </select>
+
+    <!-- 중고물품 리스트 카테고리 O / 검색 X -->
+    <select id="itemListC" parameterType="Map" resultType="item">
+        SELECT *
+        FROM (SELECT ROWNUM RN, K.*
+              FROM (SELECT * FROM (SELECT * FROM ITEM WHERE ITEMCATEGORY = #{cate.caSeq}) WHERE ITEMCHECK = 0 ORDER BY ITEMDATE DESC) K)
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+
+    <!-- 중고물품 리스트 카테고리 X / 검색 O -->
+    <select id="itemListS" parameterType="Map" resultType="item">
+        SELECT *
+        FROM (SELECT ROWNUM RN, K.*
+              FROM (SELECT *
+                    FROM (SELECT *
+                          FROM ITEM
+                          WHERE (ITEMNAME LIKE '%' || #{sear.search} || '%')
+                             OR (ITEMCONTENT LIKE '%' || #{sear.search} || '%'))
+                    WHERE ITEMCHECK = 0 ORDER BY ITEMDATE DESC) K)
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+
+    <!-- 중고물품 리스트 카테고리 O / 검색 O -->
+    <select id="itemListSC" parameterType="Map" resultType="item">
+        SELECT *
+        FROM (SELECT ROWNUM RN, K.*
+              FROM (SELECT *
+                    FROM (SELECT *
+                          FROM (SELECT * FROM ITEM WHERE ITEMCATEGORY = #{cate.caSeq})
+                          WHERE (ITEMNAME LIKE '%' || #{sear.search} || '%')
+                             OR (ITEMCONTENT LIKE '%' || #{sear.search} || '%'))
+                    WHERE ITEMCHECK = 0 ORDER BY ITEMDATE DESC) K)
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+
+
+    <!-- 중고물품 리스트 중고물품 상세보기 -->
+    <select id="itemView" parameterType="int" resultType="item">
+        SELECT * FROM ITEM WHERE ITEMNUM = #{itemNum}
+    </select>
+
+    <!-- 중고물품 조회수 증가 -->
+    <update id="itemHit" parameterType="int">
+        UPDATE ITEM SET ITEMHIT = ITEMHIT + 1 WHERE ITEMNUM = #{itemNum}
+    </update>
+
+    <!-- 판매자 정보 불러오기 -->
+    <select id="itemSellerInfo" parameterType="String" resultType="users">
+        SELECT * FROM USERS WHERE USERID = #{itemSeller}
+    </select>
+
+    <!-- 판매지역 정보 불러오기 -->
+    <select id="itemRegionInfo" parameterType="int" resultType="region">
+        SELECT * FROM REGION WHERE RESEQ = #{itemRegion}
+    </select>
+
+    <!-- 카테고리 정보 불러오기 -->
+    <select id="itemCategoryInfo" parameterType="int" resultType="category">
+        SELECT * FROM CATEGORY WHERE CASEQ = #{itemCategory}
+    </select>
+
+    <!-- caMain선택시, 해당 CATEGORY 값 불러오기 -->
+    <select id="selectCaMain" parameterType="String" resultType="category">
+        SELECT * FROM CATEGORY WHERE CAMAIN = #{caMain}
+    </select>
+
+    <!-- reCity선택시, 해당 REGION 값 불러오기 -->
+    <select id="selectReCity" parameterType="String" resultType="region">
+        SELECT * FROM REGION WHERE RECITY = #{reCity}
+    </select>
+
+    <!-- 등록한 중고품 삭제 -->
+    <delete id="itemDelete" parameterType="int">
+        DELETE FROM ITEM WHERE ITEMNUM = #{itemNum}
+    </delete>
+
+    <!-- 댓글 삭제 -->
+    <delete id="itemCommentDelete" parameterType="int">
+        DELETE FROM ITEMCOMMENTS WHERE ICITEMNUM = #{icItemNum}
+    </delete>
+
+    <!-- 사진 초기화 -->
+    <update id="itemPhotoReset" parameterType="int">
+        UPDATE ITEM
+        SET ITEMPHOTONAME = '',
+            ITEMPHOTO1NAME = '',
+            ITEMPHOTO2NAME = '',
+            ITEMPHOTO3NAME = ''
+        WHERE ITEMNUM = #{itemNum}
+    </update>
+
+
+    <!-- 중고품 정보 수정 -->
+    <update id="itemModify" parameterType="item">
+        UPDATE ITEM
+        SET ITEMNAME     = #{itemName},
+            ITEMCONTENT  = #{itemContent},
+            ITEMPRICE    = #{itemPrice},
+            ITEMREGION   = #{itemRegion},
+            ITEMCATEGORY = #{itemCategory},
+            ITEMPHOTONAME = #{itemPhotoName, jdbcType = NVARCHAR},
+            ITEMPHOTO1NAME = #{itemPhoto1Name, jdbcType = NVARCHAR},
+            ITEMPHOTO2NAME = #{itemPhoto2Name, jdbcType = NVARCHAR},
+            ITEMPHOTO3NAME = #{itemPhoto3Name, jdbcType = NVARCHAR}
+        WHERE ITEMNUM = #{itemNum}
+    </update>
+
+    <!-- 현재 좋아요 여부 확인 -->
+    <select id="itemLikeCheck" parameterType="itemLike" resultType="Integer">
+        SELECT ILNUM FROM ITEMLIKE WHERE ILITEM = #{ilItem} AND ILUSER = #{ilUser}
+    </select>
+
+    <!-- 이미 좋아요 선택되어있을때 한번더 클릭시 -->
+    <delete id="itemLikeDelete" parameterType="itemLike">
+        DELETE FROM ITEMLIKE WHERE ILITEM = #{ilItem} AND ILUSER = #{ilUser}
+    </delete>
+
+    <!-- 좋아요 선택 해제시 중고품의 좋아요 수 감소 -->
+    <update id="itemLikeDown" parameterType="int">
+        UPDATE ITEM SET ITEMLIKE = ITEMLIKE - 1 WHERE ITEMNUM = #{itemNum}
+    </update>
+
+    <!-- 좋아요 선택 -->
+    <insert id="itemLike" parameterType="itemLike">
+        INSERT INTO ITEMLIKE VALUES(ITEMLIKE_SEQ.NEXTVAL, #{ilItem}, #{ilUser})
+    </insert>
+
+    <!-- 좋아요 선택시 중고품의 좋아요 수 증가 -->
+    <update id="itemLikeUP" parameterType="int">
+        UPDATE ITEM SET ITEMLIKE = ITEMLIKE + 1 WHERE ITEMNUM = #{itemNum}
+    </update>
+
+    <!-- 중고품 구매 클릭시, 회원 계좌 확인 -->
+    <select id="userCashCheck" parameterType="Map" resultType="String">
+        SELECT CASE WHEN USERCASH >= #{item.itemPrice} THEN 'Y' ELSE 'N' END AS RESULT FROM USERS WHERE USERID = #{user.userId}
+    </select>
+
+    <!-- 회원 계좌 확인 후, 결제 진행 -->
+    <update id="itemPayment" parameterType="Map">
+        UPDATE USERS SET USERCASH = USERCASH - #{item.itemPrice} WHERE USERID = #{user.userId}
+    </update>
+
+    <!-- 결제 이후, 거래중으로 변경 -->
+    <update id="itemCheckChange" parameterType="Map">
+        UPDATE ITEM
+        SET ITEMCHECK = 1,
+            ITEMBUYER = #{user.userId}
+        WHERE ITEMNUM = #{item.itemNum}
+    </update>
+
+    <!-- 중고품 구매시, 판매자에게 쪽지 보내기 -->
+    <insert id="itemSendBuyNote" parameterType="Map">
+        INSERT INTO NOTE VALUES (NOTE_SEQ.NEXTVAL, #{user.userId}, #{item.itemSeller}, '중고품 판매 완료', '${item.itemNum} 번 상품'||CHR(13)||CHR(10)||'물품명 :  ${item.itemName}' ||CHR(13)||CHR(10)||'구매자 : ${user.userId}   판매 금액 :  ${item.itemPrice} 원 .',sysdate,1,0)
+    </insert>
+
+    <!-- 수취확인버튼 클릭시 itemCheck가 2로 변경-->
+    <update id="itemTakeCheck" parameterType="item">
+        UPDATE ITEM
+        SET ITEMCHECK = 2
+        WHERE ITEMNUM = #{itemNum}
+    </update>
+
+    <!-- 수취확인 버튼 클릭시 캐시 증가 -->
+    <update id="itemSell" parameterType="item">
+        UPDATE USERS
+        SET USERCASH = USERCASH + #{itemPrice}
+        WHERE USERID = #{itemSeller}
+    </update>
+
+    <!-- 수취확인 버튼 클릭시 쪽지 보내기 -->
+    <insert id="itemSendSellNote" parameterType="item">
+        INSERT INTO NOTE VALUES (NOTE_SEQ.NEXTVAL, #{itemBuyer}, #{itemSeller}, '중고품 수취 확인', '${itemNum} 번 상품'||CHR(13)||CHR(10)||'물품명 : ${itemName}' ||CHR(13)||CHR(10)||'구매자 : ${itemBuyer}   판매 금액 :  ${itemPrice} 원 이 입금되었습니다.',sysdate,1,0)
+    </insert>
+
+    <!-- 유저 계좌 확인 -->
+    <select id="userCash" parameterType="String" resultType="int">
+        SELECT USERCASH FROM USERS WHERE USERID = #{userId}
+    </select>
+
+    <!-- ============================================================= -->
+    <!-- itemCnt : 상점 주인의 거래 판매 물품 갯수 -->
+    <select id="itemCnt" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM ITEM WHERE ITEMSELLER = #{userId}
+    </select>
+
+</mapper>

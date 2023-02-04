@@ -1,0 +1,397 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+    
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/quEWriteForm.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:03 GMT -->
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>XeMart - Ecommerce Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+		<!-- Fontawesome Icon -->
+        <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+		<!-- Animate Css -->
+        <link rel="stylesheet" href="/css/assets/animate.css">
+
+        <!-- Owl Slider -->
+        <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+        <!-- Custom Style -->
+        <link rel="stylesheet" href="/css/assets/normalize.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/assets/responsive.css">
+
+    </head>
+    <body>
+
+    <header th:replace="header.html :: header"></header>
+
+        <!-- Mobile Menu -->
+        <section class="mobile-menu-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mobile-menu">
+                            <nav id="dropdown">
+                                <a href="#"><img src="/images/logo.png" alt=""></a>
+                                <a href="#"><span>Sign In</span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Home</a>
+                                        <ul class="list-unstyled">
+                                            <li><a href="index.html">Home Style 1</a></li>
+	                                        <li><a href="02-home-two.html">Home Style 2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Pages</a>
+                                        <ul class="list-unstyled">
+                                            <li><a href="03-about-us.html">About Us</a></li>
+                                            <li><a href="04-category.html">Category</a></li>
+                                            <li><a href="05-single-product.html">Single Product</a></li>
+                                            <li><a href="noList.html">Shopping Cart</a></li>
+                                            <li><a href="07-checkout.html">Checkout</a></li>
+                                            <li><a href="08-login.html">Log In</a></li>
+                                            <li><a href="09-register.html">Register</a></li>
+                                            <li><a href="10-wishlist.html">Wishlist</a></li>
+                                            <li><a href="11-compare.html">Compare</a></li>
+                                            <li><a href="15-track-order.html">Track Order</a></li>
+                                            <li><a href="12-terms-condition.html">Terms & Condition</a></li>
+                                            <li><a href="13-faq.html">Faq</a></li>
+                                            <li><a href="14-404.html">404</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Blog</a>
+                                        <ul class="list-unstyled">
+                                            <li><a href="16-blog-one.html">Blog Style 1</a></li>
+                                            <li><a href="17-blog-two.html">Blog Style 2</a></li>
+                                            <li><a href="18-blog-three.html">Blog Style 3</a></li>
+                                            <li><a href="noView.html">Blog Details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="quEWriteForm.html">Contact</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Mobile Menu -->
+
+        <!-- Breadcrumb Area -->
+        <section class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="breadcrumb-box text-center">
+                            <ul class="list-unstyled list-inline">
+                                <li class="list-inline-item">Home</li>
+                                <li class="list-inline-item"><span>||</span><a href="quEWriteForm"> 이메일 문의</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Breadcrumb Area -->
+
+        <!-- Contact -->
+        <section class="contact-area">
+            <div id="map"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-5">
+                    	<div class="contact-box-tp">
+                    		<h4>정보</h4>
+                    	</div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="contact-box d-flex">
+                                    <div class="contact-icon">
+                                        <i class="fa fa-map-marker"></i>
+                                    </div>
+                                    <div class="contact-content">
+                                        <h6>주소</h6>
+                                        <p>인천광역시 미추홀구 매소홀로488번길 6-32 태승빌딩 5층</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="contact-box d-flex">
+                                    <div class="contact-icon">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+                                    <div class="contact-content">
+                                        <h6>이메일 주소</h6>
+                                        <p>enquery@domain.com <br>help@yourdomain.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="contact-box d-flex">
+                                    <div class="contact-icon">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+                                    <div class="contact-content">
+                                        <h6>전화번호</h6>
+                                        <p>0507-1491-3360</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="social-link">
+                        	<ul class="list-unstyled list-inline">
+                        		<li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        		<li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        		<li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        		<li class="list-inline-item"><a href="#"><i class="fa fa-youtube"></i></a></li>
+                        		<li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        	</ul>
+                        </div>-->
+                    </div>
+                    <div class="col-lg-8 col-md-7">
+                        <div class="contact-form">
+                            <h4>이메일 문의하기</h4>
+                            <form action="quEWrite" method="post">
+                                <input type="hidden" name="tomail" id="tomail" value="syh22133@gmail.com">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><input type="text"
+                                                  placeholder="이름" name="name" id="name" required></p>
+                                     </div>
+                                    <div class="col-md-6">
+                                        <p><input type="text"
+                                                  placeholder="이메일을 정확하게 입력해주세요" name="email" id="email" required></p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p><input type="text" name="title"
+                                                  id="title" placeholder="문의 제목"></p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p><textarea name="message" id="message"
+                                                     placeholder="불편사항이나 문의사항을 입력해주세요" required style="resize: none"></textarea></p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button onclick="mailSend()">문의하기</button>
+                                    </div>
+                                </div>
+                                <div id="form-messages"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Contact -->
+
+        <!-- Brand area 2 -->
+        <!--<section class="brand2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tp-bnd owl-carousel">
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-01.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-02.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-03.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-04.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-05.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-06.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-07.png" alt="" class="img-fluid"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+        <!-- End Brand area 2 -->
+
+        <!-- Footer Area -->
+        <section class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="f-contact">
+                            <h5>Contact Info</h5>
+                            <div class="f-add">
+                                <i class="fa fa-map-marker"></i>
+                                <span>Address :</span>
+                                <p>795 South Park Avenue, New York, NY USA 94107</p>
+                            </div>
+                            <div class="f-email">
+                                <i class="fa fa-envelope"></i>
+                                <span>Email :</span>
+                                <p>enquery@domain.com</p>
+                            </div>
+                            <div class="f-phn">
+                                <i class="fa fa-phone"></i>
+                                <span>Phone :</span>
+                                <p>+1 908 875 7678</p>
+                            </div>
+                            <div class="f-social">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-cat">
+                            <h5>Categories</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-link">
+                            <h5>Quick Links</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-sup">
+                            <h5>Support</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="footer-btm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a></p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <img src="/images/payment.png" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div class="back-to-top text-center">
+                <img src="/images/backtotop.png" alt="" class="img-fluid">
+            </div>
+        </section>
+        <!-- End Footer Area -->
+
+
+        <!-- =========================================
+        JavaScript Files
+        ========================================== -->
+
+        <!-- jQuery JS -->
+        <script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+        <!-- Bootstrap -->
+        <script src="/js/assets/popper.min.js"></script>
+        <script src="/js/assets/bootstrap.min.js"></script>
+
+        <!-- Owl Slider -->
+        <script src="/js/assets/owl.carousel.min.js"></script>
+
+        <!-- Wow Animation -->
+        <script src="/js/assets/wow.min.js"></script>
+
+        <!-- Price Filter -->
+        <script src="/js/assets/price-filter.js"></script>
+
+        <!-- Mean Menu -->
+        <script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="/js/plugins.js"></script>
+        <script src="/js/custom.js"></script>
+
+        <!-- Google Map -->
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f37da221f28280bd6ba9f480327d84ba&libraries=services,clusterer,drawing"></script>
+        <script>
+        var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+        var options = { //지도를 생성할 때 필요한 기본 옵션
+            center: new kakao.maps.LatLng(37.438898, 126.675182), //지도의 중심좌표.
+            level: 3 //지도의 레벨(확대, 축소 정도)
+        };
+
+        var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+        </script>
+
+        <!--<script src="/js/assets/map.js"></script>-->
+
+    </body>
+
+<script>
+
+    function mailSend(){
+
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let tomail = document.getElementById("tomail").value;
+        let title = document.getElementById("title").value;
+        let message = $("#message").val();
+
+        if(!name || !email || !message){
+            alert("모든 항목을 기입해주세요");
+        } else{
+            if(!title){
+                document.getElementById("title").value =
+            }
+            alert("이메일 문의가 완료되었습니다.");
+            document.getElementById("mailSending").submit();
+        }
+
+    }
+
+</script>
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/quEWriteForm.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:04 GMT -->
+</html>

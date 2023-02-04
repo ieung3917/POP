@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sss.pop.dao.noDAO">
+    <insert id="noWrite" parameterType="notice">
+        INSERT INTO NOTICE
+        VALUES (NO_SEQ.NEXTVAL, #{noTitle}, #{noContent}, #{noWriter}, SYSDATE)
+    </insert>
+
+    <select id="noCount" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM NOTICE WHERE ${where}
+    </select>
+
+    <select id="pNoList" parameterType="paging" resultType="notice">
+        SELECT *
+        FROM (SELECT ROWNUM RN, A.* FROM (SELECT NOTICE.* FROM NOTICE where ${where} ORDER BY NODATE DESC)A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+    </select>
+
+    <select id="noView" parameterType="int" resultType="notice">
+        SELECT * FROM NOTICE WHERE NONUM = #{noNum}
+    </select>
+
+    <delete id="noDelete">
+        DELETE FROM NOTICE WHERE NONUM = #{noNum}
+    </delete>
+
+    <update id="noModify" parameterType="notice">
+        UPDATE NOTICE SET NOTITLE = #{noTitle}, NOCONTENT = #{noContent} WHERE NONUM = #{noNum}
+    </update>
+
+
+</mapper>

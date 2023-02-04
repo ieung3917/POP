@@ -1,0 +1,482 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+    
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/05-single-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:57 GMT -->
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>내정보</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+		<!-- Fontawesome Icon -->
+        <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+		<!-- Animate Css -->
+        <link rel="stylesheet" href="/css/assets/animate.css">
+
+        <!-- Owl Slider -->
+        <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+        <!-- Custom Style -->
+        <link rel="stylesheet" href="/css/assets/normalize.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/assets/responsive.css">
+
+    </head>
+
+<style>
+    .owl-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled {
+        display: inherit;
+    }
+</style>
+
+    <body>
+
+    <header th:replace="header.html :: header"></header>
+
+
+
+        <!-- Breadcrumb Area -->
+        <section class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="breadcrumb-box text-center">
+                            <ul class="list-unstyled list-inline">
+                                <li class="list-inline-item"><a href="#">Home</a></li>
+                                <li class="list-inline-item"><span>||</span> 내정보</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Breadcrumb Area -->
+
+        <!-- Single Product Area -->
+        <section class="sg-product">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="row">
+
+                            <!-- tab div -->
+                            <div class="col-md-12">
+                                <div class="sg-tab"  style="margin-top: 0px">
+
+                                    <!-- tab button -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#pro-det">상점 프로필</a></li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#rev">판매자 리뷰([[${rvCnt}]])</a></li>
+                                    </ul>
+                                    <!-- End tab button -->
+
+
+                                    <div class="tab-content">
+
+                                        <!-- 상점 프로필 -->
+                                        <div class="tab-pane fade show active" id="pro-det" role="tabpanel">
+                                            <div class="review-box d-flex">
+                                                <div class="sg-img" style="width: 30%; margin-right: 10px">
+                                                    <img th:src="@{/profile/{varName}(varName=${user.userProfileName})}" alt="" width="80%" height="80%" style="border-radius: 70%; border: 1px solid lightgray">
+                                                </div>
+                                                <div class="rv-content" style="width: 70%">
+                                                    <h6 style="border: 1px solid lightgray; border-radius: 15px; text-align: center; font-size: large; color: white; background-color: #9fcdff; ">
+                                                        <strong>[[${user.userId}]]</strong> 님의 상점<span></span></h6>
+<!--                                                    <ul class="list-unstyled list-inline">-->
+<!--                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>-->
+<!--                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>-->
+<!--                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>-->
+<!--                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>-->
+<!--                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>-->
+<!--                                                    </ul>-->
+                                                    <div style="margin: 2%">
+                                                        <h6 th:if="${user.userGrade >= 0 && user.userGrade < 10}" style="font-weight: bold">등급 : 일반 회원</h6>
+                                                        <h6 th:if="${user.userGrade >= 10 && user.userGrade < 20}" style="font-weight: bold">등급 : 아마추어 회원</h6>
+                                                        <h6 th:if="${user.userGrade >= 20}" style="font-weight: bold">등급 : 프로 회원</h6>
+                                                    </div>
+
+                                                    <div style="margin: 2%">
+                                                        <h6 style="font-weight: bold">모든 상품 : [[${totalCnt}]]개</h6>
+                                                    </div>
+
+                                                    <div style="margin: 2%">
+                                                        <h6 style="font-weight: bold; display: inline-block">상점 소개글</h6>
+                                                        <button type="button" style="margin-left: 5px; border: 1px solid lightgray; border-radius: 10px">소개글 수정</button>
+
+                                                        <p id="introArea" style="margin-top: 10px"><pre>쓸까 말까 생각해보셈    여기 그냥 두면 너무 허전</pre></p>
+                                                    </div>
+
+                                                    <div style="margin-top: 10%">
+                                                        <button th:if="${session.login ne null && (session.login.userId ne user.userId)}"
+                                                                style="display: inline-block; border: 1px solid white; border-radius: 15px; background-color: red; color: white"
+                                                                type="button" name="button" onclick="location.href='noteWriteForm'">쪽지 보내기
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- End 상점 프로필 -->
+
+                                        <!-- 리뷰 -->
+                                        <div class="tab-pane fade" id="rev" role="tabpanel">
+                                            <th:block th:each="list : ${rvList}">
+                                                <div class="review-box d-flex">
+                                                    <div class="rv-img" style="text-align: center;">
+                                                        <img th:src="@{/profile/{varName}(varName=${list.userProfileName})}" alt="" style="width: 100%; height: 80%; border-radius: 70%; border: 1px solid lightgray">
+                                                    </div>
+                                                    <div class="rv-content" style="width: 100%">
+                                                        <h6>[[${list.userId}]] <span>[[${list.rvDate}]]</span></h6>
+                                                        <ul class="list-unstyled list-inline">
+                                                            <th:block th:each="num : ${#numbers.sequence(1,list.rvGrade)}">
+                                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            </th:block>
+                                                        </ul>
+                                                        <p>[[${list.rvContent}]]</p>
+                                                    </div>
+                                                </div>
+                                            </th:block>
+
+
+                                        </div><!-- End 리뷰 -->
+
+
+                                    </div>
+                                </div>
+                            </div><!-- End tab div -->
+
+
+                            <!-- 거래 목록 -->
+                            <div class="col-md-12">
+                                <div class="sim-pro">
+
+                                    <div class="sec-title">
+                                        <h5>판매중인 거래 상품목록
+                                            <a th:href="@{itemAuctionList(userId=${user.userId})}" width="50px" height="50px" style="text-align: center; border: 1px solid black; background-color: #9fcdff; color: white"><span>+</span></a>
+                                        </h5>
+                                    </div>
+
+
+                                    <!-- (2) 판매중 거래 판매 목록 -->
+                                    <div id="itemSellingList" class="sim-slider owl-carousel" style="display: block">
+
+                                        <th:block th:each="list : ${itemSellingList}">
+
+                                            <div class="sim-item">
+                                                <div class="sim-img">
+                                                    <a th:href="@{itemView(itemNum=${list.itemNum})}">
+                                                        <img class="main-img img-fluid" th:src="@{/itemPhoto/{varName}(varName=${list.itemPhoto1Name})}" alt=""
+                                                            onerror="this.src='/images/noimg.jpg'" style="width: 100%; height: 200px">
+                                                    </a>
+                                                    <div class="layer-box">
+                                                        <!-- onfocus 됐을 경우 하트모양 표시 -->
+                                                        <a href="#" class="it-fav" data-toggle="tooltip" data-placement="left" title="찜하기"><img src="/images/it-fav.png" alt=""></a>
+                                                    </div>
+                                                </div>
+                                                <div class="sim-heading">
+                                                    <p>
+                                                        <a th:href="@{itemView(itemNum=${list.itemNum})}" style="display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">[[${list.itemName}]]</a>
+                                                    </p>
+                                                </div>
+                                                <div class="img-content d-flex justify-content-between">
+                                                    <div>
+                                                        <ul class="list-unstyled list-inline price">
+                                                            <li class="list-inline-item" style="text-decoration: none; font-weight: bold; color: black">[[${list.itemPrice}]]원</li>
+                                                            <li class="list-inline-item" style="text-decoration: none; font-weight: normal; font-size: small">
+                                                                <span>조회수 [[${list.itemHit}]]</span> <span> | 좋아요 [[${list.itemLike}]]</span>
+                                                            </li>
+                                                            <li class="list-inline-item" style="text-decoration: none; font-weight: normal; font-size: small; display: block">[[${list.itRegion}]]</li>
+                                                            <li class="list-inline-item" style="text-decoration: none; display: block; float: right">[[${list.itDate}]]</li>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </th:block>
+
+                                    </div><!-- (2) End 판매중 거래 판매 목록 -->
+
+                                </div>
+                            </div><!-- End 거래 목록 -->
+
+
+
+
+
+                            <!-- 경매 판매 목록 -->
+                            <div class="col-md-12" style="margin-top: 10%">
+                                <div class="sim-pro">
+
+                                    <div class="sec-title">
+                                        <h5>판매중인 경매 상품목록
+                                            <a th:href="@{itemAuctionList(userId=${user.userId})}" width="50px" height="50px" style="text-align: center; border: 1px solid black; background-color: #9fcdff; color: white"><span>+</span></a>
+                                        </h5>
+                                    </div>
+
+
+                                    <!-- (2-2) 판매중 경매 판매 목록 -->
+                                    <div id="auSellingList" class="sim-slider owl-carousel" style="display: block;">
+
+                                        <th:block th:each="list : ${auSellingList}">
+                                            <div class="sim-item">
+                                                <div class="sim-img">
+                                                    <a th:href="@{/auction/auView(auNum=${list.auNum})}">
+                                                        <img class="main-img img-fluid" th:src="@{/auPhoto/{varName}(varName=${list.auPhotoName})}" alt=""
+                                                            onerror="this.src='/images/noimg.jpg'" style="width: 100%; height: 200px">
+                                                    </a>
+                                                    <div class="layer-box">
+                                                        <!-- onfocus 됐을 경우 하트모양 표시 -->
+                                                        <a href="#" class="it-fav" data-toggle="tooltip" data-placement="left" title="찜하기"><img src="/images/it-fav.png" alt=""></a>
+                                                    </div>
+                                                </div>
+                                                <div class="sim-heading">
+                                                    <p>
+                                                        <a th:href="@{/auction/auView(auNum=${list.auNum})}" style="display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">[[${list.auName}]]</a>
+                                                    </p>
+                                                </div>
+                                                <div class="img-content d-flex justify-content-between">
+                                                    <div>
+                                                        <ul class="list-unstyled list-inline price">
+                                                            <li class="list-inline-item" style="text-decoration: none; font-weight: bold; color: black">[[${list.auPrice}]]원</li>
+                                                            <li class="list-inline-item" style="text-decoration: none; font-weight: normal; font-size: small">
+                                                                <span>조회수 [[${list.auHit}]]</span> <span> | 좋아요 [[${list.auLike}]]</span>
+                                                            </li>
+                                                            <li class="list-inline-item" style="text-decoration: none; font-weight: normal; font-size: small; display: block">[[${list.aucRegion}]]</li>
+                                                            <li class="list-inline-item" style="text-decoration: none; display: block; float: right">[[${list.aucDate}]]</li>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </th:block>
+
+                                    </div><!-- (2-2) End 판매중 경매 판매 목록 -->
+
+                                </div>
+                            </div>
+                            <!-- End 경매 판매 목록 -->
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-3" th:if="${session.login ne null && (session.login.userId eq user.userId)}">
+                        <div class="category-box">
+                            <div class="sec-title">
+                                <h6>메뉴</h6>
+                            </div>
+                            <!-- accordion -->
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a href="#" data-toggle="collapse" data-target="#collapse1">
+                                            <span>회원정보 관리</span>
+                                            <i class="fa fa-angle-down"></i>
+                                        </a>
+                                    </div>
+                                    <div id="collapse1" class="collapse">
+                                        <div class="card-body">
+                                            <ul class="list-unstyled">
+                                                <li><a th:href="@{/userModiForm(userId=${session.login.userId})}"><i class="fa fa-angle-right"></i> 정보 수정</a></li>
+                                                <li><a href="/kakaoPay1"><i class="fa fa-angle-right"></i> 캐시 충전</a></li>
+                                                <li><a href="#"><i class="fa fa-angle-right"></i> 회원 탈퇴</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a href="#" data-toggle="collapse" data-target="#collapse2">
+                                            <span>상품 관리</span>
+                                            <i class="fa fa-angle-down"></i>
+                                        </a>
+                                    </div>
+                                    <div id="collapse2" class="collapse">
+                                        <div class="card-body">
+                                            <ul class="list-unstyled">
+                                                <li><a th:href="|itemBList?userId=${session.login.userId}|"><i class="fa fa-angle-right"></i> 거래내역</a></li>
+                                                <li><a th:href="|auBList?userId=${session.login.userId}|"><i class="fa fa-angle-right"></i> 경매내역</a></li>
+                                                <li><a href="#"><i class="fa fa-angle-right"></i> 관심상품</a></li>
+                                                <li><a href="#"><i class="fa fa-angle-right"></i> 공백</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a href="#" data-toggle="collapse" data-target="#collapse3">
+                                            <span>쪽지함</span>
+                                            <i class="fa fa-angle-down"></i>
+                                        </a>
+                                    </div>
+                                    <div id="collapse3" class="collapse">
+                                        <div class="card-body">
+                                            <ul class="list-unstyled">
+                                                <li><a th:href="@{/noteGetList(userId=${session.login.userId})}"><i class="fa fa-angle-right"></i> 받은 쪽지함</a></li>
+                                                <li><a th:href="@{/noteSendList(userId=${session.login.userId})}"><i class="fa fa-angle-right"></i> 보낸 쪽지함</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a href="#" data-toggle="collapse" data-target="#collapse4">
+                                            <span>내 정보</span>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Single Product Area -->
+
+        <!-- Footer Area -->
+        <section class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="f-contact">
+                            <h5>Contact Info</h5>
+                            <div class="f-add">
+                                <i class="fa fa-map-marker"></i>
+                                <span>Address :</span>
+                                <p>795 South Park Avenue, New York, NY USA 94107</p>
+                            </div>
+                            <div class="f-email">
+                                <i class="fa fa-envelope"></i>
+                                <span>Email :</span>
+                                <p>enquery@domain.com</p>
+                            </div>
+                            <div class="f-phn">
+                                <i class="fa fa-phone"></i>
+                                <span>Phone :</span>
+                                <p>+1 908 875 7678</p>
+                            </div>
+                            <div class="f-social">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-cat">
+                            <h5>Categories</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-link">
+                            <h5>Quick Links</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-sup">
+                            <h5>Support</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="footer-btm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a></p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <img src="/images/payment.png" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div class="back-to-top text-center">
+                <img src="/images/backtotop.png" alt="" class="img-fluid">
+            </div>
+        </section>
+        <!-- End Footer Area -->
+
+
+        <!-- =========================================
+        JavaScript Files
+        ========================================== -->
+
+        <!-- jQuery JS -->
+        <script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+        <!-- Bootstrap -->
+        <script src="/js/assets/popper.min.js"></script>
+        <script src="/js/assets/bootstrap.min.js"></script>
+
+        <!-- Owl Slider -->
+        <script src="/js/assets/owl.carousel.min.js"></script>
+
+        <!-- Wow Animation -->
+        <script src="/js/assets/wow.min.js"></script>
+
+        <!-- Price Filter -->
+        <script src="/js/assets/price-filter.js"></script>
+
+        <!-- Mean Menu -->
+        <script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="/js/plugins.js"></script>
+        <script src="/js/custom.js"></script>
+
+    </body>
+
+
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/05-single-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:58 GMT -->
+</html>

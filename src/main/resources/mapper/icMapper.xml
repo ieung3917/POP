@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sss.pop.dao.icDAO">
+
+    <insert id="itemCommentWrite" parameterType="itemComments">
+        INSERT INTO ITEMCOMMENTS
+        VALUES (ITEMCOMMENTS_SEQ.NEXTVAL, #{icItemNum}, #{icWriter}, SYSDATE, #{icContent})
+    </insert>
+
+    <select id="itemCommentList" parameterType="int" resultType="itemComments">
+        SELECT t1.iccontent,t1.icdate, t1.icitemnum, t1.icnum, t1.icwriter, t2.userprofilename
+        FROM ITEMCOMMENTS T1 JOIN USERS T2 ON (T1.icwriter = T2.USERID)
+        WHERE ICITEMNUM = #{itemNum} ORDER BY ICDATE DESC
+    </select>
+
+    <delete id="itemCommentDelete" parameterType="int">
+        DELETE FROM ITEMCOMMENTS WHERE ICNUM = #{icNum}
+    </delete>
+
+</mapper>

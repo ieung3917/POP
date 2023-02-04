@@ -1,0 +1,874 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/05-single-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:57 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>XeMart - Ecommerce Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="/css/assets/animate.css">
+
+    <!-- Owl Slider -->
+    <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/css/assets/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/assets/responsive.css">
+
+</head>
+
+<body>
+
+<header th:replace="header.html :: header"></header>
+
+
+<!-- Breadcrumb Area -->
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-box text-center">
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item"><a href="#">Home</a></li>
+                        <li class="list-inline-item"><span>||</span> Single Product</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Breadcrumb Area -->
+
+<!-- Single Product Area -->
+<section class="sg-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="sg-img">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="sg1" role="tabpanel">
+                                    <img th:src="@{/auPhoto/{auPhoto}(auPhoto=${auView.auPhotoName})}" alt=""
+                                         class="img-fluid" style="width:268px ; height: 288.61px;">
+                                </div>
+                                <div class="tab-pane" id="sg2" role="tabpanel">
+                                    <img src="/images/tab-2.png" alt="" class="img-fluid">
+                                </div>
+                                <div class="tab-pane" id="sg3" role="tabpanel">
+                                    <img src="/images/tab-3.png" alt="" class="img-fluid">
+                                </div>
+                                <div class="tab-pane" id="sg4" role="tabpanel">
+                                    <img src="/images/tab-4.png" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="nav d-flex justify-content-between">
+                                <a class="nav-item nav-link active" data-toggle="tab" href="#sg1"><img
+                                        th:src="@{/auPhoto/{auPhoto}(auPhoto=${auView.auPhotoName})}" alt=""></a>
+                                <a class="nav-item nav-link" data-toggle="tab" href="#sg2"><img src="/images/tab-2.png"
+                                                                                                alt=""></a>
+                                <a class="nav-item nav-link" data-toggle="tab" href="#sg3"><img src="/images/tab-3.png"
+                                                                                                alt=""></a>
+                                <a class="nav-item nav-link" data-toggle="tab" href="#sg4"><img src="/images/tab-4.png"
+                                                                                                alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="sg-content">
+                            <div class="pro-tag">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item"><a href="#">[[${caInfo.caMain}]] ,</a></li>
+                                    <li class="list-inline-item"><a href="#">[[${caInfo.caSub}]]</a></li>
+                                </ul>
+                            </div>
+                            <div class="pro-name">
+                                <p>[[${auView.auName}]]</p>
+                            </div>
+                            <div class="pro-rating">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item"><a href="#">조회수[[${auView.auHit}]]
+                                        좋아요수[[${auView.auLike}]]</a></li>
+                                </ul>
+                            </div>
+                            <div class="pro-price">
+                                <ul class="list-unstyled list-inline" style="margin-bottom: 15px;"  id="msgArea">
+                                    <li class="list-inline-item" style="font-size : 25px ;" id="auPrice" th:value="${auView.auPrice}">[[${auView.auPrice}]]<span>원</span>
+                                    </li>
+
+                                    <li class="list-inline-item"></li>
+
+                                </ul>
+                                <p>판매 지역 : <span>[[${reInfo.reCity}]] [[${reInfo.reNine}]]</span></p>
+                                <br/>
+                                <p>경매 시작일 : <span>[[${auView.aDate}]]</span></p>
+                                <hr/>
+                                <p>경매 마감까지 남은시간 :
+                                <span id="d-day-day">00</span>
+                                <span>일</span>
+                                <span id="d-day-hour">00</span>
+                                <span>시간</span>
+                                <span id="d-day-min">00</span>
+                                <span>분</span>
+                                <span id="d-day-sec">00</span>
+                                <span >초</span></p>
+
+                            </div>
+                            <div class="colo-siz">
+                                <div class="pro-btns" id="auComplete">
+                                    <input type="text" name="price" id="msg" class="form-control">
+                                    <a  href="javacsript:void(0);" class="cart" id="button-send">구매하기</a>
+                                    <a href="#" class="fav-com" data-toggle="tooltip" data-placement="top"
+                                       title="좋아요"><img src="/images/it-fav.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="sg-tab">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#pro-det">상품
+                                    설명</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#rev">판매자 정보</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="pro-det" role="tabpanel">
+                                    <p>[[${auView.auContent}]]</p>
+
+                                </div>
+                                <div class="tab-pane fade" id="rev" role="tabpanel">
+                                    <div class="review-box d-flex">
+                                        <div class="rv-img">
+                                            <img th:src="@{/userProfile/{userInfo}(userInfo=${userInfo.userProfileName})}"
+                                                 alt="" >
+                                        </div>
+                                        <div class="rv-content">
+                                            <h6>[[${auView.auSeller}]]<span>[[${userInfo.userGrade}]]</span></h6>
+                                            <ul class="list-unstyled list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            </ul>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos a
+                                                deleniti dolorem architecto quae eligendi voluptatem omnis beatae at aut
+                                                eveniet repellendus voluptas.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="category-box">
+                    <div class="sec-title">
+                        <h6>카테고리</h6>
+                    </div>
+                    <!-- accordion -->
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse1">
+                                    <span>남성의류</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse1" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 남성 상의</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 남성 하의</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 남성 속옷</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 남성 기타의류</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse2">
+                                    <span>여성의류</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse2" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 여성 상의</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 여성 하의</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 여성 속옷</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 여성 기타의류</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse3">
+                                    <span>신발</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse3" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 스니커즈</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 남성화</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 여성화</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 기타신발</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse4">
+                                    <span>액세서리/잡화</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse4" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 시계</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 쥬얼리</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 지갑</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 안경/선글라스</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 기타 액세서리</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse5">
+                                    <span>디지털/가전</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse5" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 모바일</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 가전제품</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 오디오/영상/관련기기</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> PC/노트북</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 게임/타이틀</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 기타 전자기기</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse6">
+                                    <span>스포츠/레저</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse6" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 골프</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 캠핑</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 낚시</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 축구</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 자전거</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 기타 스포츠/레저 용품</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse7">
+                                    <span>도서/티켓/문구</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse7" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 도서</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 문구</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 기프티콘/쿠폰</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 상품권</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 티켓</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse8">
+                                    <span>뷰티/미용</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse8" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 스킨케어</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 메이크업</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 바디/헤어케어</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 향수/아로마</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 남성 화장품</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 기타 뷰티/미용 용품</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse9">
+                                    <span>생활/가공식품</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse9" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 주방용품</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 생활용품</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 식품</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 산업용품</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse10">
+                                    <span>유아동</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse10" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 베이비의류(0~2세)</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 남아의류(3세~)</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 여아의류(3세~)</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 교육/완구/인형</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 이유용품/유아식기</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 기타 유아동 용품</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse11">
+                                    <span>반려동물용품</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="collapse11" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 강아지 용품</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 강아지 사료/간식</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 고양이 용품</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 고양이 사료/간식</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i> 기타 반려동물 용품</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ht-offer">
+                    <div class="sec-title">
+                        <h6>Hot Offer</h6>
+                    </div>
+                    <div class="ht-body owl-carousel">
+                        <div class="ht-item">
+                            <div class="ht-img">
+                                <a href="#"><img src="/images/tab-15.png" alt="" class="img-fluid"></a>
+                                <span>- 59%</span>
+                                <ul class="list-unstyled list-inline counter-box">
+                                    <li class="list-inline-item">185 <p>Days</p></li>
+                                    <li class="list-inline-item">11 <p>Hrs</p></li>
+                                    <li class="list-inline-item">39 <p>Mins</p></li>
+                                    <li class="list-inline-item">51 <p>Sec</p></li>
+                                </ul>
+                            </div>
+                            <div class="ht-content">
+                                <p><a href="#">Items Title Name Enter Here</a></p>
+                                <ul class="list-unstyled list-inline fav">
+                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                </ul>
+                                <ul class="list-unstyled list-inline price">
+                                    <li class="list-inline-item">$120.00</li>
+                                    <li class="list-inline-item">$150.00</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ht-item">
+                            <div class="ht-img">
+                                <a href="#"><img src="/images/tab-14.png" alt="" class="img-fluid"></a>
+                                <span>- 59%</span>
+                                <ul class="list-unstyled list-inline counter-box">
+                                    <li class="list-inline-item">185 <p>Days</p></li>
+                                    <li class="list-inline-item">11 <p>Hrs</p></li>
+                                    <li class="list-inline-item">39 <p>Mins</p></li>
+                                    <li class="list-inline-item">51 <p>Sec</p></li>
+                                </ul>
+                            </div>
+                            <div class="ht-content">
+                                <p><a href="#">Items Title Name Enter Here</a></p>
+                                <ul class="list-unstyled list-inline fav">
+                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                </ul>
+                                <ul class="list-unstyled list-inline price">
+                                    <li class="list-inline-item">$120.00</li>
+                                    <li class="list-inline-item">$150.00</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-box">
+                    <a href="#"><img src="/images/s-banner1.jpg" alt="" class="img-fluid"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Single Product Area -->
+
+<!-- Footer Area -->
+<section class="footer-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="f-contact">
+                    <h5>Contact Info</h5>
+                    <div class="f-add">
+                        <i class="fa fa-map-marker"></i>
+                        <span>Address :</span>
+                        <p>795 South Park Avenue, New York, NY USA 94107</p>
+                    </div>
+                    <div class="f-email">
+                        <i class="fa fa-envelope"></i>
+                        <span>Email :</span>
+                        <p>enquery@domain.com</p>
+                    </div>
+                    <div class="f-phn">
+                        <i class="fa fa-phone"></i>
+                        <span>Phone :</span>
+                        <p>+1 908 875 7678</p>
+                    </div>
+                    <div class="f-social">
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-cat">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-link">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-sup">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="footer-btm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-right">
+                <img src="/images/payment.png" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="back-to-top text-center">
+        <img src="/images/backtotop.png" alt="" class="img-fluid">
+    </div>
+</section>
+<!-- End Footer Area -->
+
+
+<!-- =========================================
+JavaScript Files
+========================================== -->
+
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<!-- jQuery JS -->
+<script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/js/assets/popper.min.js"></script>
+<script src="/js/assets/bootstrap.min.js"></script>
+
+<!-- Owl Slider -->
+<script src="/js/assets/owl.carousel.min.js"></script>
+
+<!-- Wow Animation -->
+<script src="/js/assets/wow.min.js"></script>
+
+<!-- Price Filter -->
+<script src="/js/assets/price-filter.js"></script>
+
+<!-- Mean Menu -->
+<script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/js/plugins.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+<script th:inline="javascript">
+
+
+
+    $(document).ready(function(){
+
+
+
+        var auNum = [[${auNum.auNum}]];
+        var roomName = [[${auNum.name}]];
+        var username = [[${session.login.userId}]]
+
+
+
+        var sockJs = new SockJS("/stomp/auction");
+        //1. SockJS를 내부에 들고있는 stomp를 내어줌
+        var stomp = Stomp.over(sockJs);
+
+        //2. connection이 맺어지면 실행
+        stomp.connect({}, function (){
+
+
+            //4. subscribe(path, callback)으로 메세지를 받을 수 있음
+            stomp.subscribe("/sub/auction/auView/" + auNum, function (chat) {
+                var content = JSON.parse(chat.body);
+
+                var writer = content.writer;
+                var str = '';
+
+                if(content.message == null){
+
+                    content.message = writer;
+
+
+
+
+
+
+
+                    if (writer === username) {
+                        str = "<li className='list-inline-item' style='font-size : 25px ;' id='auPrice' value='"+content.message+"'>";
+                        str += content.message+"<span>원</span>";
+                        str += " <li className='list-inline-item'></li>";
+                    } else {
+                        str = "<li className='list-inline-item' style='font-size : 25px ;' id='auPrice' value='"+content.message+"'>";
+                        str += content.message+"<span>원</span>";
+                        str += " <li className='list-inline-item'></li>";
+                        $("#msgArea").html(str);
+                    }
+                }else {
+                    if (writer === username) {
+                        str = "<li className='list-inline-item' style='font-size : 25px ;' id='auPrice' value='"+content.message+"'>";
+                        str += content.message +"<span>원</span>";
+                        str += " <li className='list-inline-item'></li>";
+                    } else {
+                        str = "<li className='list-inline-item' style='font-size : 25px ;' id='auPrice' value='"+content.message+"'>";
+                        str += content.message+"<span>원</span>";
+                        str += " <li className='list-inline-item'></li>";
+                    }
+
+                    $("#msgArea").html(str);
+                }
+
+            });
+
+            //3. send(path, header, message)로 메세지를 보낼 수 있음
+            stomp.send('/pub/auction/enter', {}, JSON.stringify({auNum: auNum, writer: username}))
+
+
+        });
+
+        $("#button-send").on("click", function(e) {
+            var msg = document.getElementById("msg");
+            let price = $("#auPrice").val();
+
+             if(msg.value == ""){
+                 alert("가격을 입력해 주세요.")
+             }else {
+                 if (price >= msg.value) {
+                     alert('판매가격보다 금액이 적습니다.')
+                 } else {
+
+
+                     // username , msg.value , auNum  보내서 ajax로 확인
+
+                     $.ajax({
+                         type: "POST",
+                         url: "auPropose",
+                         async: false,
+                         data: {
+                             "userId": username,
+                             "price" : Number(msg.value),
+                             "auNum": auNum
+                         },
+                         dataType: "json",
+                         success: function (result) {
+                             if (result == 0) {
+                                 alert('잔액이 부족합니다.')
+                             } else if (result == 1) {
+                                 alert('이미 입찰중인 상품입니다.')
+                             } else {stomp.send('/pub/auction/message', {}, JSON.stringify({
+                                 auNum: auNum,
+                                 message: msg.value,
+                                 writer: username
+                             }));
+
+                             }
+
+
+                         },
+                         error: function () {
+                             alert('숫자만 입력해주세요.');
+
+                         }
+
+                     });
+
+                     msg.value = '';
+
+                 }
+             }
+        });
+
+        stomp.disconnect();
+    });
+
+
+
+
+    function remaindTime() {
+
+        $.ajax({
+            type: "POST",
+            url: "auRemain",
+            async: false,
+            data: {
+                "auNum": [[${auView.auNum}]]
+            },
+            dataType: "text",
+            success: function (result) {
+
+                var now = new Date(); //현재시간을 구한다.
+                var nt = now.getTime(); // 현재의 시간만 가져온다
+
+
+                var open = new Date(result);
+                var ot = open.getTime(); // 오픈시간만 가져온다
+
+                if(nt<ot){ //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.
+                    sec = parseInt(ot - nt) / 1000;
+                    day = parseInt(sec/60/60/24);
+                    sec = (sec - (day*60*60*24));
+                    hour = parseInt(sec/60/60);
+                    sec = (sec - (hour*60*60));
+                    min = parseInt(sec/60);
+                    sec = parseInt(sec-(min*60));
+
+                    if(day<10){day="0"+day;}
+                    if(hour<10){hour="0"+hour;}
+                    if(min<10){min="0"+min;}
+                    if(sec<10){sec="0"+sec;}
+                    $("#d-day-day").html(day);
+                    $("#d-day-hour").html(hour);
+                    $("#d-day-min").html(min);
+                    $("#d-day-sec").html(sec);
+                } else{ //현재시간이 종료시간보다 크면
+                    $("#d-day-day").html('00');
+                    $("#d-day-hour").html('00');
+                    $("#d-day-min").html('00');
+                    $("#d-day-sec").html('00');
+
+                    // ajax로 경매 완료 시키기
+                    $.ajax({
+                        type: "POST",
+                        url: "auComplete",
+                        async: false,
+                        data: {
+                            "auNum": [[${auView.auNum}]]
+                        },
+                        dataType: "json",
+                        success: function (result) {
+
+                            let input = "";
+                            input +="<h1>경매가 종료된 상품입니다.</h1>"
+
+                            $("#auComplete").html(input);
+
+                        },
+                        error: function () {
+                            alert('오류2');
+
+                        }
+
+                    });
+
+
+                }
+
+
+            },
+            error: function () {
+                location.href="#";
+
+            }
+
+        });
+
+
+
+       /*
+        var now = new Date(); //현재시간을 구한다.
+        var nt = now.getTime(); // 현재의 시간만 가져온다
+        var auNum = [[${auNum.auNum}]];
+
+
+
+        var open = new Date([[${auView.aucDate}]]);
+        var ot = open.getTime(); // 오픈시간만 가져온다
+
+        if(nt<ot){ //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.
+            sec = parseInt(ot - nt) / 1000;
+            hour = parseInt(sec/60/60);
+            sec = (sec - (hour*60*60));
+            min = parseInt(sec/60);
+            sec = parseInt(sec-(min*60));
+
+            if(hour<10){hour="0"+hour;}
+            if(min<10){min="0"+min;}
+            if(sec<10){sec="0"+sec;}
+            $("#d-day-hour").html(hour);
+            $("#d-day-min").html(min);
+            $("#d-day-sec").html(sec);
+        } else{ //현재시간이 종료시간보다 크면
+            $("#d-day-hour").html('00');
+            $("#d-day-min").html('00');
+            $("#d-day-sec").html('00');
+
+            // ajax로 경매 완료 시키기
+            $.ajax({
+                type: "POST",
+                url: "auComplete",
+                async: false,
+                data: {
+                    "auNum": [[${auView.auNum}]]
+                },
+                dataType: "json",
+                success: function (result) {
+
+                    let input = "";
+                    input +="<h1>경매가 종료된 상품입니다.</h1>"
+
+                    $("#auComplete").html(input);
+
+                },
+                error: function () {
+                    alert('오류');
+
+                }
+
+            });
+
+
+        }
+        */
+    }
+    setInterval(remaindTime,1000); //1초마다 검사를 해주면 실시간으로 시간을 알 수 있다.
+
+
+
+</script>
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/05-single-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:58 GMT -->
+</html>

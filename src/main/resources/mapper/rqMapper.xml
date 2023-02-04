@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sss.pop.dao.rqDAO">
+
+    <insert id="rqWrite" parameterType="repque">
+        INSERT INTO REPQUE
+        VALUES (RQ_SEQ.NEXTVAL, #{rqTitle}, #{rqContent}, 0, SYSDATE, #{rqAnswer})
+    </insert>
+
+    <select id="rqCount" resultType="int">
+        SELECT COUNT(*)
+        FROM REPQUE WHERE ${where}
+    </select>
+
+    <select id="pRqList" parameterType="paging" resultType="repque">
+        SELECT *
+        FROM (SELECT ROWNUM RN, A.* FROM (SELECT REPQUE.* FROM REPQUE where ${where} ORDER BY RQHIT DESC)A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+    </select>
+
+    <select id="rqView" parameterType="int" resultType="repque">
+        SELECT * FROM REPQUE WHERE RQNUM = #{rqNum}
+    </select>
+
+    <update id="rqHit" parameterType="int">
+        UPDATE REPQUE SET RQHIT = RQHIT + 1 WHERE RQNUM = #{rqNum}
+    </update>
+
+    <delete id="rqDelete">
+        DELETE FROM REPQUE WHERE RQNUM = #{rqNum}
+    </delete>
+
+    <update id="rqModify" parameterType="repque">
+        UPDATE REPQUE SET RQTITLE = #{rqTitle}, RQCONTENT = #{rqContent}, RQANSWER = #{rqAnswer} WHERE RQNUM = #{rqNum}
+    </update>
+
+</mapper>

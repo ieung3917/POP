@@ -1,0 +1,744 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/05-single-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:57 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>XeMart - Ecommerce Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="/css/assets/animate.css">
+
+    <!-- Owl Slider -->
+    <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/css/assets/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/assets/responsive.css">
+
+</head>
+<body>
+
+<header th:replace="header.html :: header"></header>
+
+<!-- Mobile Menu -->
+<section class="mobile-menu-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mobile-menu">
+                    <nav id="dropdown">
+                        <a href="#"><img src="/images/logo.png" alt=""></a>
+                        <a href="#"><span>Sign In</span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="itemlist">Home</a>
+                                <ul class="list-unstyled">
+                                    <li><a href="index.html">Home Style 1</a></li>
+                                    <li><a href="02-home-two.html">Home Style 2</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Pages</a>
+                                <ul class="list-unstyled">
+                                    <li><a href="03-about-us.html">About Us</a></li>
+                                    <li><a href="itemList">Category</a></li>
+                                    <li><a href="05-single-product.html">Single Product</a></li>
+                                    <li><a href="06-shopping-cart.html">Shopping Cart</a></li>
+                                    <li><a href="07-checkout.html">Checkout</a></li>
+                                    <li><a href="08-login.html">Log In</a></li>
+                                    <li><a href="09-register.html">Register</a></li>
+                                    <li><a href="10-wishlist.html">Wishlist</a></li>
+                                    <li><a href="11-compare.html">Compare</a></li>
+                                    <li><a href="15-track-order.html">Track Order</a></li>
+                                    <li><a href="12-terms-condition.html">Terms & Condition</a></li>
+                                    <li><a href="13-faq.html">Faq</a></li>
+                                    <li><a href="14-404.html">404</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Blog</a>
+                                <ul class="list-unstyled">
+                                    <li><a href="16-blog-one.html">Blog Style 1</a></li>
+                                    <li><a href="17-blog-two.html">Blog Style 2</a></li>
+                                    <li><a href="18-blog-three.html">Blog Style 3</a></li>
+                                    <li><a href="19-blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="20-contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Mobile Menu -->
+
+<!-- Breadcrumb Area -->
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-box text-center">
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item"><a href="itemList">Home</a></li>
+                        <li class="list-inline-item"><span>||</span> Single Product</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Breadcrumb Area -->
+
+<!-- Single Product Area -->
+<section class="sg-product">
+    <div class="container">
+        <div class="row" style="justify-content: center;">
+            <div class="col-md-9" style="max-width: 100%;">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="sg-img">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="sg1" role="tabpanel">
+                                    <img th:src="@{/itemPhoto/{itemPhoto}(itemPhoto=${itemView.itemPhotoName})}"
+                                         alt=""
+                                         class="img-fluid" onerror="this.src='/images/noimg.jpg';"
+                                         style="width: 100%; height: 350px">
+                                </div>
+                                <div class="tab-pane" id="sg2" role="tabpanel">
+                                    <img th:src="@{/itemPhoto/{itemPhoto1}(itemPhoto1=${itemView.itemPhoto1Name})}"
+                                         alt=""
+                                         class="img-fluid" onerror="this.src='/images/noimg.jpg';"
+                                         style="width: 100%; height: 350px">
+                                </div>
+                                <div class="tab-pane" id="sg3" role="tabpanel">
+                                    <img th:src="@{/itemPhoto/{itemPhoto2}(itemPhoto2=${itemView.itemPhoto2Name})}"
+                                         alt=""
+                                         class="img-fluid" onerror="this.src='/images/noimg.jpg';"
+                                         style="width: 100%; height: 350px">
+                                </div>
+                                <div class="tab-pane" id="sg4" role="tabpanel">
+                                    <img th:src="@{/itemPhoto/{itemPhoto3}(itemPhoto3=${itemView.itemPhoto3Name})}"
+                                         alt=""
+                                         class="img-fluid" onerror="this.src='/images/noimg.jpg';"
+                                         style="width: 100%; height: 350px">
+                                </div>
+                            </div>
+                            <div class="nav d-flex justify-content-between">
+                                <a class="nav-item nav-link active" data-toggle="tab" href="#sg1"><img
+                                        th:if="${itemView.itemPhotoName ne null}"
+                                        th:src="@{/itemPhoto/{itemPhoto}(itemPhoto=${itemView.itemPhotoName})}" alt=""
+                                        style="width: 100%; height: 75px" onerror="this.src='/images/noimg.jpg';"></a>
+                                <a class="nav-item nav-link" data-toggle="tab" href="#sg2"><img
+                                        th:if="${itemView.itemPhoto1Name ne null}"
+                                        th:src="@{/itemPhoto/{itemPhoto1}(itemPhoto1=${itemView.itemPhoto1Name})}"
+                                        alt=""
+                                        style="width: 100%; height: 75px" onerror="this.src='/images/noimg.jpg';"></a>
+                                <a class="nav-item nav-link" data-toggle="tab" href="#sg3"><img
+                                        th:if="${itemView.itemPhoto2Name ne null}"
+                                        th:src="@{/itemPhoto/{itemPhoto2}(itemPhoto2=${itemView.itemPhoto2Name})}"
+                                        alt=""
+                                        style="width: 100%; height: 75px" onerror="this.src='/images/noimg.jpg';"></a>
+                                <a class="nav-item nav-link" data-toggle="tab" href="#sg4"><img
+                                        th:if="${itemView.itemPhoto3Name ne null}"
+                                        th:src="@{/itemPhoto/{itemPhoto3}(itemPhoto3=${itemView.itemPhoto3Name})}"
+                                        alt=""
+                                        style="width: 100%; height: 75px" onerror="this.src='/images/noimg.jpg';"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="sg-content">
+                            <div class="pro-tag">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item"><a href="#">[[${caInfo.caMain}]] ,</a></li>
+                                    <li class="list-inline-item"><a href="#">[[${caInfo.caSub}]]</a></li>
+                                </ul>
+                            </div>
+                            <div class="pro-name">
+                                <p>[[${itemView.itemName}]]</p>
+                            </div>
+                            <div class="pro-rating">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item" style="margin-left: 0px;"><a href="#">조회수[[${itemView.itemHit}]]
+                                        좋아요수[[${itemView.itemLike}]]</a></li>
+                                </ul>
+                            </div>
+                            <div class="pro-price">
+                                <ul class="list-unstyled list-inline" style="margin-bottom: 15px;">
+                                    <li class="list-inline-item" style="font-size : 25px ;">[[${itemView.itemPrice}]]원
+                                    </li>
+                                    <li class="list-inline-item"></li>
+                                </ul>
+                                <p>판매 지역 : <span>[[${reInfo.reCity}]] [[${reInfo.reNine}]]</span></p>
+                                <br/>
+                                <p>등록 일자 : <span>[[${itemView.itemDate}]]</span></p>
+                            </div>
+                            <div class="colo-siz">
+                                <div class="pro-btns" id="itemLikeArea">
+                                    <a th:if="${session.login eq null && itemView.itemCheck == 0}" href='javascript:void(0);' onclick="itemError()" class="cart">구매하기</a>
+                                    <a th:if="${session.login eq null && itemView.itemCheck == 1}" href='javascript:void(0);' onclick="itemTrading()" class="cart">거래중</a>
+                                    <a th:if="${itemView.itemCheck == 2}" href='javascript:void(0);' class="cart">판매완료</a>
+                                    <a th:if="${session.login eq null}" href='javascript:void(0);' class="fav-com"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="좋아요" onclick="itemError()"><img
+                                            src="/images/it-fav.png" alt=""></a>
+                                </div>
+                                <div class="pro-btns" style="margin-top: 20px">
+                                    <a th:if="${session.login ne null && (session.login.userId == itemView.itemSeller) && (itemView.itemCheck == 0)}"
+                                       th:onclick="itemModifyForm([[${itemView.itemNum}]])" href='javascript:void(0);'
+                                       class="cart">수정하기</a>
+                                    <a th:if="${session.login ne null && (session.login.userId == itemView.itemSeller) && (itemView.itemCheck == 0)}"
+                                       th:onclick="itemDelete([[${itemView.itemNum}]])" href='javascript:void(0);'
+                                       class="cart">삭제하기</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="sg-tab">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#pro-det">상품
+                                    설명</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#rev">판매자 정보</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="pro-det" role="tabpanel">
+                                    <p>[[${itemView.itemContent}]]</p>
+                                </div>
+                                <div class="tab-pane fade" id="rev" role="tabpanel">
+                                    <div class="review-box d-flex">
+                                        <div class="rv-img" style="width: 100px;">
+                                            <img th:src="@{/profile/{userInfo}(userInfo=${userInfo.userProfileName})}"
+                                                 alt="" onerror="this.src='/images/noimg.jpg';" style="width: 80px; height: 80px; max-width: 80px; max-height: 80px;">
+                                        </div>
+                                        <div class="rv-content" style="width : 90%">
+                                            <a th:href="@{/userStore(userId = ${itemView.itemSeller})}"><h6>[[${itemView.itemSeller}]]</h6></a>
+                                            <p>[[${userInfo.userStoreIntro}]]</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="sim-pro">
+                            <div class="sec-title">
+                                <h5>댓글</h5>
+                            </div>
+                            <div id="itemComment">
+                            </div>
+                            <div th:if="${session.login ne null}" style="padding: 5px 20px 20px;
+                                        border: 1px solid #e5e5e5;
+                                        background-color: #f9f9f9;
+                                        color: #353535;">
+                                <p style="margin: 10px 0 10px 0;"><strong>댓글달기</strong></p>
+                                <div style="vertical-align: middle;">
+                                    <textarea th:if="${session.login ne null}" name="itemContent" id="itemContent"
+                                              cols="90"
+                                              rows="5" placeholder="댓글을 작성해주세요"
+                                              style="width: 85%;
+                                                     height: 48px;
+                                                     padding: 2px 2px 2px 4px;
+                                                     margin: 0px 40px 0px 0px;"></textarea>
+                                    <button th:if="${session.login ne null}"
+                                            th:onclick="itemCommentWrite([[${itemView.itemNum}]])"
+                                            style="position: absolute;
+                                                vertical-align: middle;
+                                                display: inline-block;
+                                                box-sizing: border-box;
+                                                padding: 14px 16px;
+                                                border: 1px solid transparent;
+                                                border-radius: 0;
+                                                font-size: 13px;
+                                                line-height: 18px;
+                                                font-weight: normal;
+                                                text-decoration: none;
+                                                word-spacing: -0.5px;
+                                                letter-spacing: 0;
+                                                text-align: center;
+                                                white-space: nowrap;
+                                                color: #fff;
+                                                background-color: #aaa;
+                                                min-width: 80px;">작성
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Single Product Area -->
+
+<!-- Footer Area -->
+<section class="footer-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="f-contact">
+                    <h5>Contact Info</h5>
+                    <div class="f-add">
+                        <i class="fa fa-map-marker"></i>
+                        <span>Address :</span>
+                        <p>795 South Park Avenue, New York, NY USA 94107</p>
+                    </div>
+                    <div class="f-email">
+                        <i class="fa fa-envelope"></i>
+                        <span>Email :</span>
+                        <p>enquery@domain.com</p>
+                    </div>
+                    <div class="f-phn">
+                        <i class="fa fa-phone"></i>
+                        <span>Phone :</span>
+                        <p>+1 908 875 7678</p>
+                    </div>
+                    <div class="f-social">
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-cat">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-link">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-sup">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="footer-btm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-right">
+                <img src="/images/payment.png" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="back-to-top text-center">
+        <img src="/images/backtotop.png" alt="" class="img-fluid">
+    </div>
+</section>
+<!-- End Footer Area -->
+
+
+<!-- =========================================
+JavaScript Files
+========================================== -->
+
+<!-- jQuery JS -->
+<script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/js/assets/popper.min.js"></script>
+<script src="/js/assets/bootstrap.min.js"></script>
+
+<!-- Owl Slider -->
+<script src="/js/assets/owl.carousel.min.js"></script>
+
+<!-- Wow Animation -->
+<script src="/js/assets/wow.min.js"></script>
+
+<!-- Price Filter -->
+<script src="/js/assets/price-filter.js"></script>
+
+<!-- Mean Menu -->
+<script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/js/plugins.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script th:inline="javascript">
+    // 최초시작시 댓글 불러오기
+    $(document).ready(function firstCommentList() {
+        let itemNum = [[${itemView.itemNum}]]
+        $.ajax({
+            type: "Post",
+            url: "itemCommentList",
+            data: {
+                "itemNum": itemNum
+            },
+            data_type: "json",
+            success: function (list) {
+                commentList(list);
+            },
+            error: function () {
+                alert('댓글호출 오류');
+            }
+        });
+    });
+
+    $(document).ready(function firstItemLike() {
+        let itemNum = [[${itemView.itemNum}]];
+
+        $.ajax({
+            type: "Post",
+            url: "itemLikeCheck",
+            data: {
+                "ilItem": itemNum,
+                "ilUser": userId
+            },
+            data_type: "json",
+            success: function (result) {
+                itemLikePrint(result);
+            },
+            error: function () {
+
+            }
+        });
+    });
+
+    // 좋아요 출력
+    function itemLikePrint(result) {
+        console.log(result);
+
+        let output = "";
+        let itemCheck = [[${itemView.itemCheck}]];
+        let itemBuyer = [[${itemView.itemBuyer}]];
+
+        if (userId != null && itemCheck == 0){
+            output += "<a href='javascript:void(0);' onclick=\"itemBuy()\" class=\"cart\">구매하기</a>";
+        }
+        if(userId != null && itemCheck == 1) {
+            if(userId == itemBuyer){
+                output += "<a href='javascript:void(0);' onclick=\"itemTakeCheck()\" class=\"cart\">수취확인</a>";
+            } else {
+                output += "<a href='javascript:void(0);' onclick=\"itemTrading()\" class=\"cart\">거래중</a>";
+            }
+
+        }
+
+        if(itemCheck == 2){
+            output += "<a href='javascript:void(0);' class=\"cart\">판매완료</a>";
+        }
+
+        if (result == 'Y') {
+            output += "<a href='javascript:void(0);' style='background-color: hotpink;' class=\"fav-com\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"좋아요\" onclick=\"itemLike([[${itemView.itemNum}]])\">";
+            output += "<img src=\"/images/it-fav.png\" alt=\"\"></a>";
+        } else {
+            output += "<a href='javascript:void(0);' class=\"fav-com\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"좋아요\" onclick=\"itemLike([[${itemView.itemNum}]])\">";
+            output += "<img src=\"/images/it-fav.png\" alt=\"\"></a>";
+        }
+        document.getElementById("itemLikeArea").innerHTML = output;
+    }
+
+    // 댓글 출력
+    function commentList(list) {
+        console.log(list);
+        let output = "";
+        for (let i in list) {
+            console.log(list[i].icNum);
+            output += "<div class=\"tab-pane fade active show\" id=\"rev" + [i] + "\" role=\"tabpanel\">";
+            output += "<div class=\"review-box d-flex\" style = \"margin : 20px;\">";
+            output += "<div class=\"rv-img\" style=\"width : 100px ;\">";
+            output += "<img src=\"/profile/" + list[i].userProfileName + "\" alt=\"\" onError=\"this.src='/images/noimg.jpg';\" style=\"width: 100%; height: 80px;max-width: 80px; max-height: 80px;  -webkit-border-radius:  50%; -moz-border-radius: 50%; -ms-border-radius: 50%; border-radius: 50%; margin-right: 20px;\">";
+            output += "</div>";
+            output += "<div class=\"rv-content\" style=\"border: 1px solid #e5e5e5;width: 100%;padding: 20px;\">";
+            output += "<div class='d-flex'><div><h3 style=\"font-size: 17px;font-weight: 600;color: #444444;margin-bottom: 5px;\">" + list[i].icWriter + "</h3></div>";
+            output += "<div style='margin-left: 10px;'><span style=' font-size: 13px;'>  (" + list[i].icDate + ")</span></div></div>"
+            if ([[${session.login ne null}]]) {
+                output += "<p style=\"font-size: 15px;color: #969696;line-height: 25px;\">" + list[i].icContent + "<button th:if='[[${session.login ne null}]]' onclick=\"itemCommentDelete('" + list[i].icWriter + "','" + list[i].icNum + "','" + list[i].icItemNum + "')\" style=\"float: right; background-color: #aaa; border: 1px solid transparent; color: #fff; font-size: 13px;\">삭제</button></p>";
+            } else {
+                output += "<p style=\"font-size: 15px;color: #969696;line-height: 25px;\">" + list[i].icContent + "</p>";
+            }
+            output += "</div>";
+            output += "</div>";
+            output += "</div>";
+            output += "</div>";
+        }
+        document.getElementById("itemComment").innerHTML = output;
+    }
+
+    // 등록된 중고품 수정
+    function itemModifyForm(itemNum) {
+
+        let f = document.createElement('form');
+
+        let obj;
+        obj = document.createElement('input');
+        obj.setAttribute('type', 'hidden');
+        obj.setAttribute('name', 'itemNum');
+        obj.setAttribute('value', itemNum);
+
+        f.appendChild(obj);
+        f.setAttribute('method', 'post');
+        f.setAttribute('action', 'itemModifyForm');
+        document.body.appendChild(f);
+        f.submit();
+    }
+
+    // 등록된 중고품 삭제
+    function itemDelete(itemNum) {
+        if (!confirm('이 게시물을 삭제하시겠습니까?')) {
+
+        } else {
+            $.ajax({
+                type: "Post",
+                url: "itemDelete",
+                data: {
+                    "itemNum": itemNum
+                },
+                success: function () {
+                    alert('삭제되었습니다.');
+                    window.location.href = "/index";
+                },
+                error: function () {
+                    alert('삭제처리를 실패하였습니다.')
+                }
+            });
+        }
+    };
+
+    function itemCommentWrite() {
+        let itemNum = [[${itemView.itemNum}]];
+        let itemContent = $('#itemContent').val();
+
+        console.log(itemContent);
+        console.log(itemNum);
+        console.log(userId);
+
+        $.ajax({
+            type: "Post",
+            url: "itemCommentWrite",
+            data: {
+                "icItemNum": itemNum,
+                "icContent": itemContent,
+                "icWriter": userId
+            },
+            data_type: "json",
+            success: function (result) {
+                console.log(result);
+                document.getElementById("itemContent").value = '';
+                commentList(result);
+            },
+            error: function () {
+                alert('댓글작성 함수 오류.');
+            }
+        })
+    }
+
+    function itemCommentDelete(icWriter, icNum, icItemNum) {
+
+        console.log(icWriter);
+        console.log(icNum);
+        console.log(icItemNum);
+
+        if (icWriter != userId) {
+            alert('삭제할수 없는 댓글입니다.');
+        } else {
+            $.ajax({
+                type: "Post",
+                url: "itemCommentDelete",
+                data: {
+                    "icNum": icNum,
+                    "icItemNum": icItemNum
+                },
+                data_type: "json",
+                success: function (result) {
+                    alert('댓글 삭제 완료.');
+                    commentList(result);
+                },
+                error: function () {
+                    alert('댓글 삭제 함수 통신 실패.');
+                }
+            });
+        }
+
+    }
+
+    function itemLike(itemNum) {
+        console.log(itemNum);
+        $.ajax({
+            type: "Post",
+            url: "itemLike",
+            data: {
+                "ilItem": itemNum,
+                "ilUser": userId
+            },
+            data_type: "json",
+            success: function (result) {
+                itemLikePrint(result);
+            },
+            error: function () {
+                alert('좋아요 함수 통신 실패');
+            }
+        });
+    }
+
+    function itemBuy() {
+
+        let itemPrice = [[${itemView.itemPrice}]];
+
+        if (userId != [[${itemView.itemSeller}]]) {
+            $.ajax({
+                type : "Post",
+                url : "userCash",
+                data : {"userId" : userId},
+                data_type : "json",
+                success : function(result){
+                    if (confirm(userId + "님의 현재 보유 캐시는 " + result + "원 입니다.\n"
+                        + "상품 구매후 잔여 캐시는 " + (result - itemPrice) + "원 입니다.\n"
+                        + "이 상품을 구매하시겠습니까?")) {
+                        userCashCheck();
+                    } else {
+
+                    }
+                },
+                error : function(){
+                    alert('userCash 함수 통신 실패');
+                }
+            })
+        } else {
+            alert("판매자와 구매자가 동일합니다.");
+        }
+
+    }
+
+    function userCashCheck() {
+
+        let itemNum = [[${itemView.itemNum}]];
+        let itemPrice = [[${itemView.itemPrice}]];
+        let itemSeller = [[${itemView.itemSeller}]];
+        let itemName = [[${itemView.itemName}]];
+
+        $.ajax({
+            type: "Post",
+            url: "userCashCheck",
+            data: {
+                "itemNum": itemNum,
+                "itemPrice": itemPrice,
+                "itemSeller": itemSeller,
+                "itemName": itemName,
+                "userId": userId
+            },
+            data_type: "json",
+            success: function (result) {
+                if (result == 'Y') {
+                    alert("구매신청이 완료되었습니다.");
+                    window.location.href = "/itemView?itemNum="+ itemNum;
+                }
+                if (result == 'N') {
+                    alert("포인트가 부족합니다.");
+                }
+            },
+            error: function () {
+                alert("itemBuy 함수 통신 실패");
+            }
+        })
+    }
+
+    function itemError() {
+        alert('로그인 후 이용해주세요.');
+    }
+
+    function itemTrading(){
+        alert('현재 거래중인 상품입니다.');
+    }
+
+    function itemTakeCheck(){
+
+        let itemNum = [[${itemView.itemNum}]];
+        let itemPrice = [[${itemView.itemPrice}]];
+        let itemSeller = [[${itemView.itemSeller}]];
+        let itemBuyer = [[${itemView.itemBuyer}]];
+
+        if(confirm('수취확인을 진행하시겠습니까?')){
+            $.ajax({
+                type : "Post",
+                url : "itemTakeCheck",
+                data : {
+                    "itemNum"   : itemNum,
+                    "itemPrice" : itemPrice,
+                    "itemSeller" : itemSeller,
+                    "itemBuyer" : itemBuyer
+                },
+                data_type : "json",
+                success : function(result){
+                    alert('수취확인을 완료하였습니다.');
+                    window.location.href = "/itemView?itemNum="+ itemNum;
+                },
+                error : function(){
+                    alert('수취 확인 함수 통신 실패!');
+                }
+            });
+        } else {
+            alert('취소하였습니다.');
+        }
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/05-single-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:58 GMT -->
+</html>

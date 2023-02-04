@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sss.pop.auc.auDAO">
+
+    <!-- 중고물품 리스트 itmecheck가 0인경우만 출력 -->
+    <select id="auList1" resultType="auction">
+        SELECT * FROM AUCTION WHERE AUCHECK = 0
+    </select>
+
+    <!-- 중고물품 상세보기 -->
+    <select id="auView" parameterType="int" resultType="auction">
+        SELECT * FROM AUCTION WHERE AUNUM = #{auNum}
+    </select>
+
+    <!-- 중고물품 조회수 증가 -->
+    <update id="auHit" parameterType="int">
+        UPDATE AUCTION SET AUHIT = AUHIT + 1 WHERE AUNUM = #{auNum}
+    </update>
+
+    <!-- 판매자 정보 불러오기 -->
+    <select id="auSellerInfo" parameterType="String" resultType="users">
+        SELECT * FROM USERS WHERE USERID = #{auSeller}
+    </select>
+
+    <!-- 판매지역 정보 불러오기 -->
+    <select id="auRegionInfo" parameterType="int" resultType="region">
+        SELECT * FROM REGION WHERE RESEQ = #{auRegion}
+    </select>
+
+    <!-- 카테고리 정보 불러오기 -->
+    <select id="auCategoryInfo" parameterType="int" resultType="category">
+        SELECT * FROM CATEGORY WHERE CASEQ = #{auCategory}
+    </select>
+
+    <select id="userInfo" parameterType="String" resultType="users">
+        SELECT * FROM USERS WHERE USERID = #{userId}
+    </select>
+
+    <update id="cashUpdate" parameterType="users">
+        UPDATE USERS SET USERCASH = #{userCash} WHERE USERID = #{userId}
+    </update>
+
+    <update id="auUpdate" parameterType="auction">
+        UPDATE AUCTION SET AUBUYER=#{auBuyer}, AUPRICE=#{auPrice} WHERE AUNUM = #{auNum}
+    </update>
+
+    <update id="auComplete" parameterType="int">
+        UPDATE AUCTION SET AUCHECK = 2 WHERE AUNUM = #{auNum}
+    </update>
+
+    <update id="deadUpdate" parameterType="int">
+        UPDATE AUCTION SET AUDEADLINE = SYSDATE + (INTERVAL '5' MINUTE) WHERE AUNUM = #{auNum}
+    </update>
+
+    <!-- 카테고리 찾기 -->
+    <select id="caSeqFind" parameterType="auction" resultType="int">
+        SELECT CASEQ FROM CATEGORY WHERE CAMAIN = #{caMain} AND CASUB = #{caSub}
+    </select>
+
+    <!-- 판매지역 찾기 -->
+    <select id="reSeqFind" parameterType="auction" resultType="int">
+        SELECT RESEQ FROM REGION WHERE RECITY = #{reCity} AND RENINE = #{reNine}
+    </select>
+
+    <!-- 경매물품 등록 -->
+    <insert id="auAdd" parameterType="auction">
+            INSERT INTO AUCTION
+            VALUES (AU_SEQ.NEXTVAL, #{auName}, #{auContent}, #{auPrice}, #{auRegion}, #{auPhotoName},
+                    #{auCategory}, #{auSeller}, 0, 0, SYSDATE, 0,null, SYSDATE +#{auDeadlineDate}/(24*60))
+    </insert>
+
+    <!-- caMain선택시, 해당 CATEGORY 값 불러오기 -->
+    <select id="selectCaMain" parameterType="String" resultType="category">
+        SELECT * FROM CATEGORY WHERE CAMAIN = #{caMain}
+    </select>
+
+    <!-- reCity선택시, 해당 REGION 값 불러오기 -->
+    <select id="selectReCity" parameterType="String" resultType="region">
+        SELECT * FROM REGION WHERE RECITY = #{reCity}
+    </select>
+
+    <!-- item갯수 확인하기 카테고리 X / 검색 X -->
+    <select id="auCount" resultType="int">
+        SELECT count(*) FROM AUCTION WHERE AUCHECK = 0
+    </select>
+
+    <!-- item갯수 확인하기 카테고리 O / 검색 X -->
+    <select id="auCountC" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM (SELECT * FROM AUCTION WHERE AUCATEGORY = #{cate.caSeq})
+        WHERE ITEMCHECK = 0
+    </select>
+
+    <!-- item갯수 확인하기 카테고리 X / 검색 O -->
+    <select id="auCountS" parameterType="String" resultType="int">
+        SELECT count(*)
+        FROM (SELECT *
+              FROM AUCTION
+              WHERE (AUNAME LIKE '%' || #{search} || '%')
+                 OR (AUCONTENT LIKE '%' || #{search} || '%'))
+        WHERE AUCHECK = 0
+    </select>
+
+    <!-- item갯수 확인하기 카테고리 O / 검색 O -->
+    <select id="auCountSC" parameterType="Map" resultType="int">
+        SELECT count(*)
+        FROM (SELECT *
+              FROM (SELECT *
+                    FROM AUCTION
+                    WHERE (AUNAME LIKE '%' || #{sear.search} || '%')
+                       OR (AUCONTENT LIKE '%' || #{sear.search} || '%'))
+              WHERE AUCATEGORY = #{cate.caSeq})
+        WHERE AUCHECK = 0
+    </select>
+
+    <!-- 중고물품 리스트 카테고리 X / 검색 X itmecheck가 0인경우만 출력 -->
+    <select id="auList" parameterType="paging" resultType="auction">
+        SELECT *
+        FROM (SELECT ROWNUM RN, K.* FROM (SELECT * FROM AUCTION WHERE auCHECK = 0 ORDER BY AUDATE DESC) K)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+    </select>
+
+    <!-- 중고물품 리스트 카테고리 O / 검색 X -->
+    <select id="auListC" parameterType="Map" resultType="auction">
+        SELECT *
+        FROM (SELECT ROWNUM RN, K.*
+              FROM (SELECT * FROM (SELECT * FROM AUCTION WHERE AUCATEGORY = #{cate.caSeq}) WHERE AUCHECK = 0 ORDER BY AUDATE DESC) K)
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+
+    <!-- 중고물품 리스트 카테고리 X / 검색 O -->
+    <select id="auListS" parameterType="Map" resultType="auction">
+        SELECT *
+        FROM (SELECT ROWNUM RN, K.*
+              FROM (SELECT *
+                    FROM (SELECT *
+                          FROM AUCTION
+                          WHERE (AUNAME LIKE '%' || #{sear.search} || '%')
+                             OR (AUCONTENT LIKE '%' || #{sear.search} || '%'))
+                    WHERE AUCHECK = 0 ORDER BY AUDATE DESC) K)
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+
+    <!-- 중고물품 리스트 카테고리 O / 검색 O -->
+    <select id="auListSC" parameterType="Map" resultType="auction">
+        SELECT *
+        FROM (SELECT ROWNUM RN, K.*
+              FROM (SELECT *
+                    FROM (SELECT *
+                          FROM (SELECT * FROM AUCTION WHERE AUCATEGORY = #{cate.caSeq})
+                          WHERE (AUNAME LIKE '%' || #{sear.search} || '%')
+                             OR (AUCONTENT LIKE '%' || #{sear.search} || '%'))
+                    WHERE AUCHECK = 0 ORDER BY AUDATE DESC) K)
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+
+    <select id="auBCount" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM AUCTION WHERE ${where}
+    </select>
+
+    <select id="auBList" parameterType="paging" resultType="auction">
+        SELECT *
+        FROM (SELECT ROWNUM RN, A.* FROM (SELECT AUCTION.* FROM AUCTION where ${where} ORDER BY AUDEADLINE DESC)A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+    </select>
+
+    <select id="auSCount" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM AUCTION WHERE ${where}
+    </select>
+
+    <select id="auSList" parameterType="paging" resultType="auction">
+        SELECT *
+        FROM (SELECT ROWNUM RN, A.* FROM (SELECT AUCTION.* FROM AUCTION where ${where} ORDER BY AUDEADLINE DESC)A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+    </select>
+
+    <!--경매입찰자 바뀔때-->
+    <insert id="sendNotebuyer" parameterType="auction">
+        INSERT INTO NOTE VALUES (NOTE_SEQ.NEXTVAL,'admin', #{auBuyer}, '입찰금 반환', '${auNum} 번 상품'||CHR(13)||CHR(10)||'물품명 :  ${auName}' ||CHR(13)||CHR(10)||'다른분의 입찰로 입찰금  ${auPrice} 원 반환되었습니다.',sysdate,1,0 )
+    </insert>
+
+    <!--경매 마감시 판매자한테 -->
+    <insert id="sendNoteSeller" parameterType="auction">
+        INSERT INTO NOTE VALUES (NOTE_SEQ.NEXTVAL,'admin', #{auSeller}, '경매 판매 완료', '${auNum} 번 상품'||CHR(13)||CHR(10)||'물품명 :  ${auName}' ||CHR(13)||CHR(10)||' 구매자 : ${auBuyer}   판매 금액 :  ${auPrice} 원 .',sysdate,1,0 )
+    </insert>
+
+    <!--경매 마감시 구매자한테-->
+    <insert id="sendNoteComplete" parameterType="auction">
+        INSERT INTO NOTE VALUES (NOTE_SEQ.NEXTVAL,'admin', #{auBuyer}, '경매 낙찰', '${auNum} 번 상품'||CHR(13)||CHR(10)||'물품명 :  ${auName}' ||CHR(13)||CHR(10)||'금액 : ${auPrice} 원에 낙찰되었습니다.',sysdate,1,0 )
+    </insert>
+
+
+    <!-- ============================================================================== -->
+    <!-- auCnt : 상점 주인의 경매 판매 물품 갯수 -->
+    <select id="auCnt" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM AUCTION WHERE AUSELLER = #{userId}
+    </select>
+
+
+
+
+
+
+
+</mapper>

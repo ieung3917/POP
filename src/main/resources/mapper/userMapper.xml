@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sss.pop.dao.userDAO">
+
+    <select id="session1" resultType="users">
+        SELECT * FROM USERS WHERE USERID = 'admin'
+    </select>
+
+    <select id="myNote" parameterType="String" resultType="note">
+        SELECT * FROM NOTE WHERE NOTERECEIVER=#{userId} AND NOTECHECK='1' AND (NOT NOTEDELCHECK = 1)
+    </select>
+
+    <!-- idOverlapCheck : 아이디 중복 체크 -->
+    <select id="idOverlapCheck" parameterType="String" resultType="String">
+        SELECT USERID FROM USERS WHERE USERID = #{userId}
+    </select>
+
+    <!-- userJoin : 회원가입 처리 -->
+    <insert id="userJoin" parameterType="users">
+        INSERT INTO USERS VALUES (#{userId}, #{userPw}, #{userName}, #{userBirth}, #{userGender},
+                                  #{userEmail}, #{userAddr}, 0, 0, #{userProfileName})
+    </insert>
+
+    <!-- userLogin : 로그인(쿠키생성) -->
+    <select id="userLogin" parameterType="String" resultType="users">
+        SELECT * FROM USERS WHERE USERID = #{userId}
+    </select>
+
+    <!-- userInfo : 회원 정보(아이디, 등급, 프로필만) -->
+    <select id="userInfo" parameterType="String" resultType="users">
+        SELECT USERID, USERGRADE, USERPROFILENAME FROM USERS WHERE USERID = #{userId}
+    </select>
+
+    <!-- auList : 회원 경매 판매 목록 -->
+    <select id="auList" parameterType="String" resultType="auction">
+        SELECT * FROM AUCTION WHERE AUSELLER = #{userId}
+    </select>
+
+    <!-- userRvList : 회원 상점 리뷰 목록 -->
+    <select id="userRvList" parameterType="String" resultType="review">
+        SELECT *
+        FROM (SELECT RV.*, USERID, USERPROFILENAME
+              FROM USERS, (SELECT *
+                           FROM REVIEW
+                           WHERE RVSELLER = #{userId}) RV
+              WHERE USERS.USERID = RV.RVWRITER)
+        ORDER BY RVDATE DESC
+    </select>
+    <!-- userRvCnt : 회원 상점 리뷰 갯수 -->
+    <select id="userRvCnt" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM (SELECT *
+              FROM USERS, (SELECT *
+                           FROM REVIEW
+                           WHERE RVSELLER = #{userId}) RV
+              WHERE USERS.USERID = RV.RVWRITER)
+    </select>
+
+
+    <!-- 거래 목록 관련 -->
+    <!-- regionOutput : 회원 거래 판매 목록 지역 출력 -->
+    <select id="regionOutput" parameterType="int" resultType="region">
+        SELECT * FROM REGION WHERE RESEQ = #{itemRegion}
+    </select>
+    <!-- itemAllList : 회원 전체 거래 판매 목록 -->
+    <select id="itemAllList" parameterType="String" resultType="item">
+        SELECT * FROM ITEM WHERE ITEMSELLER = #{userId} ORDER BY ITEMDATE DESC
+    </select>
+    <!-- itemSellingList : 회원 판매중 거래 판매 목록 -->
+    <select id="itemSellingList" parameterType="String" resultType="item">
+        SELECT * FROM ITEM WHERE ITEMSELLER = #{userId} AND ITEMCHECK = 0 ORDER BY ITEMDATE DESC
+    </select>
+    <!-- itemDoneList : 회원 판매완료 거래 판매 목록 -->
+    <select id="itemDoneList" parameterType="String" resultType="item">
+        SELECT * FROM ITEM WHERE ITEMSELLER = #{userId} AND ITEMCHECK = 1 ORDER BY ITEMDATE DESC
+    </select>
+
+
+    <!-- 경매 목록 관련 -->
+    <!-- auRegionOutput : 회원 거래 판매 목록 지역 출력 -->
+    <select id="auRegionOutput" parameterType="int" resultType="region">
+        SELECT * FROM REGION WHERE RESEQ = #{auRegion}
+    </select>
+
+    <!-- auSellingList : 회원 판매중 경매 판매 목록 -->
+    <select id="auSellingList" parameterType="String" resultType="auction">
+        SELECT * FROM AUCTION WHERE AUSELLER = #{userId} AND AUCHECK = 0 ORDER BY AUDATE DESC
+    </select>
+    <!-- auAllList : 회원 전체 경매 판매 목록 -->
+    <select id="auAllList" parameterType="String" resultType="auction">
+        SELECT * FROM AUCTION WHERE AUSELLER = #{userId} ORDER BY AUDATE DESC
+    </select>
+    <!-- auDoneList : 회원 판매 완료 경매 목록 -->
+    <select id="auDoneList" parameterType="String" resultType="auction">
+        SELECT * FROM AUCTION WHERE AUSELLER = #{userId} AND AUCHECK = 1 ORDER BY AUDATE DESC
+    </select>
+
+
+
+
+
+
+
+
+
+    <!--   =============================================================================   -->
+    <select id="userModiForm" parameterType="String" resultType="users">
+        SELECT * FROM USERS WHERE USERID = #{userId}
+    </select>
+
+    <update id="userModi" parameterType="users">
+        UPDATE USERS SET USERNAME=#{userName}, USEREMAIL=#{userEmail}, USERADDR=#{userAddr}, USERPROFILENAME=#{userProfileName} WHERE USERID = #{userId}
+    </update>
+
+    <update id="userModiPw" parameterType="users">
+        UPDATE USERS SET USERPW=#{userPw},USERNAME=#{userName}, USEREMAIL=#{userEmail}, USERADDR=#{userAddr}, USERPROFILENAME=#{userProfileName} WHERE USERID = #{userId}
+    </update>
+
+    <update id="cashRecharge" parameterType="users">
+        UPDATE USERS SET USERCASH = USERCASH + #{userCash} WHERE USERID = #{userId}
+    </update>
+
+
+    <!-- userList : 모든 회원 조회 -->
+    <select id="userList" resultType="String">
+        SELECT USERID FROM USERS
+    </select>
+
+    <!-- userKakaoJoin : 카카오 정보로 회원가입 -->
+    <insert id="userKakaoJoin" parameterType="users">
+        INSERT INTO USERS VALUES (#{userId}, null, #{userName}, null, #{userGender},
+                                  #{userEmail}, null, 0, 0, #{userProfileName})
+    </insert>
+
+    <!-- userKakaoLogin : 카카오 정보로 로그인 -->
+    <select id="userKakaoLogin" parameterType="String" resultType="users">
+        SELECT * FROM USERS WHERE USERID = #{id}
+    </select>
+
+
+</mapper>

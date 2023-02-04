@@ -1,0 +1,442 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/index by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:01 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>XeMart - Ecommerce Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="/css/assets/animate.css">
+
+    <!-- Owl Slider -->
+    <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/css/assets/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/assets/responsive.css">
+
+</head>
+<body>
+<header th:fragment="header">
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <!-- 안 읽은 쪽지 갯수들고 오는 스크립트 -->
+    <script th:inline="javascript" th:if="${session.login ne null}">
+
+        let session = sessionStorage.getItem("login");
+        let userId = [[${session.login.userId}]];
+
+        $.ajax({
+            type : "POST",
+            url : "noteGetNoneCheckCnt",
+            data : { "userId" : userId },
+            dataType : "text",
+            success : function(result){
+
+                if(result >= 99){
+                    result = "99+";
+                } else {
+                    result = "+"+result;
+                }
+
+                // id가 noteCnt1, noteCnt2인 영역에 출력
+                $(document).ready(
+                    $("#noteCnt1").text(result),
+                    $("#noteCnt2").text(result)
+                );
+
+            },
+            error : function(){
+                console.log('Failed to get the count of notes.');
+            }
+        });
+
+        $.ajax({
+            type : "POST",
+            url : "noteMynote",
+            data : { "userId" : userId },
+            dataType : "json",
+            success : function(list){
+                // console.log(list);
+                let output = "";
+                for(let i in list) {
+                    output += "<div class='content-item d-flex justify-content-between' style='text-align: right'>"
+                    output += "<div class='cart-disc'>"
+                    output += "<p><a href=\"/noteView?noteSeq="+list[i].noteSeq+"\" style=''>"+list[i].noteTitle+"</a></p></div>"
+                    output += "<div class='cart-disc'> <p><span>"+list[i].noteSender+"</span></p></div></div>"
+                }
+
+
+                document.getElementById("myNote").innerHTML=output;
+            },
+            error : function(){
+                alert('실패')
+            }
+        });
+
+
+
+    </script>
+    <script>
+        function test(){
+            // 거래/경매 선택
+            let selectBar = $("#selectBox").val();
+
+            // 검색내역
+            let search = $("#search").val();
+
+            // 거래/경매 선택이 되지 않았을경우
+            if(selectBar == null){
+                alert('거래/경매 검색타입을 선택해주세요.');
+            }
+
+            // 거래 선택의 경우
+            if(selectBar == "item"){
+
+                location.href = "/itemList?search=" + search;
+            }
+
+            // 경매 선택의 경우
+            if(selectBar == 'auction'){
+                location.href = "/auList?search=" + search;
+            }
+
+        }
+        function test1(){
+            // 거래/경매 선택
+            let selectBar = $("#selectBox1").val();
+
+            // 검색내역
+            let search = $("#search1").val();
+
+            // 거래/경매 선택이 되지 않았을경우
+            if(selectBar == null){
+                alert('거래/경매 검색타입을 선택해주세요.');
+            }
+
+            // 거래 선택의 경우
+            if(selectBar == "item"){
+
+                location.href = "/itemList?search=" + search;
+            }
+
+            // 경매 선택의 경우
+            if(selectBar == 'auction'){
+                location.href = "/auList?search=" + search;
+            }
+
+        }
+    </script>
+
+    <!-- 카카오 로그아웃 -->
+    <script>
+        function kakaoLogout() {
+            location.href = "https://kauth.kakao.com/oauth/logout?client_id=0d9934d491f5f82afbca7b5269823ea7&logout_redirect_uri=http://localhost:9090/kakaoLogout/callbackLogout";
+        }
+    </script>
+
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="load-list">
+            <div class="load"></div>
+            <div class="load load2"></div>
+        </div>
+    </div>
+    <!-- End Preloader -->
+
+    <!-- Top Bar -->
+    <section class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-4">
+                    <div class="top-left d-flex">
+                        <div class="lang-box">
+                            <a href="/session">세션 만들기</a>
+                        </div>
+                    <div class="lang-box">
+                        <a href="/server">채팅서버 만들기</a></div>
+                </div>
+                </div>
+                <div class="col-lg-6 col-md-8">
+                    <div class="top-right text-right">
+                        <ul class="list-unstyled list-inline" th:if="${session.login ne null}">
+                            <li class="list-inline-item"><a>[[${session.login.userId}]]</a></li>
+                            <li class="list-inline-item"><a th:href="@{/userStore(userId=${session.login.userId})}"><img src="/images/user.png" alt="">My 상점</a>
+                            </li>
+                            <li class="list-inline-item"><a th:if="${session.login ne null}" th:href="@{/noteGetList(userId=${session.login.userId})}"><img src="/images/note.png" alt="cart">쪽지함</a>
+                            </li>
+                            <li class="list-inline-item"><a href="/userLogout"><img src="/images/checkout.png" alt="">로그아웃</a></li>
+                            <li class="list-inline-item"><a onclick="kakaoLogout()"><img src="/images/checkout.png" alt="">카카오 로그아웃</a></li>
+                        </ul>
+                        <ul class="list-unstyled list-inline" th:if="${session.login eq null}">
+                            <li class="list-inline-item"><a href="/userJoinForm"><img src="/images/check_in.png" alt="">회원가입</a>
+                            </li>
+                            <li class="list-inline-item"><a href="/userLoginForm"><img src="/images/login.png" alt="">로그인</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Top Bar -->
+
+    <!-- Logo Area -->
+    <section class="logo-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="logo">
+                        <a href="/index"><img src="/images/poplogo.png" alt="" style="margin-top: 10px;"></a>
+                    </div>
+                </div>
+                <div class="col-md-5 padding-fix" style="margin-left: 10px;">
+                    <form action="" method="" onsubmit="return false" class="search-bar" id="search-bar">
+                        <input type="text" name="search-bar" id="search" onkeypress="if(event.keyCode==13){test();}" placeholder="어떤 상품을 찾으시나요?">
+                        <button type="button" onclick="test()" id="testButton"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="col-md-3" style="align-items : center; text-align : center;">
+                    <div class="sortby" style="margin: 12px;">
+                        <select id="selectBox" class="sort-box" name="category"
+                                style="height: 45px; width: 163px; border: 2px solid #dddddd; border-radius: 30px; padding-left: 20px; float: left">
+                            <option value="" selected disabled>-- 선택 --</option>
+                            <option value="item">거래</option>
+                            <option value="auction">경매</option>
+                        </select>
+                    </div>
+                    <div class="carts-area d-flex" style="margin: 0px; padding: 0px">
+                        <div class="cart-box ml-auto text-center">
+                            <a href="#" class="cart-btn" th:if="${session.login ne null}">
+                                <img src="/images/note.png" alt="cart">
+                                <span id="noteCnt1"></span>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- End Logo Area -->
+
+    <!-- Cart Body -->
+    <div class="cart-body">
+        <div class="close-btn">
+            <button class="close-cart"><img src="/images/close.png" alt="">Close</button>
+        </div>
+        <div class="crt-bd-box">
+            <div class="cart-heading text-center">
+                <h5>내 쪽지</h5>
+            </div>
+            <div class="cart-content" id="myNote">
+
+            </div>
+        </div>
+    </div>
+    <div class="cart-overlay"></div>
+    <!-- End Cart Body -->
+
+    <!-- Sticky Menu -->
+    <section class="sticky-menu">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-3">
+                    <div class="sticky-logo">
+                        <a href="/index"><img src="/images/poplogo.png" alt="" class="img-fluid"></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="main-menu" >
+                        <ul class="list-unstyled list-inline" style="text-align: center;">
+                            <li class="list-inline-item"><a href="/index">HOME </a>
+                            </li>
+
+                            <li class="list-inline-item"><a href="/itemList">거래</a></li>
+                            <li class="list-inline-item"><a href="/auList">경매</a></li>
+                            <li class="list-inline-item"><a href="/boList">커뮤니티 </a>
+                            </li>
+                            <li class="list-inline-item"><a>고객센터 <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown list-unstyled">
+                                    <li><a href="/noList">공지사항</a></li>
+                                    <li><a href="/rqList">자주찾는 질문</a></li>
+                                    <li th:if="${session.login ne null}"><a th:href="|/quList?userId=${session.login.userId}|">문의사항</a></li>
+                                    <li><a th:if="${session.login ne null}" th:href="|auBList?userId=${session.login.userId}|">경매내역</a></li>
+                                    <li><a th:if="${session.login ne null}" th:href="|itemBList?userId=${session.login.userId}|">구매내역</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3">
+                    <div class="carts-area d-flex">
+                        <div class="src-box" style="margin-right: 10px;">
+                            <form action="" method="" onsubmit="return false" class="search-bar">
+                            <input type="text" name="search-bar" id="search1" onkeypress="if(event.keyCode==13){test1();}" placeholder="어떤 상품을 찾으시나요?" style="font-size: 12px;">
+                            <button type="button" onclick="test1()" id="testButton1"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        <div class="src-box" style="margin-right: 15px;">
+                            <select id="selectBox1" name="category"
+                                    style="width: 90px; height:40px; border: 2px solid #dddddd; border-radius: 30px; padding-left: 10px; float: left; font-size: 12px;">
+                                <option value="" selected disabled>-- 선택 --</option>
+                                <option value="item">거래</option>
+                                <option value="auction">경매</option>
+                            </select>
+                        </div>
+                        <div class="cart-box ml-auto text-center">
+                            <a href="#" class="cart-btn" th:if="${session.login ne null}">
+                                <img src="/images/note.png" alt="cart">
+                                <span id="noteCnt2"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <!-- End Sticky Menu -->
+
+    <!-- Menu Area -->
+    <section class="menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" >
+                    <div class="main-menu">
+                        <ul class="list-unstyled list-inline" style="text-align: justify">
+                            <li class="list-inline-item"><a href="/index">HOME </a>
+                            </li>
+
+                            <li class="list-inline-item"><a href="/itemList">거래</a></li>
+                            <li class="list-inline-item"><a href="/auList">경매</a></li>
+                            <li class="list-inline-item"><a href="/boList">커뮤니티 </a>
+                            </li>
+                            <li class="list-inline-item"><a>고객센터 <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown list-unstyled">
+                                    <li><a href="/noList">공지사항</a></li>
+                                    <li><a href="/rqList">자주찾는 질문</a></li>
+                                    <li th:if="${session.login ne null}"><a th:href="|/quList?userId=${session.login.userId}|">문의사항</a></li>
+                                    <li><a th:if="${session.login ne null}" th:href="|auBList?userId=${session.login.userId}|">경매내역</a></li>
+                                    <li><a th:if="${session.login ne null}" th:href="|itemBList?userId=${session.login.userId}|">구매내역</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <a href="#"><img src="/images/poplogo.png" alt=""></a>
+                            <a href="#"><span>Sign In</span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="/index">Home</a>
+                                </li>
+                                <li><a href="#">Pages</a>
+                                    <ul class="list-unstyled">
+                                        <li><a href="/auAdd">경매물품등록</a></li>
+                                        <li><a href="03-about-us">About Us</a></li>
+                                        <li><a href="04-category">Category</a></li>
+                                        <li><a href="05-single-product">Single Product</a></li>
+                                        <li><a href="06-shopping-cart">Shopping Cart</a></li>
+                                        <li><a href="07-checkout">Checkout</a></li>
+                                        <li><a href="08-login">Log In</a></li>
+                                        <li><a href="09-register">Register</a></li>
+                                        <li><a href="10-wishlist">Wishlist</a></li>
+                                        <li><a href="11-compare">Compare</a></li>
+                                        <li><a href="15-track-order">Track Order</a></li>
+                                        <li><a href="12-terms-condition">Terms & Condition</a></li>
+                                        <li><a href="13-faq">Faq</a></li>
+                                        <li><a href="14-404">404</a></li>
+                                        <li><a href="16-blog-one">Blog Style 1</a></li>
+                                        <li><a href="17-blog-two">Blog Style 2</a></li>
+                                        <li><a href="18-blog-three">Blog Style 3</a></li>
+                                        <li><a href="19-blog-details">Blog Details</a></li>
+                                        <li><a href="20-contact">CONTACT</a></li>
+                                    </ul>
+                                </li>
+                                <li ><a href="/itemList">거래</a></li>
+                                <li ><a href="/auList">경매</a></li>
+                                <li><a href="/boList">커뮤니티</a>
+                                </li>
+                                <li><a href="#">고객센터</a>
+                                    <ul class="list-unstyled">
+                                        <li><a href="/noList">공지사항</a></li>
+                                        <li><a href="/rqList">자주찾는 질문</a></li>
+                                        <li th:if="${session.login ne null}"><a th:href="|/quList?userId=${session.login.userId}|">문의사항</a></li>
+                                        <li><a th:if="${session.login ne null}" th:href="|auBList?userId=${session.login.userId}|">경매내역</a></li>
+                                        <li><a th:if="${session.login ne null}" th:href="|itemBList?userId=${session.login.userId}|">구매내역</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</header>
+<!-- =========================================
+        JavaScript Files
+        ========================================== -->
+
+<!-- jQuery JS -->
+<script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/js/assets/popper.min.js"></script>
+<script src="/js/assets/bootstrap.min.js"></script>
+
+<!-- Owl Slider -->
+<script src="/js/assets/owl.carousel.min.js"></script>
+
+<!-- Wow Animation -->
+<script src="/js/assets/wow.min.js"></script>
+
+<!-- Price Filter -->
+<script src="/js/assets/price-filter.js"></script>
+
+<!-- Mean Menu -->
+<script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/js/plugins.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+
+
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/index by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:51 GMT -->
+</html>

@@ -1,0 +1,466 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/09-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>XeMart - Ecommerce Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="/css/assets/animate.css">
+
+    <!-- Owl Slider -->
+    <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/css/assets/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/assets/responsive.css">
+</head>
+<style>
+    .selectBar {
+        border: 1px solid #dddddd;
+        display: flex;
+        width: 100%;
+        height: 45px;
+        border-radius: 30px;
+        -webkit-box-align: center;
+        padding-left: 15px;
+        margin-bottom: 35px;
+        align-items: center;
+        position: relative;
+        font-size: 12px;
+        appearance: none;
+        color: rgb(77, 77, 77);
+        background: rgb(255, 255, 255);
+    }
+</style>
+<script th:if="${session.login eq null}">
+        alert("로그인 후 이용해주세요.");
+        location.href="index";
+</script>
+<body>
+
+<header th:replace="header.html :: header"></header>
+
+<!-- Mobile Menu -->
+<section class="mobile-menu-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mobile-menu">
+                    <nav id="dropdown">
+                        <a href="#"><img src="/images/logo.png" alt=""></a>
+                        <a href="#"><span>Sign In</span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Home</a>
+                                <ul class="list-unstyled">
+                                    <li><a href="index.html">Home Style 1</a></li>
+                                    <li><a href="02-home-two.html">Home Style 2</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Pages</a>
+                                <ul class="list-unstyled">
+                                    <li><a href="03-about-us.html">About Us</a></li>
+                                    <li><a href="04-category.html">Category</a></li>
+                                    <li><a href="05-single-product.html">Single Product</a></li>
+                                    <li><a href="06-shopping-cart.html">Shopping Cart</a></li>
+                                    <li><a href="07-checkout.html">Checkout</a></li>
+                                    <li><a href="08-login.html">Log In</a></li>
+                                    <li><a href="09-register.html">Register</a></li>
+                                    <li><a href="10-wishlist.html">Wishlist</a></li>
+                                    <li><a href="11-compare.html">Compare</a></li>
+                                    <li><a href="15-track-order.html">Track Order</a></li>
+                                    <li><a href="12-terms-condition.html">Terms & Condition</a></li>
+                                    <li><a href="13-faq.html">Faq</a></li>
+                                    <li><a href="14-404.html">404</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Blog</a>
+                                <ul class="list-unstyled">
+                                    <li><a href="16-blog-one.html">Blog Style 1</a></li>
+                                    <li><a href="17-blog-two.html">Blog Style 2</a></li>
+                                    <li><a href="18-blog-three.html">Blog Style 3</a></li>
+                                    <li><a href="19-blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="20-contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Mobile Menu -->
+
+<!-- Breadcrumb Area -->
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-box text-center">
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item"><a href="#">Home</a></li>
+                        <li class="list-inline-item"><span>||</span> Register</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Breadcrumb Area -->
+
+<!-- Register -->
+<section class="register">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="/itemAdd" method="post" enctype="multipart/form-data">
+                    <h5>등록할 물품 정보 입력</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- 세션에 로그인값으로 지정 -->
+                            <input type="hidden" name="itemSeller" th:if="${session.login ne null}" th:value="${session.login.userId}" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label>제목*</label>
+                            <input type="text" name="itemName" placeholder="제목을 입력해주세요" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label>메인 카테고리*</label>
+                            <br/>
+                            <select class="selectBar" name="caMain" id="caMain" th:onchange="selectCaMain()" required>
+                                <option value='' selected disabled>-- 선택 --</option>
+                                <option value='남성의류'>남성의류</option>
+                                <option value='여성의류'>여성의류</option>
+                                <option value='신발'>신발</option>
+                                <option value='액세서리/잡화'>액세서리/잡화</option>
+                                <option value='디지털/가전'>디지털/가전</option>
+                                <option value='스포츠/레저'>스포츠/레저</option>
+                                <option value='도서/티켓/문구'>도서/티켓/문구</option>
+                                <option value='뷰티/미용'>뷰티/미용</option>
+                                <option value='생활/가공식품'>생활/가공식품</option>
+                                <option value='유아동'>유아동</option>
+                                <option value='반려동물용품'>반려동물용품</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label>서브 카테고리*</label>
+                            <br/>
+                            <select class="selectBar" name="caSub" id="caSubArea" required>
+                                <option  value=''  selected disabled>-- 선택 --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label>가격*</label>
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  name="itemPrice" placeholder="가격입력" required/>
+                        </div>
+                        <div class="col-md-12">
+                            <label>상품설명*</label>
+                            <br/>
+                            <textarea name="itemContent" placeholder="상품정보를 입력해주세요" cols="95%" rows="7%" style="border-radius: 15px" required></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label>상품 이미지*</label>
+                            <br/>
+                            <label>
+                                <input type="file" name="itemPhoto" accept=".jpg,.png" required>
+                            </label>
+                            <label>
+                                <input type="file" name="itemPhoto1" accept=".jpg,.png" >
+                            </label>
+                            <label>
+                                <input type="file" name="itemPhoto2" accept=".jpg,.png" >
+                            </label>
+                            <label>
+                                <input type="file" name="itemPhoto3" accept=".jpg,.png" >
+                            </label>
+                            <br/>
+                        </div>
+                        <br/>
+                        <div class="col-md-12">
+                            <label>거래 희망 시/도*</label>
+                            <br/>
+                            <select class="selectBar" name="reCity" id="reCity" th:onchange="selectReCity()" required>
+                                <option value='' selected disabled>-- 선택 --</option>
+                                <option value='강원'>강원</option>
+                                <option value='경기'>경기</option>
+                                <option value='경남'>경남</option>
+                                <option value='경북'>경북</option>
+                                <option value='광주'>광주</option>
+                                <option value='대구'>대구</option>
+                                <option value='대전'>대전</option>
+                                <option value='부산'>부산</option>
+                                <option value='서울'>서울</option>
+                                <option value='세종'>세종</option>
+                                <option value='울산'>울산</option>
+                                <option value='인천'>인천</option>
+                                <option value='전남'>전남</option>
+                                <option value='전북'>전북</option>
+                                <option value='제주'>제주</option>
+                                <option value='충남'>충남</option>
+                                <option value='충북'>충북</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label>거래 희망 시/군/구*</label>
+                            <br/>
+                            <select class="selectBar" name="reNine" id="reNineArea" required>
+                                <option value='' selected disabled>-- 선택 --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <div>
+                                <input type="checkbox" name="t-box" id="t-box">
+                                <label for="t-box">I have read the terms and condition.</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="c-box" id="c-box">
+                                <label for="c-box">Subscribe for newsletter</label>
+                            </div>
+                        </div>
+                        <div class="col-md-5 text-right">
+                            <button type="submit" name="button">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Register -->
+
+<!-- Brand area 2 -->
+<section class="brand2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tp-bnd owl-carousel">
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-01.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-02.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-03.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-04.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-05.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-06.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-07.png" alt="" class="img-fluid"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Brand area 2 -->
+
+<!-- Footer Area -->
+<section class="footer-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="f-contact">
+                    <h5>Contact Info</h5>
+                    <div class="f-add">
+                        <i class="fa fa-map-marker"></i>
+                        <span>Address :</span>
+                        <p>795 South Park Avenue, New York, NY USA 94107</p>
+                    </div>
+                    <div class="f-email">
+                        <i class="fa fa-envelope"></i>
+                        <span>Email :</span>
+                        <p>enquery@domain.com</p>
+                    </div>
+                    <div class="f-phn">
+                        <i class="fa fa-phone"></i>
+                        <span>Phone :</span>
+                        <p>+1 908 875 7678</p>
+                    </div>
+                    <div class="f-social">
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-cat">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-link">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-sup">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="footer-btm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-right">
+                <img src="/images/payment.png" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="back-to-top text-center">
+        <img src="/images/backtotop.png" alt="" class="img-fluid">
+    </div>
+</section>
+<!-- End Footer Area -->
+
+
+<!-- =========================================
+JavaScript Files
+========================================== -->
+
+<!-- jQuery JS -->
+<script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/js/assets/popper.min.js"></script>
+<script src="/js/assets/bootstrap.min.js"></script>
+
+<!-- Owl Slider -->
+<script src="/js/assets/owl.carousel.min.js"></script>
+
+<!-- Wow Animation -->
+<script src="/js/assets/wow.min.js"></script>
+
+<!-- Price Filter -->
+<script src="/js/assets/price-filter.js"></script>
+
+<!-- Mean Menu -->
+<script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/js/plugins.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"></script>
+<script>
+    // caMain선택시, caSub변경
+    function selectCaMain() {
+        let caMain = $("#caMain").val();
+        $('#caSubArea').html("");
+        console.log(caMain);
+        $.ajax({
+            type: "Post",
+            url: "selectCaMain",
+            data: {"caMain": caMain},
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                $('#caSubArea').append("<option  value=''  selected disabled>-- 선택 --</option>");
+                for (let i in result) {
+                    let caSub = "";
+                    caSub += "<option value='" + result[i].caSub + "'>" + result[i].caSub + "</option>";
+                        $('#caSubArea').append(caSub);
+                }
+            },
+            error: function () {
+                alert("selectCaMain 함수 통신 실패!");
+            }
+        })
+    }
+
+    // reCity선택시, rcNine변경
+    function selectReCity() {
+        let reCity = $("#reCity").val();
+        $('#reNineArea').html("");
+        console.log(reCity);
+        $.ajax({
+            type: "Post",
+            url: "selectReCity",
+            data: {"reCity": reCity},
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                $('#reNineArea').append("<option  value=''  selected disabled>-- 선택 --</option>");
+                for (let i in result) {
+                    let reNine = "";
+                    reNine += "<option value=" + result[i].reNine + ">" + result[i].reNine + "</option>";
+                    $('#reNineArea').append(reNine);
+                }
+            },
+            error: function () {
+                alert("selectReCity 함수 통신 실패!");
+            }
+        })
+    }
+</script>
+
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/09-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+</html>

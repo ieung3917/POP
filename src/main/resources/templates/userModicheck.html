@@ -1,0 +1,274 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+    
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/08-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>POP 로그인</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+		<!-- Fontawesome Icon -->
+        <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+		<!-- Animate Css -->
+        <link rel="stylesheet" href="/css/assets/animate.css">
+
+        <!-- Owl Slider -->
+        <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+        <!-- Custom Style -->
+        <link rel="stylesheet" href="/css/assets/normalize.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/assets/responsive.css">
+
+    </head>
+    <body>
+
+    <header th:replace="header.html :: header"></header>
+
+
+
+        <!-- Breadcrumb Area -->
+        <section class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="breadcrumb-box text-center">
+                            <ul class="list-unstyled list-inline">
+                                <li class="list-inline-item"><a href="#">내 정보</a></li>
+                                <li class="list-inline-item"><span>||</span>정보 수정</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Breadcrumb Area -->
+
+        <!-- Log In -->
+        <section class="login">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center" >
+                        <div class="r-customer text-center">
+                            <h5>비밀번호 확인</h5>
+                            <p>보안을 위해서 비밀번호를 다시 입력해주세요.</p>
+                            <form action="" method="" onsubmit="return false">
+                                <div class="pass d-flex" style="padding-left: 33%; padding-right: 26%  " >
+                                    <input type="password" name="userPw" id="userPw" onkeypress="if(event.keyCode==13){userModicheck();}" style="margin-bottom: 0px;" >
+
+                                <button type="button" onclick="userModicheck()" style="width: 100px;">확인</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Log In -->
+
+        <!-- Brand area 2 -->
+        <section class="brand2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tp-bnd owl-carousel">
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-01.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-02.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-03.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-04.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-05.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-06.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-07.png" alt="" class="img-fluid"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Brand area 2 -->
+
+        <!-- Footer Area -->
+        <section class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="f-contact">
+                            <h5>Contact Info</h5>
+                            <div class="f-add">
+                                <i class="fa fa-map-marker"></i>
+                                <span>Address :</span>
+                                <p>795 South Park Avenue, New York, NY USA 94107</p>
+                            </div>
+                            <div class="f-email">
+                                <i class="fa fa-envelope"></i>
+                                <span>Email :</span>
+                                <p>enquery@domain.com</p>
+                            </div>
+                            <div class="f-phn">
+                                <i class="fa fa-phone"></i>
+                                <span>Phone :</span>
+                                <p>+1 908 875 7678</p>
+                            </div>
+                            <div class="f-social">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-cat">
+                            <h5>Categories</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-link">
+                            <h5>Quick Links</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-sup">
+                            <h5>Support</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="footer-btm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a></p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <img src="/images/payment.png" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div class="back-to-top text-center">
+                <img src="/images/backtotop.png" alt="" class="img-fluid">
+            </div>
+        </section>
+        <!-- End Footer Area -->
+
+
+        <!-- =========================================
+        JavaScript Files
+        ========================================== -->
+
+        <!-- jQuery JS -->
+        <script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+        <!-- Bootstrap -->
+        <script src="/js/assets/popper.min.js"></script>
+        <script src="/js/assets/bootstrap.min.js"></script>
+
+        <!-- Owl Slider -->
+        <script src="/js/assets/owl.carousel.min.js"></script>
+
+        <!-- Wow Animation -->
+        <script src="/js/assets/wow.min.js"></script>
+
+        <!-- Price Filter -->
+        <script src="/js/assets/price-filter.js"></script>
+
+        <!-- Mean Menu -->
+        <script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="/js/plugins.js"></script>
+        <script src="/js/custom.js"></script>
+    <script th:inline="javascript" th:if="${session.login ne null}">
+        function userModicheck(){
+            let userId = [[${session.login.userId}]];
+            console.log(typeof userId);
+            let userPw = $("#userPw").val();
+
+            $.ajax({
+                type : "POST",
+                url : "/userModicheck",
+                data : { "userId" : userId,
+                         "userPw" : userPw},
+                dataType : "text",
+                success : function(result){
+
+                    if(result==0){
+                        location.href="/userModiForm?userId="+[[${session.login.userId}]];
+                    } else if(result==1){
+                        alert('비밀번호가 일치하지 않습니다.');
+                        $("#userPw").val("");
+                    }
+
+
+                },
+                error : function(){
+                    console.log('Failed to get the count of notes.');
+                }
+            });
+
+
+
+        }
+    </script>
+
+    </body>
+
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/08-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+</html>

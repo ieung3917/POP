@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sss.pop.dao.quDAO">
+
+    <insert id="quWrite" parameterType="quest">
+        INSERT INTO QUEST
+        VALUES (QU_SEQ.NEXTVAL, #{quTitle}, #{quContent}, #{quWriter}, SYSDATE, 0, null, '')
+    </insert>
+
+    <select id="quCount" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM QUEST WHERE ${where}
+    </select>
+
+    <select id="quNACount" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM QUEST WHERE ${where} AND QUADATE IS NULL
+    </select>
+
+    <select id="quACount" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM QUEST WHERE ${where} AND QUADATE IS NOT NULL
+    </select>
+
+    <select id="pQuList" parameterType="paging" resultType="quest">
+        SELECT *
+        FROM (SELECT ROWNUM RN, A.* FROM (SELECT QUEST.* FROM QUEST where ${where} ORDER BY QUNUM DESC)A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+    </select>
+
+    <select id="pQuNAList" parameterType="paging" resultType="quest">
+        SELECT *
+        FROM (SELECT ROWNUM RN, A.* FROM (SELECT QUEST.* FROM QUEST where ${where} AND QUADATE IS NULL ORDER BY QUNUM DESC)A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+    </select>
+
+    <select id="pQuAList" parameterType="paging" resultType="quest">
+        SELECT *
+        FROM (SELECT ROWNUM RN, A.* FROM (SELECT QUEST.* FROM QUEST where ${where} AND QUADATE IS NOT NULL ORDER BY QUNUM DESC)A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+    </select>
+
+    <select id="quView" parameterType="int" resultType="quest">
+        SELECT * FROM QUEST WHERE QUNUM = #{quNum}
+    </select>
+
+    <update id="quHit" parameterType="int">
+        UPDATE QUEST SET QUHIT = QUHIT + 1 WHERE QUNUM = #{quNum}
+    </update>
+
+    <delete id="quDelete">
+        DELETE FROM QUEST WHERE QUNUM = #{quNum}
+    </delete>
+
+    <update id="quModify" parameterType="quest">
+        UPDATE QUEST SET QUTITLE = #{quTitle}, QUCONTENT = #{quContent}, QUWRITER = #{quWriter} WHERE QUNUM = #{quNum}
+    </update>
+
+    <update id="quAWrite" parameterType="quest">
+        UPDATE QUEST SET QUANSWER = #{quAnswer}, QUADATE = SYSDATE WHERE QUNUM = #{quNum}
+    </update>
+
+</mapper>

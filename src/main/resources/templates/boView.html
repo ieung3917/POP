@@ -1,0 +1,1032 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/19-blog-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:03 GMT -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>XeMart - Ecommerce Template</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+  <!-- Fontawesome Icon -->
+  <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+  <!-- Animate Css -->
+  <link rel="stylesheet" href="/css/assets/animate.css">
+
+  <!-- Owl Slider -->
+  <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+  <!-- Custom Style -->
+  <link rel="stylesheet" href="/css/assets/normalize.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/assets/responsive.css">
+
+  <style>
+
+    /* boView */
+
+    .xans-board-write .ec-base-button {
+      margin: 10px 0 40px;
+    }
+
+    #container-1 {
+      margin: 0 auto;
+      *zoom: 1;
+    }
+
+
+
+    #contents {
+      position: relative;
+      width: 90%;
+      max-width: 1350px;
+      min-height: 500px;
+      margin: 0 auto;
+    }
+
+    #main #contents {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .txtNum {
+      display: inline-block;
+      font-size: 14px;
+      color: #999;
+      word-break: normal;
+    }
+
+    .titleArea {
+      margin: 5% 0 30px;
+      text-align: center;
+    }
+
+    .titleArea h2 {
+      position: relative;
+      font-size: 18px;
+      color: #111;
+      text-transform: uppercase;
+    }
+
+    .titleArea h2 font {
+      color: #111 !important;
+    }
+
+    .titleArea p {
+      font-size: 15px;
+      font-weight: 400;
+      margin-top: 5px;
+      color: #555;
+      line-height: 18px;
+    }
+
+    input, select, textarea {
+      font-size: 100%;
+      font-family: 'Nanum Gothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+      color: #353535;
+      vertical-align: middle;
+      outline: none;
+    }
+
+    input[type=radio], input[type=checkbox] {
+      width: 13px;
+      height: 13px;
+      border: 0;
+    }
+
+    input[type=text], input[type=password] {
+      height: 22px;
+      line-height: 22px;
+      padding: 2px 4px;
+      border: 1px solid #d5d5d5;
+      color: #353535;
+      font-size: 14px;
+    }
+
+    input[type=radio] + label, input[type=checkbox] + label {
+      margin: 0 4px 0 2px;
+    }
+
+    textarea {
+      padding: 5px 6px;
+      border: 1px solid #d5d5d5;
+      line-height: 1.5;
+    }
+
+    .btnNormal, .btnSubmit{
+      font-family: 'Roboto', 'Nanum Gothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+    }
+
+    [class^='btnNormal'], a[class^='btnNormal'] {
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 2px 8px;
+      border: 1px solid #d5d5d5;
+      border-radius: 0;
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: normal;
+      text-decoration: none;
+      vertical-align: middle;
+      word-spacing: -0.5px;
+      letter-spacing: 0;
+      text-align: center;
+      white-space: nowrap;
+      color: #353535;
+      background-color: #fff;
+    }
+
+    [class^='btnSubmit'], a[class^='btnSubmit'] {
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 2px 8px;
+      border: 1px solid transparent;
+      border-radius: 0;
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: normal;
+      text-decoration: none;
+      vertical-align: middle;
+      word-spacing: -0.5px;
+      letter-spacing: 0;
+      text-align: center;
+      white-space: nowrap;
+      color: #fff;
+      background-color: #222;
+    }
+
+    [class^='btn'].sizeS {
+      padding: 6px 8px;
+    }
+
+    [class^='btn'][class*='Fix'].sizeS {
+      width: 96px;
+    }
+
+    .ec-base-button {
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .ec-base-button:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+
+    .ec-base-button .gLeft {
+      float: left;
+      text-align: left;
+    }
+
+    .ec-base-button .gRight {
+      float: right;
+      text-align: right;
+    }
+
+    .ec-base-table table {
+      position: relative;
+      margin: 10px 0 0;
+      border: 1px solid #e5e5e5;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    .ec-base-table thead th {
+      padding: 12px 0;
+      border-bottom: 1px solid #e5e5e5;
+      color: #353535;
+      vertical-align: middle;
+      font-size: 12px;
+      font-weight: 500;
+      background: #fff;
+    }
+
+    .ec-base-table tbody th {
+      padding: 12px 0 12px 18px;
+      border: 1px solid #e5e5e5;
+      border-bottom-width: 0;
+      color: #353535;
+      text-align: left;
+      font-weight: normal;
+      background-color: #fff;
+    }
+
+    .ec-base-table th:first-child {
+      border-left: 0;
+    }
+
+    .ec-base-table td {
+      padding: 12px 10px;
+      border-top: 1px solid #e5e5e5;
+      color: #353535;
+      font-size: 12px;
+      vertical-align: middle;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+
+    .ec-base-table td.clear {
+      padding: 0 !important;
+      border: 0 !important;
+    }
+
+    table {
+      width: 100%;
+      border: 0;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+
+    /* boView End */
+
+    .blog-details{
+      font: 14px 'Roboto', 'Nanum Gothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+      color: #353535;
+      background: #fff;
+      padding: 35px 0;
+    }
+
+    .content {
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px
+      position: relative;
+      width: 90%;
+      max-width: 1350px;
+      min-height: 500px;
+      margin: 0 auto;
+    }
+
+    .content-2 {
+      -ms-flex: 0 0 75%;
+      flex: 0 0 75%;
+    }
+
+    .content-3 {
+      -ms-flex: 0 0 66.666667%;
+      flex: 0 0 66.666667%;
+    }
+
+    .ec-base-table tbody th {
+      padding: 12px 0 12px 18px;
+      border: 1px solid #e5e5e5;
+      border-bottom-width: 0;
+      color: #353535;
+      text-align: left;
+      font-weight: normal;
+      background-color: #fff;
+    }
+
+    .ec-base-table typeWrite td {
+      position: relative;
+      padding: 8px 0 7px
+    }
+
+    .ec-base-table typeWrite th {
+      border: 0;
+    }
+
+    /* boComment */
+    .xans-board-commentlist {
+      border: 1px #e5e5e5 solid;
+      border-top: 0;
+    }
+
+    .xans-board-commentlist .boardComment li {
+      position: relative;
+      border-top: 1px solid #e5e5e5;
+      color: #353535;
+      line-height: 140%;
+    }
+
+    .xans-board-commentlist .boardComment li:first-child {
+      margin: 0
+    }
+
+    .xans-board-commentlist .boardComment li div.commentTop {
+      overflow: hidden;
+      padding: 12px 0 10px 20px;
+    }
+
+    .xans-board-commentlist .boardComment li .name {
+      float: left;
+      font-weight: 600;
+    }
+
+    .xans-board-commentlist .boardComment li .date {
+      margin: 1px 10px 0 15px;
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    .xans-board-commentlist .boardComment li .button {
+      position: absolute;
+      top: 7px;
+      right: 10px;
+    }
+
+    .xans-board-commentlist .boardComment li .comment {
+      clear: both;
+      padding: 10px 0 20px 25px;
+      word-break: break-all;
+    }
+
+    .xans-board-commentform {
+      margin: 10px 20px;
+      padding: 5px 20px 20px;
+      border: 1px solid #e5e5e5;
+      background-color: #f9f9f9;
+      color: #353535;
+    }
+
+    .xans-board-commentform legend {
+      visibility: hidden;
+      overflow: hidden;
+      width: 0;
+      height: 0;
+      font-size: 0;
+      line-height: 0;
+    }
+
+    .xans-board-commentform p {
+      margin: 10px 0 0;
+    }
+
+    .xans-board-commentform input[type=text], .xans-board-commentform input[type=password] {
+      width: 135px;
+      margin: 0 10px 0 9px;
+    }
+
+    .xans-board-commentform textarea {
+      width: 100%;
+      height: 48px;
+      padding: 2px 2px 2px 4px;
+    }
+
+    .xans-board-commentform .view {
+      position: relative;
+      margin: 10px 0 0;
+      padding: 0 180px 0 0;
+    }
+
+    .xans-board-commentform .submit {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .xans-board-commentform {
+      margin: 10px 0px 10px 0;
+    }
+
+    .xans-board-movement {
+      border: 1px solid #e8e8e8;
+      margin: 20px 0;
+    }
+
+    .xans-board-movement ul {
+      margin: 0 0 -1px;
+    }
+
+    .xans-board-movement li {
+      overflow: hidden;
+      padding: 0 20px;
+      border-bottom: 1px solid #e8e8e8;
+      line-height: 140%;
+      color: #353535;
+    }
+
+    .xans-board-movement li strong, .xans-board-movement li a {
+      float: left;
+      padding: 10px;
+    }
+
+    .xans-board-movement li strong {
+      width: 6%;
+      padding-left: 15px;
+      font-weight: normal;
+      background: url("//img.echosting.cafe24.com/skin/base/board/ico_move_prev.gif") no-repeat 0 15px;
+    }
+
+    .xans-board-movement li a {
+      border-left: 1px solid #e8e8e8;
+    }
+
+    .xans-board-movement li.next {
+      border: 0;
+    }
+
+    .xans-board-movement li.next strong {
+      background: url("//img.echosting.cafe24.com/skin/base/board/ico_move_next.gif") no-repeat 0 15px;
+    }
+
+    html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img, a{
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    html {
+      width: 100%;
+      height: 100%;
+    }
+
+    body, code {
+      font: 12px 'Roboto', sans-serif;
+      color: #353535;
+      background: #fff;
+    }
+
+    body {
+      width: 100%;
+      min-width: 1000px;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: none;
+      text-rendering: optimizelegibility;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: #353535;
+    }
+
+    ::selection {
+      background: #888;
+      color: #fff;
+      text-shadow: none;
+    }
+
+    input, textarea {
+      font-size: 100%;
+      font-family: 'Roboto', sans-serif;
+      color: #353535;
+      vertical-align: middle;
+      outline: none;
+    }
+
+    textarea {
+      padding: 5px 6px;
+      border: 1px solid #d5d5d5;
+      line-height: 1.5;
+    }
+
+    .btnNormal, .btnEm{
+      font-family: 'Roboto', 'Nanum Gothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+    }
+
+    [class^='btnNormal'], a[class^='btnNormal'] {
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 2px 8px;
+      border: 1px solid #d5d5d5;
+      border-radius: 0;
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: normal;
+      text-decoration: none;
+      vertical-align: middle;
+      word-spacing: -0.5px;
+      letter-spacing: 0;
+      text-align: center;
+      white-space: nowrap;
+      color: #353535;
+      background-color: #fff;
+    }
+
+    [class^='btnEm'], a[class^='btnEm'] {
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 2px 8px;
+      border: 1px solid transparent;
+      border-radius: 0;
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: normal;
+      text-decoration: none;
+      vertical-align: middle;
+      word-spacing: -0.5px;
+      letter-spacing: 0;
+      text-align: center;
+      white-space: nowrap;
+      color: #fff;
+      background-color: #aaa;
+    }
+
+    [class^='btn'].sizeL {
+      padding: 14px 16px;
+      min-width: 80px;
+      font-size: 13px;
+    }
+
+    [class^='btn'] .icoDelete {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin: -2px 2px 0 0;
+      vertical-align: middle;
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    [class^='btn'] .icoDelete:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 4px;
+      width: 2px;
+      height: 10px;
+      background: #77797d;
+    }
+
+    [class^='btn'] .icoDelete:after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      right: 0;
+      width: 10px;
+      height: 2px;
+      background: #77797d;
+    }
+    /* boComment end */
+  </style>
+
+</head>
+<body>
+
+<header th:replace="header.html :: header"></header>
+
+
+
+<!-- Breadcrumb Area -->
+<section class="breadcrumb-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="breadcrumb-box text-center">
+          <ul class="list-unstyled list-inline">
+            <li class="list-inline-item"><a href="#">커뮤니티</a></li>
+            <li class="list-inline-item"><span>||</span> 게시글</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Breadcrumb Area -->
+
+<!-- Blog Details -->
+<section class="blog-details">
+  <div class="container-1">
+    <div class="content">
+      <div class="content-2 content-3">
+        <div class="blog-d-box">
+
+          </div>
+
+          <div class="ec-base-table typeWrite">
+            <table>
+              <colgroup>
+                <col style="width:130px;"/>
+                <col style="width:auto;"/>
+              </colgroup>
+              <tbody>
+              <tr>
+                <th scope="row" style="border-bottom: 0; border-right: 0;">제목</th>
+                <td style="padding: 8px 0 7px; border-bottom: 0;">[[${view.boTitle}]]</td>
+              </tr>
+              <tr>
+                <th scope="row" style="border-top: 0; border-right: 0;">작성자</th>
+                <td style="position: relative; padding: 8px 0 7px; border-top: 0;"> [[${view.boWriter}]]
+                  <div class="gridT" style="position: absolute; right: 10px; top: 13px;">
+                    <div class=" date" style="display: inline-block">작성일 <span class="txtNum">[[${view.boDate}]]</span>
+                    </div>
+                    <div class=" hit" style="margin-left: 10px; display: inline-block;">조회수 <span class="txtNum">[[${view.boHit}]]</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="view">
+                <td colspan="2">
+                  <img th:src="@{/fileUpload/{aa}(aa=${view.boFileName})}" width="200px">
+                  <br/><br/><br/>
+                  <div class="detail"><div class="fr-view fr-view-article">[[${view.boContent}]]</div></div>
+                </td>
+              </tr>
+              <tr class="attach displaynone">
+                <th scope="row">첨부파일</th>
+                <td>[[${view.boFileName}]]</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ec-base-button ">
+              <span class="gLeft">
+                  <a href="/boList" class="btnNormalFix sizeS">목록</a>
+              </span>
+            <span class="gRight">
+                <button th:onclick="|location.href='@{boModifyForm(boNum=${view.boNum})}'|" class="btnSubmitFix sizeS displaynone">수정</button>
+                <button th:onclick="|location.href='@{boDelete(boNum=${view.boNum})}'|" class="btnNormalFix sizeS displaynone">삭제</button>
+            </span>
+          </div>
+
+
+          <!-- boComment -->
+        <div id="coArea"></div>
+          <div class="xans-element- xans-board xans-board-commentpackage-8 xans-board-commentpackage xans-board-8 ">
+
+              <div class="xans-element- xans-board xans-board-commentform-8 xans-board-commentform xans-board-8 ">
+                <fieldset>
+                  <form action="">
+                  <p style="margin: 10px 0 10px 0;"><strong>댓글달기</strong></p>
+                  <div class="view">
+                    <input id="cbNum" name="cbNum" th:value="${view.boNum}" type="hidden"/>
+                    <input id="coWriter" name="coWriter" th:if="${session.login ne null}" th:value="${session.login.userId}" type="hidden" />
+
+                    <textarea id="coContent" fw-filter="isFill" fw-label="댓글내용" name="coContent" onclick="checkLogin()" required></textarea>
+                    <span class="submit">
+                              <button type="button" class="btnEm sizeL" onclick="coWrite()">작성</button> </span>
+                  </div>
+                  </form>
+                </fieldset>
+              </div>
+
+          </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous">
+        </script>
+
+        <script th:inline="javascript">
+          //console.log('확인확인1');
+          let cbNum = [[${view.boNum}]];
+
+          $.ajax({
+            type : "GET",
+            url : "comments/coList",
+            data : {
+              "cbNum" : cbNum
+            },
+            dataType : "json",
+            success : function(list){
+              coList(list);
+            },
+            error : function(){
+              alert("댓글 불러오기 통신 실패");
+            }
+          });
+
+
+          // 댓글 불러오기 함수
+          function coList(list){
+
+            let output = "";
+
+
+
+
+
+            output += "<div class=\"xans-element- xans-board xans-board-commentpackage-8 xans-board-commentpackage xans-board-8 \">";
+
+            for(let i in list) {
+              output += "<div class=\"xans-element- xans-board xans-board-commentlist-8 xans-board-commentlist xans-board-8\">";
+
+              output += "<ul class=\"boardComment\">";
+              output += "<li class=\"first  xans-record-\">";
+
+              output += "<div class=\"commentTop\">";
+              output += "<strong class=\"name\">" + list[i].coWriter + "</strong>";
+              output += "<span class=\"date\">" + list[i].comDate + "</span>";
+              output += "</div>";
+
+
+
+
+                if ([[${session.login eq null}]]) {
+                  output += "<span></span><span></span>"
+                }else{
+
+                  if([[${session.login?.userId eq 'admin'}]] || list[i].coWriter == [[${session.login?.userId}]] ) {
+                  // alert('if문 실행');
+                  output += "<span class=\"button\">";
+                  output += "<button type='button'  onclick='coCon("
+                          + list[i].coNum + ", " + list[i].cbNum
+                          + ")' class=\"btnNormal\">수정</button>";
+                  output += "<button type='button' style='margin-left: 10px;' onclick='coDelete("
+                          + list[i].coNum + ", " + list[i].cbNum
+                          + ")' class=\"btnNormal\">"
+                          + "<i class=\"icoDelete\"></i>"
+                          + "삭제</button>";
+                  output += "</span>";
+                }
+
+                }
+
+
+
+              output += "<div class=\"comment\">";
+              output += "<span id='"+"coModiContent" + list[i].coNum +"'>"
+                      + list[i].coContent + "</span>";
+              output += "</div>";
+              output += "</li>";
+              output += "</ul>";
+              output += "</div>";
+            }
+
+            document.getElementById("coArea").innerHTML = output;
+          }
+
+          // 댓글 삭제 함수
+          function coDelete(coNum, cbNum){
+            //console.log("coNum : "+coNum+", cbNum : "+cbNum);
+
+            $.ajax({
+              type : "POST",
+              url : "comments/coDelete",
+              data : {
+                "cbNum" : cbNum,
+                "coNum" : coNum
+              },
+              dataType : "json",
+              success : function(list){
+                coList(list);
+              },
+              error : function(){
+                alert("댓글 삭제 통신 실패");
+              }
+            });
+          }
+
+          // 수정 버튼을 눌렀을 때
+          function coCon(coNum, cbNum){
+            $("#coModiContent"+coNum).html("<input type='text' id='coContent' required>"
+                    + " <button class='btnNormal' value='확인' onclick='coModify("
+                    + coNum +", "+ cbNum +")'>확인</button>");
+          }
+
+
+          // 수정댓글 내용 작성 후 확인버튼 눌렀을 때 함수
+          function coModify(coNum, cbNum){
+
+            let coContent = $("#coContent").val();
+
+
+            $.ajax({
+              type : "POST",
+              url : "comments/coModify",
+              data : {
+                "cbNum" : cbNum,
+                "coNum" : coNum,
+                "coContent" : coContent
+              },
+              dataType : "json",
+              success : function(list){
+                coList(list);
+              },
+              error : function(){
+                alert("댓글 수정 통신 실패 ㅠㅠ");
+              }
+            });
+          }
+
+          // 댓글 작성 함수
+          function coWrite(){
+            let coWriter = document.getElementById("coWriter").value;
+            let coContent = $("#coContent").val();	// 위와 같은 사용법
+            let cbNum = $("#cbNum").val();
+
+            /* console.log("cmtWriter : "+cmtWriter);
+            console.log("cmtContent : "+cmtContent);
+            console.log("cbNum : "+cbNum); */
+
+            $.ajax({
+              type : "POST",
+              url : "comments/coWrite",
+              data : {
+                "cbNum" : cbNum,
+                "coWriter" : coWriter,
+                "coContent" : coContent
+              },
+              dataType : "json",
+              success : function(list) {
+                coList(list);
+                $("#coContent").val("");
+              },
+              error : function() {
+                alert('댓글 작성 통신 실패');
+              }
+            });
+
+          }
+
+          // 댓글 입력시 로그인 여부확인 함수
+          function checkLogin(){
+
+            if([[${session.login eq null}]]){
+              //$("#coContent").blur();
+              alert('로그인 후 사용해 주세요.');
+              location.href = "userLoginForm";
+            }
+          }
+        </script>
+          <!-- boComment end -->
+
+        <!-- boMovement -->
+          <div class="xans-element- xans-board xans-board-movement-8 xans-board-movement xans-board-8 "><ul>
+            <li class="prev">
+              <strong>이전글</strong><a href="/article/event/8/$3/">이전글</a>
+            </li>
+            <li class="next ">
+              <strong>다음글</strong><a href="/article/event/8/23101/">다음글</a>
+            </li>
+          </ul>
+          </div>
+        <!-- boMovement end -->
+
+        </div>
+      </div>
+    </div>
+</section>
+<!-- End Blog Details -->
+
+<!-- Brand area 2 -->
+<section class="brand2">
+  <div class="container">
+    <div class="row" style="display: none">
+      <div class="col-md-12">
+        <div class="tp-bnd owl-carousel">
+          <div class="bnd-items">
+            <a href="#"><img src="/images/brand-01.png" alt="" class="img-fluid"></a>
+          </div>
+          <div class="bnd-items">
+            <a href="#"><img src="/images/brand-02.png" alt="" class="img-fluid"></a>
+          </div>
+          <div class="bnd-items">
+            <a href="#"><img src="/images/brand-03.png" alt="" class="img-fluid"></a>
+          </div>
+          <div class="bnd-items">
+            <a href="#"><img src="/images/brand-04.png" alt="" class="img-fluid"></a>
+          </div>
+          <div class="bnd-items">
+            <a href="#"><img src="/images/brand-05.png" alt="" class="img-fluid"></a>
+          </div>
+          <div class="bnd-items">
+            <a href="#"><img src="/images/brand-06.png" alt="" class="img-fluid"></a>
+          </div>
+          <div class="bnd-items">
+            <a href="#"><img src="/images/brand-07.png" alt="" class="img-fluid"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Brand area 2 -->
+
+<!-- Footer Area -->
+<section class="footer-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="f-contact">
+          <h5>Contact Info</h5>
+          <div class="f-add">
+            <i class="fa fa-map-marker"></i>
+            <span>Address :</span>
+            <p>795 South Park Avenue, New York, NY USA 94107</p>
+          </div>
+          <div class="f-email">
+            <i class="fa fa-envelope"></i>
+            <span>Email :</span>
+            <p>enquery@domain.com</p>
+          </div>
+          <div class="f-phn">
+            <i class="fa fa-phone"></i>
+            <span>Phone :</span>
+            <p>+1 908 875 7678</p>
+          </div>
+          <div class="f-social">
+            <ul class="list-unstyled list-inline">
+              <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+              <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="f-cat">
+          <h5>Categories</h5>
+          <ul class="list-unstyled">
+            <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="f-link">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="f-sup">
+          <h5>Support</h5>
+          <ul class="list-unstyled">
+            <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="footer-btm">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a></p>
+      </div>
+      <div class="col-md-6 text-right">
+        <img src="/images/payment.png" alt="" class="img-fluid">
+      </div>
+    </div>
+  </div>
+  <div class="back-to-top text-center">
+    <img src="/images/backtotop.png" alt="" class="img-fluid">
+  </div>
+</section>
+<!-- End Footer Area -->
+
+
+<!-- =========================================
+JavaScript Files
+========================================== -->
+
+<!-- jQuery JS -->
+<script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/js/assets/popper.min.js"></script>
+<script src="/js/assets/bootstrap.min.js"></script>
+
+<!-- Owl Slider -->
+<script src="/js/assets/owl.carousel.min.js"></script>
+
+<!-- Wow Animation -->
+<script src="/js/assets/wow.min.js"></script>
+
+<!-- Price Filter -->
+<script src="/js/assets/price-filter.js"></script>
+
+<!-- Mean Menu -->
+<script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/js/plugins.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/19-blog-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:03 GMT -->
+</html>

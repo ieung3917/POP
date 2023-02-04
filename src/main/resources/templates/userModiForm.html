@@ -1,0 +1,455 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+    
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/09-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>POP 회원가입</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+		<!-- Fontawesome Icon -->
+        <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+		<!-- Animate Css -->
+        <link rel="stylesheet" href="/css/assets/animate.css">
+
+        <!-- Owl Slider -->
+        <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+        <!-- Custom Style -->
+        <link rel="stylesheet" href="/css/assets/normalize.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/assets/responsive.css">
+
+    </head>
+
+<style>
+    .typeDate, .typeEmail, .typePw {
+        margin-bottom: 35px;
+        border-radius: 30px;
+        border: 1px solid lightgray;
+        width: 100%;
+        height: 45px;
+        padding: 15px;
+    }
+
+    .typePwLabel, .typePwCheckLabel , .typeNameLabel, .typeAddrLabel{
+        margin-top: 35px;
+    }
+</style>
+
+    <body>
+
+    <header th:replace="header.html :: header"></header>
+
+
+
+        <!-- Breadcrumb Area -->
+        <section class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="breadcrumb-box text-center">
+                            <ul class="list-unstyled list-inline">
+                                <li class="list-inline-item"><a href="#">내 정보</a></li>
+                                <li class="list-inline-item"><span>||</span> 정보 수정</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Breadcrumb Area -->
+
+        <!-- Register -->
+        <section class="register">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="userModi" method="POST" name="userModiForm" enctype="multipart/form-data">
+                            <h5>정보수정</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>아이디*</label>
+                                    <input type="text" name="userId" id="userId" th:value="${users.userId}" style="margin-bottom: 0px" readonly>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="typePwLabel">현재 비밀번호*</label>
+                                    <input type="password" class="typePw" id="userPw1" style="margin-bottom: 0px">
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="typePwLabel">변경 비밀번호*</label><br/>
+                                    <input type="password" name="userPw" id="userPw" onkeyup="userPwRegexp()" class="typePw" placeholder="영문,숫자,특수문자를 혼합하여 8~16자로 입력해주세요"
+                                           style="margin-bottom: 0px">
+                                    <span id="spanPw"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="typePwCheckLabel">변경 비밀번호 확인*</label><br/>
+                                    <input type="password" class="typePw" id="checkPw" onkeyup="userPwCheck()" placeholder="비밀번호 확인"
+                                           style="margin-bottom: 0px">
+                                    <span id="spanPwCheck"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="typeNameLabel">이름*</label>
+                                    <input type="text" name="userName" th:value="${users.userName}" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>생년월일*</label><br/>
+                                    <input type="date" name="userBirth" class="typeDate" th:value="${users.userBirth}" readonly>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>성별*</label><br/>
+                                    <input type="text" name="userGender" value="남자" style="margin-bottom: 35px" th:if="${users.userGender eq '남자'}" readonly> &nbsp;&nbsp;
+                                    <input type="text" name="userGender" value="여자" style="margin-bottom: 35px" th:if="${users.userGender eq '여자'}" readonly>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>이메일*</label>
+                                    <input type="email" name="userEmail" id="userEmail" class="typeEmail" placeholder="이메일 입력" th:value="${users.userEmail}">
+
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="typeAddrLabel">주소*</label>&nbsp;
+                                    <div class="d-flex">
+                                    <input type="text" name="addr1" id="sample6_postcode" placeholder="우편번호" style="margin-bottom: 10px" th:value="${users.addr1}">
+                                    <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="height:45px; border-radius: 15px; border: 1px solid black; background-color: #e45151; color: white"><br></div>
+                                    <input type="text" name="addr2" id="sample6_address" placeholder="주소" style="margin-bottom: 10px" th:value="${users.addr2}"><br>
+                                    <input type="text" name="addr3" id="sample6_detailAddress" placeholder="상세주소" style="margin-bottom: 35px" th:value="${users.addr3}">
+                                </div>
+                                <div class="col-md-12">
+                                    <label>프로필 사진</label><br/>
+                                    <img th:src="@{/profile/{varName}(varName=${users.userProfileName})}"  width="128" height="128" />
+                                    <input type="file" name="userProfile" style="margin-bottom: 35px">
+                                    <input type="hidden" name="userProfileName" th:value="${users.userProfileName}">
+                                </div>
+
+                                <div class="col-md-12 text-center">
+                                    <button type="button" onclick="checkConfirm()" name="button">수정</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Register -->
+
+        <!-- Brand area 2 -->
+        <section class="brand2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tp-bnd owl-carousel">
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-01.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-02.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-03.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-04.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-05.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-06.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-07.png" alt="" class="img-fluid"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Brand area 2 -->
+
+        <!-- Footer Area -->
+        <section class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="f-contact">
+                            <h5>Contact Info</h5>
+                            <div class="f-add">
+                                <i class="fa fa-map-marker"></i>
+                                <span>Address :</span>
+                                <p>795 South Park Avenue, New York, NY USA 94107</p>
+                            </div>
+                            <div class="f-email">
+                                <i class="fa fa-envelope"></i>
+                                <span>Email :</span>
+                                <p>enquery@domain.com</p>
+                            </div>
+                            <div class="f-phn">
+                                <i class="fa fa-phone"></i>
+                                <span>Phone :</span>
+                                <p>+1 908 875 7678</p>
+                            </div>
+                            <div class="f-social">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-cat">
+                            <h5>Categories</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-link">
+                            <h5>Quick Links</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-sup">
+                            <h5>Support</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="footer-btm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a></p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <img src="/images/payment.png" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div class="back-to-top text-center">
+                <img src="/images/backtotop.png" alt="" class="img-fluid">
+            </div>
+        </section>
+        <!-- End Footer Area -->
+
+
+        <!-- =========================================
+        JavaScript Files
+        ========================================== -->
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+        <!-- jQuery JS -->
+        <script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+        <!-- Bootstrap -->
+        <script src="/js/assets/popper.min.js"></script>
+        <script src="/js/assets/bootstrap.min.js"></script>
+
+        <!-- Owl Slider -->
+        <script src="/js/assets/owl.carousel.min.js"></script>
+
+        <!-- Wow Animation -->
+        <script src="/js/assets/wow.min.js"></script>
+
+        <!-- Price Filter -->
+        <script src="/js/assets/price-filter.js"></script>
+
+        <!-- Mean Menu -->
+        <script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="/js/plugins.js"></script>
+        <script src="/js/custom.js"></script>
+
+    </body>
+
+
+
+<!-- 회원가입을 위한 스크립트 영역 -->
+<script th:inline="javascript" th:if="${session.login ne null}">
+    function checkConfirm(){
+        // 회원가입 동의 체크박스의 체크값을 가져옴(undefined or 'ok')
+
+        let userId = [[${session.login.userId}]];
+        console.log(typeof userId);
+        let userPw1 = $("#userPw1").val();
+
+
+        if(userPw1=='' && $("#userPw").val()=='' && $("#checkPw").val()=='') {
+
+            document.userModiForm.submit();
+
+        } else{
+
+            $.ajax({
+                type : "POST",
+                url : "/userModicheck",
+                data : { "userId" : userId,
+                    "userPw" : userPw1},
+                dataType : "text",
+                success : function(result){
+
+                    if (result == 0) {
+                        if (!userPwRegexp() || !userPwCheck()) {
+                            alert('변경 비밀번호를 확인해주세요!');
+                        } else {
+                            document.userModiForm.submit();
+                        }
+                    } else if (result == 1) {
+                        alert('현재 비밀번호가 일치하지 않습니다.');
+                        $("#userPw1").val("");
+                    }
+
+
+                },
+                error : function(){
+                    console.log('Failed to get the count of notes.');
+                }
+            });
+
+        }
+
+    }
+
+    // 아이디 중복 체크 여부 변수
+
+    // 아이디 중복 체크
+
+    // 아이디 정규식 체크
+
+
+    // 비밀번호 정규식 체크
+    function userPwRegexp(){
+        let userPw = document.getElementById("userPw").value;
+        let spanPw = document.getElementById("spanPw");
+
+        let num = userPw.search(/[0-9]/);
+        let eng = userPw.search(/[a-z]/);
+        let spe = userPw.search(/[`~!@#$%^&*|\\\'\":;\/?]/);
+        let spc = userPw.search(/\s/);
+
+        // console.log("num : " + num + " , eng : " + eng + " , spe : " + spe);
+
+        if(userPw.length < 8 || userPw.length > 16){
+            spanPw.style.color = "#ff0000";
+            spanPw.innerHTML = "비밀번호는 8자리에서 16자리 이내로 입력해주세요.";
+            return false;
+
+        } else if(spc >= 0){
+            spanPw.style.color = "#ff0000";
+            spanPw.innerHTML = "비밀번호는 공백없이 입력해주세요.";
+            return false;
+
+        } else if(num < 0 || eng < 0 || spe < 0){
+            spanPw.style.color = "#ff0000";
+            spanPw.innerHTML = "영문, 숫자, 특수문자를 혼합하여 입력해주세요.";
+            return false;
+
+        } else {
+            spanPw.style.color = "#0000ff";
+            spanPw.innerHTML = "사용가능한 비밀번호 입니다.";
+            return true;
+        }
+    }
+
+    // 비번번호 일치여부 확인
+    function userPwCheck(){
+
+        let userPw = document.getElementById("userPw").value;
+        let checkPw = document.getElementById("checkPw").value;
+        let spanPwCheck = document.getElementById("spanPwCheck");
+
+        if(userPw == checkPw){
+            spanPwCheck.style.color = "#0000ff";
+            spanPwCheck.innerHTML = "비밀번호가 일치합니다.";
+            return true;
+        } else {
+            spanPwCheck.style.color = "#ff0000";
+            spanPwCheck.innerHTML = "비밀번호가 일치하지 않습니다.";
+            return false;
+        }
+    }
+
+    // 이메일 인증 여부 변수
+    // 이메일 인증 여부 확인
+
+    //회원 가입 버튼누를 경우 최종 확인
+
+</script>
+
+
+<!-- 주소 입력을 위한 다음 주소 API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                document.getElementById("sample6_detailAddress").value="";
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
+</script>
+
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/09-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+</html>

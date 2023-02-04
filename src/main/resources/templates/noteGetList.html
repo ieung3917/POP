@@ -1,0 +1,449 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+    
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/10-wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>XeMart - Ecommerce Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+		<!-- Fontawesome Icon -->
+        <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+		<!-- Animate Css -->
+        <link rel="stylesheet" href="/css/assets/animate.css">
+
+        <!-- Owl Slider -->
+        <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+        <!-- Custom Style -->
+        <link rel="stylesheet" href="/css/assets/normalize.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/assets/responsive.css">
+<style>
+
+
+</style>
+    </head>
+
+<th:block th:if="${session.login eq null}">
+    <script>
+        alert('로그인 후 사용 가능합니다!');
+        location.href = "/index";
+    </script>
+</th:block>
+
+    <body>
+
+    <header th:replace="header.html :: header"></header>
+
+
+
+        <!-- Breadcrumb Area -->
+        <section class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="breadcrumb-box text-center">
+                            <ul class="list-unstyled list-inline">
+                                <li class="list-inline-item"><a href="#">Home</a></li>
+                                <li class="list-inline-item"><span>||</span> 받은 쪽지함</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Breadcrumb Area -->
+
+        <!-- Wishlist -->
+        <section class="shopping-cart">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cart-table wsh-list table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <!-- 탭 버튼 -->
+                                    <tbody>
+                                        <table class="table">
+                                            <tr>
+                                                <td class="t-add1 justify-content-between" colspan="2" style="text-align: justify">
+                                                    <button type="button" name="button" style="color: #fff; background: #5677fc; border:1px solid #5677fc; margin-right: 5px;">받은 쪽지함
+                                                    </button>
+
+                                                    <button type="button" name="button" th:if="${session.login ne null}"
+                                                            th:onclick="|location.href='@{noteSendList}'|">보낸 쪽지함
+                                                    </button>
+                                                </td>
+
+                                                <!-- 받은 쪽지 검색 -->
+                                                <form action="noteGetList" method="GET">
+                                                    <!-- 카테고리 드롭박스 -->
+                                                    <td class="t-add">
+                                                        <div class="sortby">
+                                                            <span><strong>검색 카테고리</strong></span>
+                                                            <select id="selectBox" class="sort-box" name="category"
+                                                                    style="height: 30px; border: 1px solid lightgray; border-radius: 10px">
+                                                                <option value="">-- 선택 --</option>
+                                                                <option value="ALL">제목+내용</option>
+                                                                <option value="NOTETITLE">제목</option>
+                                                                <option value="NOTESENDER">보낸사람</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <!-- End 카테고리 드롭박스 -->
+
+
+                                                    <!-- 키워드 입력 -->
+                                                    <td class="t-add">
+                                                        <div class="col-md-12" style="float: left">
+                                                            <div class="blog-sr" style="float: left">
+                                                                <div class="sec-title" style="float: left">
+                                                                    <span><strong>검색하기</strong></span>
+
+                                                                    <input id="keywordBox" type="text" name="keyword"
+                                                                           placeholder="키워드를 입력하세요"
+                                                                           style="height: 30px;border: 1px solid lightgray; border-radius: 10px"
+                                                                           required>
+                                                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <!-- End 키워드 입력 -->
+                                                </form>
+                                                <!-- End 받은 쪽지 검색 -->
+
+                                                <td class="t-add">
+                                                    <button style="width: 110px" type="button" name="button"
+                                                            onclick="location.href='noteWriteForm'">쪽지 보내기
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                        </table>
+                                    </tbody>
+                                </thead>
+                                <!-- End 탭 버튼 -->
+
+                                <tbody>
+                                    <table class="table">
+
+                                        <tr style="background-color: royalblue; text-align: center; color:white; ">
+                                            <th colspan="2" class="t-pro" style="text-align: left; width: 50%">제목</th>
+                                            <th class="t-price">보낸사람</th>
+                                            <th class="t-qty">날짜</th>
+                                            <th class="t-rem">삭제</th>
+                                        </tr>
+
+                                        <th:block th:each="list : ${noteGetList}">
+
+                                            <tr>
+                                                <td colspan="2" class="t-price" style="text-align: left">
+                                                    <div class="t-content">
+                                                        <p class="t-heading">
+                                                            <th:block th:if="${list.noteCheck == 1}">
+                                                                <a th:href="@{noteView(noteSeq=${list.noteSeq})}"
+                                                                   style="font-weight:700; color: black">[[${list.noteTitle}]]</a>
+                                                            </th:block>
+                                                            <th:block th:if="${list.noteCheck == 0}">
+                                                                <a th:href="@{noteView(noteSeq=${list.noteSeq})}"
+                                                                   style="color: gray; font-weight: 350">[[${list.noteTitle}]]</a>
+                                                            </th:block>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td class="t-price">
+                                                    <th:block th:if="${list.noteCheck == 1}"><a style="font-weight:700; color: black">[[${list.noteSender}]]</a>
+                                                    </th:block>
+                                                    <th:block th:if="${list.noteCheck == 0}"><a
+                                                            style="color: gray; font-weight: 350">[[${list.noteSender}]]</a>
+                                                    </th:block>
+                                                    </td>
+                                                <td class="t-price">
+                                                    <th:block th:if="${list.noteCheck == 1}"><a style="font-weight:700; color: black">[[${list.noteDate}]]</a>
+                                                    </th:block>
+                                                    <th:block th:if="${list.noteCheck == 0}"><a
+                                                            style="color: gray; font-weight: 350">[[${list.noteDate}]]</a>
+                                                    </th:block>
+                                                    </td>
+                                                <td class="t-rem" style="text-align: center">
+                                                    <a th:onclick="noteGetDelete([[${list.noteSeq}]])"><i
+                                                            class="fa fa-trash-o"></i></a>
+                                                </td>
+                                            </tr>
+                                        </th:block>
+                                    </table>
+                                </tbody>
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 페이징 처리 -->
+            <section class="blog1" style="padding-top: 10px">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pagination-box text-center" style="margin-top: 10px; padding-top: 10px">
+                                <ul class="list-unstyled list-inline">
+
+                                    <!-- [이전]페이지에 대한 처리 -->
+                                    <th:block th:if="${paging.page != paging.startRow}">
+
+                                    </th:block>
+                                    <th:block th:if="${paging.page > 1}">
+                                        <li class="list-inline-item">
+                                            <a th:href="@{noteGetList(userId=${session.login.userId}, page=${paging.page-1}, limit=${paging.limit}
+                                                , category=${noteCategory.category}, keyword=${noteCategory.keyword})}">
+                                                <i class="fa fa-angle-left"></i>
+                                            </a>
+                                        </li>
+                                    </th:block>
+
+                                    <!-- [페이지번호]페이지에 대한 처리 -->
+                                    <th:block th:each="i : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+
+                                        <th:block th:if="${paging.page == i}">
+                                            <li class="active list-inline-item"><a href="#">[[${i}]]</a></li>
+                                        </th:block>
+                                        <th:block th:if="${paging.page != i}">
+                                            <li class="list-inline-item">
+                                                <a th:href="@{noteGetList(userId=${session.login.userId}, page=${i}, limit=${paging.limit}
+                                                , category=${noteCategory.category}, keyword=${noteCategory.keyword})}">[[${i}]]</a></li>
+                                        </th:block>
+
+                                    </th:block>
+
+                                    <!-- [다음]페이지에 대한 처리 -->
+                                    &nbsp;
+                                    <th:block th:if="${paging.page >= paging.maxPage}">
+
+                                    </th:block>
+                                    <th:block th:if="${paging.page < paging.maxPage}">
+                                        <li class="list-inline-item">
+                                            <a th:href="@{noteGetList(userId=${session.login.userId}, page=${paging.page+1}, limit=${paging.limit}
+                                                , category=${noteCategory.category}, keyword=${noteCategory.keyword})}">
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                    </th:block>
+
+
+<!--                                    <li class="list-inline-item"><a href="#"><i class="fa fa-angle-left"></i></a></li>-->
+<!--                                    <li class="list-inline-item"><a href="#">1</a></li>-->
+<!--                                    <li class="list-inline-item"><a href="#">2</a></li>-->
+<!--                                    <li class="active list-inline-item"><a href="#">3</a></li>-->
+<!--                                    <li class="list-inline-item"><a href="#">4</a></li>-->
+<!--                                    <li class="list-inline-item"><a href="#"><i class="fa fa-angle-right"></i></a></li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End 페이징 처리 -->
+
+
+        </section>
+        <!-- End Wishlist -->
+
+
+
+
+        <!-- Brand area 2 -->
+        <section class="brand2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tp-bnd owl-carousel">
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-01.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-02.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-03.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-04.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-05.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-06.png" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="bnd-items">
+                                <a href="#"><img src="/images/brand-07.png" alt="" class="img-fluid"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Brand area 2 -->
+
+        <!-- Footer Area -->
+        <section class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="f-contact">
+                            <h5>Contact Info</h5>
+                            <div class="f-add">
+                                <i class="fa fa-map-marker"></i>
+                                <span>Address :</span>
+                                <p>795 South Park Avenue, New York, NY USA 94107</p>
+                            </div>
+                            <div class="f-email">
+                                <i class="fa fa-envelope"></i>
+                                <span>Email :</span>
+                                <p>enquery@domain.com</p>
+                            </div>
+                            <div class="f-phn">
+                                <i class="fa fa-phone"></i>
+                                <span>Phone :</span>
+                                <p>+1 908 875 7678</p>
+                            </div>
+                            <div class="f-social">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-cat">
+                            <h5>Categories</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-link">
+                            <h5>Quick Links</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-sup">
+                            <h5>Support</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="footer-btm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a></p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <img src="/images/payment.png" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div class="back-to-top text-center">
+                <img src="/images/backtotop.png" alt="" class="img-fluid">
+            </div>
+        </section>
+        <!-- End Footer Area -->
+
+
+        <!-- =========================================
+        JavaScript Files
+        ========================================== -->
+
+        <!-- jQuery JS -->
+        <script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+        <!-- Bootstrap -->
+        <script src="/js/assets/popper.min.js"></script>
+        <script src="/js/assets/bootstrap.min.js"></script>
+
+        <!-- Owl Slider -->
+        <script src="/js/assets/owl.carousel.min.js"></script>
+
+        <!-- Wow Animation -->
+        <script src="/js/assets/wow.min.js"></script>
+
+        <!-- Price Filter -->
+        <script src="/js/assets/price-filter.js"></script>
+
+        <!-- Mean Menu -->
+        <script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="/js/plugins.js"></script>
+        <script src="/js/custom.js"></script>
+
+    </body>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script>
+
+        function noteGetDelete(noteSeq){
+            let result = confirm('정말로 삭제 하시겠습니까?');
+
+            if(result) {
+                location.href = "/noteDelete?noteSeq="+noteSeq;
+            } else {
+                alert('작업을 취소하였습니다.');
+            }
+
+        }
+
+    </script>
+
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/10-wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+</html>

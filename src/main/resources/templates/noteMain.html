@@ -1,0 +1,357 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/10-wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>XeMart - Ecommerce Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="/css/assets/animate.css">
+
+    <!-- Owl Slider -->
+    <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/css/assets/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/assets/responsive.css">
+
+</head>
+<body>
+
+<header th:replace="header.html :: header"></header>
+
+
+<!-- Breadcrumb Area -->
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-box text-center">
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item"><a href="#">Home</a></li>
+                        <li class="list-inline-item"><span>||</span> Wishlist</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Breadcrumb Area -->
+
+<!-- Wishlist -->
+<section class="shopping-cart">
+
+    <div class="container">
+
+        <!-- Tab bar -->
+        <div class="tab-box d-flex justify-content-end" style="float: left">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#receiveNote">받은 쪽지함</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#sendNote">보낸 쪽지함</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#smart">Smartphones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#shoe">Shoes</a>
+                </li>
+            </ul>
+        </div>
+        <!-- End Tab bar -->
+
+
+        <div class="row" style="clear:both; display: inline-block">
+
+
+            <!-- Tab -->
+            <div class="tab-content">
+
+                <!-- 받은 쪽지함  -->
+                <div class="tab-pane fade show active" id="receiveNote" role="tabpanel">
+
+                    <div class="col-md-12">
+                        <div class="cart-table wsh-list table-responsive">
+                            <table class="table">
+
+                                <thead>
+                                <tr>
+                                    <th class="t-pro">제목</th>
+                                    <th class="t-price">보낸 사람</th>
+                                    <th class="t-qty">날짜</th>
+                                    <th class="t-total">Add To Cart</th>
+                                    <th class="t-rem"></th>
+                                </tr>
+                                </thead>
+
+
+                                <tbody>
+
+                                <tr th:each="list : ${note}">
+                                    <th:block th:if="${session.login.userId eq list.noteReceiver}">
+                                        <td class="t-price">
+                                            <!-- 쪽지 시퀀스 넘겨야 함 -->
+                                            <p class="t-heading"><a th:href="@{noteView(noteSeq=${list.noteSeq})}"
+                                                                    th:if="${list ne null}"
+                                                                    th:text="${list.noteTitle}"></a></p>
+                                        </td>
+                                        <td class="t-price">[[${list.noteSender}]]</td>
+                                        <td class="t-stk">[[${list.noteDate}]]</td>
+                                        <td class="t-add">
+                                            <button type="button" name="button">쓸일 있겄지</button>
+                                        </td>
+                                        <td class="t-rem"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                    </th:block>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End 받은 쪽지함 -->
+
+                <!-- 보낸 쪽지함 -->
+                <div class="tab-pane fade" id="sendNote" role="tabpanel">
+                    <div class="tab-slider owl-carousel owl-loaded owl-drag">
+
+                    </div>
+                </div>
+                <!-- End 보낸 쪽지함 -->
+
+
+                <div class="tab-pane fade" id="smart" role="tabpanel">
+                    <div class="tab-slider owl-carousel owl-loaded owl-drag">
+
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="shoe" role="tabpanel">
+                    <div class="tab-slider owl-carousel owl-loaded owl-drag">
+
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- End Tab -->
+
+
+        </div>
+    </div>
+
+    <!-- 페이징처리 -->
+    <section class="blog3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pagination-box text-center">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item"><a href="#">1</a></li>
+                                    <li class="list-inline-item"><a href="#">2</a></li>
+                                    <li class="active list-inline-item"><a href="#">3</a></li>
+                                    <li class="list-inline-item"><a href="#">4</a></li>
+                                    <li class="list-inline-item"><a href="#">...</a></li>
+                                    <li class="list-inline-item"><a href="#">12</a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i
+                                            class="fa fa-angle-double-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End 페이징 처리 -->
+
+</section>
+<!-- End Wishlist -->
+
+<!-- Brand area 2 -->
+<section class="brand2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tp-bnd owl-carousel">
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-01.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-02.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-03.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-04.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-05.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-06.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-07.png" alt="" class="img-fluid"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Brand area 2 -->
+
+<!-- Footer Area -->
+<section class="footer-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="f-contact">
+                    <h5>Contact Info</h5>
+                    <div class="f-add">
+                        <i class="fa fa-map-marker"></i>
+                        <span>Address :</span>
+                        <p>795 South Park Avenue, New York, NY USA 94107</p>
+                    </div>
+                    <div class="f-email">
+                        <i class="fa fa-envelope"></i>
+                        <span>Email :</span>
+                        <p>enquery@domain.com</p>
+                    </div>
+                    <div class="f-phn">
+                        <i class="fa fa-phone"></i>
+                        <span>Phone :</span>
+                        <p>+1 908 875 7678</p>
+                    </div>
+                    <div class="f-social">
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-cat">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-link">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-sup">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="footer-btm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-right">
+                <img src="/images/payment.png" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="back-to-top text-center">
+        <img src="/images/backtotop.png" alt="" class="img-fluid">
+    </div>
+</section>
+<!-- End Footer Area -->
+
+
+<!-- =========================================
+JavaScript Files
+========================================== -->
+
+<!-- jQuery JS -->
+<script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/js/assets/popper.min.js"></script>
+<script src="/js/assets/bootstrap.min.js"></script>
+
+<!-- Owl Slider -->
+<script src="/js/assets/owl.carousel.min.js"></script>
+
+<!-- Wow Animation -->
+<script src="/js/assets/wow.min.js"></script>
+
+<!-- Price Filter -->
+<script src="/js/assets/price-filter.js"></script>
+
+<!-- Mean Menu -->
+<script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/js/plugins.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/10-wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+</html>

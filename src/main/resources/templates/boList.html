@@ -1,0 +1,793 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+    
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/10-wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>XeMart - Ecommerce Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+		<!-- Fontawesome Icon -->
+        <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+		<!-- Animate Css -->
+        <link rel="stylesheet" href="/css/assets/animate.css">
+
+        <!-- Owl Slider -->
+        <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+        <!-- Custom Style -->
+        <link rel="stylesheet" href="/css/assets/normalize.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/assets/responsive.css">
+
+       <style>
+        /* boList */
+
+        section-boList {
+            font-size: 12px;
+        }
+
+        .xans-board-search {
+            margin: 0;
+            padding: 0 0 10px;
+            color: #555;
+            font-size: 11px;
+        }
+
+        .xans-board-search .boardSearch {
+            display: block;
+        }
+
+        .xans-board-search .category select {
+            margin: 0 4px 0 0;
+            width: 150px;
+        }
+
+        .xans-board-search .category select#product_category_depth1 {
+            margin: 0 5px 0 10px;
+        }
+
+        .xans-board-search select {
+            margin: 0 2px 0 0;
+            width: 72px;
+            height: 24px;
+            line-height: 24px;
+        }
+
+        .xans-board-search select#search_date {
+            margin: 0 2px 0 0;
+        }
+
+        .xans-board-search input {
+            width: 172px;
+            height: 24px;
+            line-height: 18px !important;
+        }
+
+        .xans-board-search .boardSearch img {
+            vertical-align: middle;
+        }
+
+        fieldset {
+            border: none;
+            vertical-align: top;
+        }
+
+        table {
+            width: 100%;
+            border: 0;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 0;
+            vertical-align: top;
+            font-size: 18px;
+        }
+
+        button {
+            overflow: visible;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            cursor: pointer;
+            outline: none;
+            font-family: 'Roboto', 'Nanum Gothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        a:active {
+            text-decoration: none;
+        }
+
+        .displaynone {
+            display: none;
+        }
+
+        #container-boList {
+            margin: 0 auto;
+            *zoom: 1;
+        }
+
+        #container-boList:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        #contents-boList {
+            position: relative;
+            width: 90%;
+            max-width: 1350px;
+            min-height: 500px;
+            margin: 0 auto;
+        }
+
+        .titleArea {
+            margin: 5% 0 30px;
+            text-align: center;
+        }
+
+        .titleArea h2 {
+            position: relative;
+            font-size: 18px;
+            color: #111;
+            text-transform: uppercase;
+        }
+
+        .titleArea h2 font {
+            color: #111 !important;
+        }
+
+        .titleArea h2 img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            margin: 0 auto 5%;
+        }
+
+        .titleArea p {
+            font-size: 12px;
+            font-weight: 400;
+            margin-top: 5px;
+            color: #555;
+            line-height: 18px;
+        }
+
+        .titleArea .imgArea {
+            margin: 30px auto 0;
+            text-align: center;
+        }
+
+        .titleArea .imgArea img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .titleArea ul {
+            color: #999;
+            line-height: 18px;
+            font-size: 12px;
+        }
+
+        .titleArea ul li {
+            position: relative;
+        }
+
+        .boardnavi {
+            margin: 0 auto 30px;
+            padding: 0;
+            text-align: center;
+            clear: both;
+            overflow: hidden;
+        }
+
+        .boardnavi:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .boardnavi a {
+            position: relative;
+            display: inline-block;
+            padding: 5px 15px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .boardnavi a:before {
+            content: "";
+            position: absolute;
+            top: 9px;
+            left: -1px;
+            display: inline-block;
+            width: 1px;
+            height: 11px;
+            background: #e5e5e5;
+        }
+
+        .boardnavi a.navi01:before {
+            display: none;
+        }
+
+        .boardnavi a.on {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .txtEm {
+            color: #999;
+        }
+
+        .txtNum {
+            display: inline-block;
+            font-size: 14px;
+            color: #999;
+            word-break: normal;
+        }
+
+        input, select, textarea {
+            font-size: 100%;
+            font-family: 'Nanum Gothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+            color: #353535;
+            vertical-align: middle;
+            outline: none;
+        }
+
+        input[type=text], input[type=password] {
+            height: 24px;
+            line-height: 22px;
+            padding: 2px 4px;
+            border: 1px solid #d5d5d5;
+            color: #353535;
+            font-size: 12px;
+        }
+
+        select {
+            display: inline-block;
+            min-width: 100px;
+            height: 28px;
+            line-height: 28px;
+            padding: 0 0 0 5px;
+            color: #353535;
+            border: 1px #d5d5d5 solid;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: #fff url('/plain/img/arrow-down.svg') 96% 47%/8px no-repeat;
+        }
+
+        .btnNormal{
+            font-family: 'Roboto', 'Nanum Gothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+        }
+
+        [class^='btnNormal'], a[class^='btnNormal'] {
+            display: inline-block;
+            box-sizing: border-box;
+            padding: 2px 8px;
+            border: 1px solid #d5d5d5;
+            border-radius: 0;
+            font-size: 12px;
+            line-height: 18px;
+            font-weight: normal;
+            text-decoration: none;
+            vertical-align: middle;
+            word-spacing: -0.5px;
+            letter-spacing: 0;
+            text-align: center;
+            white-space: nowrap;
+            color: #353535;
+            background-color: #fff;
+        }
+
+        [class^='btnNormal']:not(.disabled):hover {
+            color: #888;
+        }
+
+        [class^='btnNormal'].disabled {
+            border-color: #e3e3e3;
+            color: #999;
+        }
+
+        .ec-base-table table {
+            position: relative;
+            margin: 10px 0 0;
+            border: 1px solid #e5e5e5;
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .ec-base-table thead th {
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e5e5;
+            color: #353535;
+            vertical-align: middle;
+            font-size: 12px;
+            font-weight: 500;
+            background: #fff;
+        }
+
+        .ec-base-table tbody th {
+            padding: 12px 0 12px 18px;
+            border: 1px solid #e5e5e5;
+            border-bottom-width: 0;
+            color: #353535;
+            text-align: left;
+            font-weight: normal;
+            background-color: #fff;
+        }
+
+        .ec-base-table th {
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
+        .ec-base-table th:first-child {
+            border-left: 0;
+        }
+
+        .ec-base-table td {
+            padding: 12px 10px;
+            border-top: 1px solid #e5e5e5;
+            color: #353535;
+            font-size: 14px;
+            vertical-align: middle;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
+        .ec-base-table.typeList table {
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .ec-base-table.typeList td {
+            padding: 14px 10px;
+            border-top: 1px #eaeaea solid;
+        }
+
+        .ec-base-table .left {
+            text-align: left;
+        }
+
+        .ec-base-table .center {
+            text-align: center;
+        }
+
+        .ec-base-table .right {
+            text-align: right;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        table {
+            width: 100%;
+            border: 0;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        .ec-base-button .gLeft {
+            float: left;
+            text-align: left;
+        }
+
+        .ec-base-button .gRight {
+            float: right;
+            text-align: right;
+        }
+
+        .btnNormal, .btnSubmit{
+            font-family: 'Roboto', 'Nanum Gothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+        }
+
+        [class^='btnSubmit'], a[class^='btnSubmit'] {
+            display: inline-block;
+            box-sizing: border-box;
+            padding: 2px 8px;
+            border: 1px solid transparent;
+            border-radius: 0;
+            font-size: 12px;
+            line-height: 18px;
+            font-weight: normal;
+            text-decoration: none;
+            vertical-align: middle;
+            word-spacing: -0.5px;
+            letter-spacing: 0;
+            text-align: center;
+            white-space: nowrap;
+            color: #fff;
+            background-color: #222;
+        }
+
+        [class^='btn'].sizeS {
+            padding: 6px 8px;
+        }
+
+        [class^='btn'][class*='Fix'].sizeS {
+            width: 96px;
+        }
+
+        /* end boList */
+
+        </style>
+
+
+    </head>
+    <body>
+
+    <header th:replace="header.html :: header"></header>
+
+
+        <!-- Breadcrumb Area -->
+        <section class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="breadcrumb-box text-center">
+                            <ul class="list-unstyled list-inline">
+                                <li class="list-inline-item"><a href="#">커뮤니티</a></li>
+                                <li class="list-inline-item"><span>||</span> 게시판</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- boList -->
+    <section-boList>
+            <div id="container-boList">
+                <div id="contents-boList">
+                    <div class="xans-element- xans-board xans-board-listpackage-1002 xans-board-listpackage xans-board-1002 ">
+                        <div class="xans-element- xans-board xans-board-title-1002 xans-board-title xans-board-1002 ">
+                            <div class="titleArea">
+                                <h2>NOTICE</h2>
+                                <p>-</p>
+                                <p class="imgArea"></p>
+                                <div class="boardnavi">
+                                    <a href="/board/notice/1/" class="navi01"><span>공지사항</span></a>
+                                    <a href="/board/q-a/6/" class="navi02"><span>자유게시판</span></a>
+                                    <a href="/board/review/4/" class="navi03"><span>리뷰게시판</span></a>
+                                    <a href="/board/model/101/" class="navi04"><span>임시</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boardSort">
+                            <span class="xans-element- xans-board xans-board-replysort-1002 xans-board-replysort xans-board-1002 "></span>
+                        </div>
+                        <div class="ec-base-table typeList">
+                            <table>
+                                <colgroup class="xans-element- xans-board xans-board-listheader-1002 xans-board-listheader xans-board-1002 ">
+                                    <col style="width:70px;"/>
+                                    <col style="width:auto;"/>
+                                    <col style="width:120px;"/>
+                                    <col style="width:120px;"/>
+                                    <col style="width:55px;"/>
+                                </colgroup>
+                                <thead style="text-align: center" class="xans-element- xans-board xans-board-listheader-1002 xans-board-listheader xans-board-1002 ">
+                                <tr>
+                                    <th scope="col">번호</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">작성자</th>
+                                    <th scope="col">작성일</th>
+                                    <th scope="col">조회</th>
+                                </tr>
+                                </thead>
+
+                                <tbody class="xans-element- xans-board xans-board-notice-1002 xans-board-notice xans-board-1002 center">
+                                <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
+                                    <td>공지</td>
+                                    <td class="subject left txtBreak">
+                                        <strong> <a href="" style="color:#555555;">공지사항</a></strong>
+                                    </td>
+                                    <td>작성자</td>
+                                    <td><span class="txtNum">날짜</span></td>
+                                    <td><span class="txtNum">조회수</span></td>
+                                </tr>
+                                </tbody>
+                                <tbody th:if="${paging.maxPage eq 0}">
+                                <tr>
+                                    <td colspan="5" style="text-align: center;">
+                                        <p th:text="|'${paging.keyword}'에 대한|"></p>
+                                        <p>검색 결과가 없습니다.</p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tbody class="xans-element- xans-board xans-board-list-1002 xans-board-list xans-board-1002 center">
+                                <tr th:each="list : ${boList}" style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
+                                    <!--<td th:text="${(listStat.size+1)-listStat.count}">번호</td>-->
+                                    <td th:text="${list.boNum}">번호</td>
+                                    <td class="subject left txtBreak">
+                                        <a th:href="@{boView(boNum=${list.boNum})}">[[${list.boTitle}]]</a>
+                                    </td>
+                                    <td>[[${list.boWriter}]]</td>
+                                    <td><span class="txtNum">[[${list.boDate}]]</span></td>
+                                    <td><span class="txtNum" style="color:royalblue;">[[${list.boHit}]]</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="padding: 10px; font-size: 12px;" class="xans-element- xans-board xans-board-buttonlist-1002 xans-board-buttonlist xans-board-1002 ec-base-button ">
+                <span class="gLeft">
+                    <form id="boardSearchForm">
+                        <input id="board_no"  value="1" type="hidden"  />
+                        <input id="page"  value="1" type="hidden"  />
+                        <input id="board_sort"  value="" type="hidden"  />
+                            <div class="xans-element- xans-board xans-board-search-1002 xans-board-search xans-board-1002 ">
+                                <fieldset class="boardSearch">
+                                            <p style="font-size: 12px;"><select style="font-size: 100%" id="search_date"  fw-filter="" fw-label="" fw-msg="" >
+                                                    <option >일주일</option>
+                                                    <option >한달</option>
+                                                    <option >세달</option>
+                                                    <option >전체</option>
+                                                </select>
+                                                <select id="category" name="category">
+                                                    <option value="subject_content">제목+내용</option>
+                                                    <option value="subject">제목</option>
+                                                    <option value="content">내용</option>
+                                                    <option value="writer_name">글쓴이</option>
+                                                </select>
+                                                <input id="keyword" name="keyword" class="inputTypeText" placeholder="" value="" type="text"  />
+                                                <button class="btnNormal" type="submit"><i class="fa fa-search"></i></button></p>
+                                </fieldset>
+                            </div>
+                    </form>
+                </span>
+                            <span class="gRight">
+                                <button class="btnSubmitFix sizeS displaynone"><a href="boWriteForm" style="color: #fff">글쓰기</a></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section-boList>
+    </section>
+        <!-- End boList -->
+
+    <!-- 페이징 처리 -->
+    <section class="blog1" style="padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="pagination-box text-center" style="margin-top: 10px; padding-top: 10px">
+                        <ul class="list-unstyled list-inline">
+
+                            <!-- [이전]페이지에 대한 처리 -->
+                            <th:block th:if="${paging.page != paging.startRow}">
+
+                            </th:block>
+                            <th:block th:if="${paging.page > 1}">
+                                <li class="list-inline-item"><a th:href="@{boList(page=${paging.page - 1}, limit=${paging.limit}, category=${paging.category}, keyword=${paging.keyword})}"><i class="fa fa-angle-left"></i></a></li>
+                            </th:block>
+
+                            <!-- [페이지번호]페이지에 대한 처리 -->
+                            <th:block th:each="i : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+
+                                <th:block th:if="${paging.page == i}">
+                                    <li class="active list-inline-item"><a>[[${i}]]</a></li>
+                                </th:block>
+                                <th:block th:if="${paging.page != i}">
+                                    <li class="list-inline-item"><a th:href="@{boList(page=${i}, limit=${paging.limit},category=${paging.category}, keyword=${paging.keyword})}">[[${i}]]</a></li>
+                                </th:block>
+
+                            </th:block>
+
+                            <!-- [다음]페이지에 대한 처리 -->
+                            &nbsp;
+                            <th:block th:if="${paging.page >= paging.maxPage}">
+
+                            </th:block>
+                            <th:block th:if="${paging.page < paging.maxPage}">
+                                <li class="list-inline-item">
+                                    <a th:href="@{boList(page=${paging.page + 1}, limit=${paging.limit},category=${paging.category}, keyword=${paging.keyword})}">
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            </th:block>
+
+
+                            <!--                                    <li class="list-inline-item"><a href="#"><i class="fa fa-angle-left"></i></a></li>-->
+                            <!--                                    <li class="list-inline-item"><a href="#">1</a></li>-->
+                            <!--                                    <li class="list-inline-item"><a href="#">2</a></li>-->
+                            <!--                                    <li class="active list-inline-item"><a href="#">3</a></li>-->
+                            <!--                                    <li class="list-inline-item"><a href="#">4</a></li>-->
+                            <!--                                    <li class="list-inline-item"><a href="#"><i class="fa fa-angle-right"></i></a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End 페이징 처리 -->
+
+        <!-- Footer Area -->
+        <section class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="f-contact">
+                            <h5>Contact Info</h5>
+                            <div class="f-add">
+                                <i class="fa fa-map-marker"></i>
+                                <span>Address :</span>
+                                <p>795 South Park Avenue, New York, NY USA 94107</p>
+                            </div>
+                            <div class="f-email">
+                                <i class="fa fa-envelope"></i>
+                                <span>Email :</span>
+                                <p>enquery@domain.com</p>
+                            </div>
+                            <div class="f-phn">
+                                <i class="fa fa-phone"></i>
+                                <span>Phone :</span>
+                                <p>+1 908 875 7678</p>
+                            </div>
+                            <div class="f-social">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-cat">
+                            <h5>Categories</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-link">
+                            <h5>Quick Links</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="f-sup">
+                            <h5>Support</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="footer-btm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a></p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <img src="/images/payment.png" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div class="back-to-top text-center">
+                <img src="/images/backtotop.png" alt="" class="img-fluid">
+            </div>
+        </section>
+        <!-- End Footer Area -->
+
+
+        <!-- =========================================
+        JavaScript Files
+        ========================================== -->
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+        <!-- jQuery JS -->
+        <script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+        <!-- Bootstrap -->
+        <script src="/js/assets/popper.min.js"></script>
+        <script src="/js/assets/bootstrap.min.js"></script>
+
+        <!-- Owl Slider -->
+        <script src="/js/assets/owl.carousel.min.js"></script>
+
+        <!-- Wow Animation -->
+        <script src="/js/assets/wow.min.js"></script>
+
+        <!-- Price Filter -->
+        <script src="/js/assets/price-filter.js"></script>
+
+        <!-- Mean Menu -->
+        <script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="/js/plugins.js"></script>
+        <script src="/js/custom.js"></script>
+
+    </body>
+
+
+<script>
+    // function ajaxTest(boNum){
+    //
+    //     console.log("boNum : " + boNum);
+    //
+    //     $.ajax({
+    //         type : "POST",
+    //         url : "checkAjax",
+    //         data : {
+    //             "boNum" : boNum
+    //         },
+    //         dataType : "text",
+    //         success : function(result){
+    //             console.log("ajax성공!");
+    //             console.log(result);
+    //
+    //
+    //         },
+    //         error : function(){
+    //             alert("idoverlap함수 통신실패!");
+    //
+    //         }
+    //
+    //     });
+    // }
+
+    function boardSearchForm(){
+        let category = document.getElementById(boardSearchForm).category.val();
+        let keyword = document.getElementById(boardSearchForm).keyword.val();
+
+        location.href="noList?category="+category+"&keyword="+keyword;
+    }
+
+</script>
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/10-wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+</html>

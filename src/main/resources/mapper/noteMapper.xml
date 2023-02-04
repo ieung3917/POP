@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sss.pop.dao.noteDAO">
+
+    <!-- 받은 쪽지함 -->
+    <!-- noteGetCount : 받은 쪽지 전체 갯수 -->
+    <select id="noteGetCount" parameterType="Map" resultType="int">
+        SELECT COUNT(*) FROM NOTE WHERE NOTERECEIVER = #{user.userId} AND NOT (NOTEDELCHECK = 1)
+    </select>
+
+    <!-- noteGetAllCount : 받은 쪽지 제목+내용 검색 목록 갯수 -->
+    <select id="noteGetAllCount" parameterType="Map" resultType="int">
+        SELECT COUNT(*)
+        FROM (SELECT *
+              FROM NOTE
+              WHERE NOTERECEIVER = #{user.userId} AND NOT (NOTEDELCHECK = 1))
+        WHERE NOTETITLE LIKE '%' || #{noteCategory.keyword} || '%' OR NOTECONTENT LIKE '%' || #{noteCategory.keyword} || '%'
+    </select>
+
+    <!-- noteGetTitleCount : 받은 쪽지 (제목) OR (아이디) 검색 목록 갯수 -->
+    <select id="noteGetTitleCount" parameterType="Map" resultType="int">
+        SELECT COUNT(*)
+        FROM (SELECT *
+              FROM NOTE
+              WHERE NOTERECEIVER = #{user.userId} AND NOT (NOTEDELCHECK = 1))
+        WHERE ${noteCategory.category} LIKE '%' || #{noteCategory.keyword} || '%'
+    </select>
+
+
+
+
+    <!-- noteGetList : 전체 받은 쪽지 리스트(페이징처리o) -->
+    <select id="noteGetList" parameterType="Map" resultType="note">
+        SELECT *
+        FROM (SELECT ROWNUM RN, N.*
+              FROM (SELECT *
+                    FROM NOTE
+                    WHERE NOTERECEIVER = #{user.userId} AND NOT (NOTEDELCHECK = 1)
+                    ORDER BY NOTEDATE DESC) N)
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+
+    <!-- noteGetAllList : 받은 쪽지 제목+내용 검색 리스트(페이징처리o) -->
+    <select id="noteGetAllList" parameterType="Map" resultType="note">
+        SELECT N3.*
+        FROM (SELECT ROWNUM RN, N2.*
+              FROM (SELECT N.*
+                    FROM (SELECT *
+                          FROM NOTE
+                          WHERE NOTERECEIVER = #{user.userId} AND NOT (NOTEDELCHECK = 1)
+                          ORDER BY NOTEDATE DESC) N) N2
+              WHERE NOTETITLE LIKE '%' || #{noteCategory.keyword} || '%' OR NOTECONTENT LIKE '%' || #{noteCategory.keyword} || '%') N3
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+
+    <!-- noteGetTitleList : 받은 쪽지 (제목) OR (아이디) 검색 리스트(페이징처리o) -->
+    <select id="noteGetTitleList" parameterType="Map" resultType="note">
+        SELECT N3.*
+        FROM (SELECT ROWNUM RN, N2.*
+              FROM (SELECT N.*
+                    FROM (SELECT *
+                          FROM NOTE
+                          WHERE NOTERECEIVER = #{user.userId} AND NOT (NOTEDELCHECK = 1)
+                          ORDER BY NOTEDATE DESC) N) N2
+              WHERE ${noteCategory.category} LIKE '%' || #{noteCategory.keyword} || '%') N3
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+    <!-- End 받은 쪽지함 -->
+
+
+
+
+
+
+
+    <!-- 보낸 쪽지함 -->
+    <!-- noteSendCount : 보낸 쪽지 전체 갯수 -->
+    <select id="noteSendCount" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM NOTE WHERE NOTESENDER = #{user.userId} AND NOT (NOTEDELCHECK = 2)
+    </select>
+
+    <!-- noteSendAllCount : 보낸 쪽지 제목+내용 검색 쪽지 전체 갯수 -->
+    <select id="noteSendAllCount" parameterType="Map" resultType="int">
+        SELECT COUNT(*)
+        FROM (SELECT *
+              FROM NOTE
+              WHERE NOTESENDER = #{user.userId} AND NOT (NOTEDELCHECK = 2))
+        WHERE NOTETITLE LIKE '%' || #{noteCategory.keyword} || '%' OR NOTECONTENT LIKE '%' || #{noteCategory.keyword} || '%'
+    </select>
+
+    <!-- noteSendTitleCount : 보낸 쪽지 (제목) OR (아이디) 검색 쪽지 전체 갯수 -->
+    <select id="noteSendTitleCount" parameterType="Map" resultType="int">
+        SELECT COUNT(*)
+        FROM (SELECT *
+              FROM NOTE
+              WHERE NOTESENDER = #{user.userId} AND NOT (NOTEDELCHECK = 2))
+        WHERE ${noteCategory.category} LIKE '%' || #{noteCategory.keyword} || '%'
+    </select>
+
+
+
+
+    <!-- noteSendList : 보낸 쪽지 리스트(페이징 처리o) -->
+    <select id="noteSendList" parameterType="Map" resultType="note">
+        SELECT *
+        FROM (SELECT ROWNUM RN, N.*
+              FROM (SELECT *
+                    FROM NOTE
+                    WHERE NOTESENDER = #{user.userId} AND NOT (NOTEDELCHECK = 2)
+                    ORDER BY NOTEDATE DESC) N)
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+
+    <!-- noteSendAllList : 보낸 쪽지 제목+내용 검색 목록(페이징처리 o) -->
+    <select id="noteSendAllList" parameterType="Map" resultType="note">
+        SELECT N3.*
+        FROM (SELECT ROWNUM RN, N2.*
+              FROM (SELECT N.*
+                    FROM (SELECT *
+                          FROM NOTE
+                          WHERE NOTESENDER = #{user.userId} AND NOT (NOTEDELCHECK = 2)
+                          ORDER BY NOTEDATE DESC) N) N2
+              WHERE NOTETITLE LIKE '%' || #{noteCategory.keyword} || '%' OR NOTECONTENT LIKE '%' || #{noteCategory.keyword} || '%') N3
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+
+    <!-- noteSendTitleList : 보낸 쪽지 (제목) OR (아이디) 검색 목록(페이징처리o) -->
+    <select id="noteSendTitleList" parameterType="Map" resultType="note">
+        SELECT N3.*
+        FROM (SELECT ROWNUM RN, N2.*
+              FROM (SELECT N.*
+                    FROM (SELECT *
+                          FROM NOTE
+                          WHERE NOTESENDER = #{user.userId} AND NOT (NOTEDELCHECK = 2)
+                          ORDER BY NOTEDATE DESC) N) N2
+              WHERE ${noteCategory.category} LIKE '%' || #{noteCategory.keyword} || '%') N3
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+    <!-- End 보낸 쪽지함 -->
+
+
+
+
+
+
+
+
+
+
+    <!-- 쪽지 기능들 -->
+    <!-- noteView : 쪽지 상세보기 -->
+    <select id="noteView" parameterType="int" resultType="note">
+        SELECT * FROM NOTE WHERE NOTESEQ = #{noteSeq}
+    </select>
+
+    <!-- noteCheck : 쪽지 확인 -->
+    <update id="noteCheck" parameterType="int">
+        UPDATE NOTE SET NOTECHECK = 0 WHERE NOTESEQ = #{noteSeq}
+    </update>
+
+    <!-- noteWrite : 쪽지 답장하기 -->
+    <insert id="noteWrite" parameterType="note">
+        INSERT INTO NOTE VALUES (NOTE_SEQ.NEXTVAL, #{noteSender}, #{noteReceiver}, #{noteTitle}, #{noteContent}, SYSDATE, 1, 0)
+    </insert>
+
+
+
+    <!-- noteGetUpdate : 받은 쪽지가 먼저 삭제된 경우 -->
+    <update id="noteGetUpdate" parameterType="int">
+        UPDATE NOTE SET NOTEDELCHECK = 1 WHERE NOTESEQ = #{noteSeq}
+    </update>
+
+    <!-- noteDelete : 먼저 ()쪽지가 삭제되고 난 후 다른 사용자가 쪽지를 삭제할 경우 -->
+    <delete id="noteDelete" parameterType="int">
+        DELETE FROM NOTE WHERE NOTESEQ = #{noteSeq}
+    </delete>
+
+    <!-- noteSendUpdate : 보낸 쪽지가 먼저 삭제된 경우 -->
+    <update id="noteSendUpdate" parameterType="int">
+        UPDATE NOTE SET NOTEDELCHECK = 2 WHERE NOTESEQ = #{noteSeq}
+    </update>
+
+    <!-- noteGetNoneCheckCnt : 안 읽은 쪽지 갯수 header에 가져오기(ajax) -->
+    <select id="noteGetNoneCheckCnt" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM NOTE WHERE (NOTERECEIVER = #{userId}) AND (NOTECHECK = 1) AND (NOT NOTEDELCHECK = 1)
+    </select>
+
+
+    <select id="noteMynote" parameterType="String" resultType="note">
+        SELECT * FROM  NOTE WHERE (NOTERECEIVER = #{userId}) AND (NOTECHECK = 1) AND (NOT NOTEDELCHECK = 1)
+    </select>
+
+
+</mapper>

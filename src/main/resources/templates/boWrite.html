@@ -1,0 +1,351 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/09-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>XeMart - Ecommerce Template</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+  <!-- Fontawesome Icon -->
+  <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+  <!-- Animate Css -->
+  <link rel="stylesheet" href="/css/assets/animate.css">
+
+  <!-- Owl Slider -->
+  <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+  <!-- Custom Style -->
+  <link rel="stylesheet" href="/css/assets/normalize.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/assets/responsive.css">
+
+  <style>
+    /* boWriteForm */
+
+    .xans-board-write .ec-base-button {
+      margin: 10px 0 40px;
+    }
+
+    #container {
+      margin: 0 auto;
+      *zoom: 1;
+    }
+
+    #container:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    #contents {
+      position: relative;
+      width: 90%;
+      max-width: 1350px;
+      min-height: 500px;
+      margin: 0 auto;
+    }
+
+    #main #contents {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .titleArea {
+      margin: 5% 0 30px;
+      text-align: center;
+    }
+
+    .titleArea h2 {
+      position: relative;
+      font-size: 18px;
+      color: #111;
+      text-transform: uppercase;
+    }
+
+    .titleArea h2 font {
+      color: #111 !important;
+    }
+
+    .titleArea p {
+      font-size: 12px;
+      font-weight: 400;
+      margin-top: 5px;
+      color: #555;
+      line-height: 18px;
+    }
+
+    input, select, textarea {
+      font-size: 100%;
+      font-family: 'Nanum Gothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+      color: #353535;
+      vertical-align: middle;
+      outline: none;
+    }
+
+    input[type=radio], input[type=checkbox] {
+      width: 13px;
+      height: 13px;
+      border: 0;
+    }
+
+    input[type=text], input[type=password] {
+      height: 22px;
+      line-height: 22px;
+      padding: 2px 4px;
+      border: 1px solid #d5d5d5;
+      color: #353535;
+      font-size: 12px;
+    }
+
+    input[type=radio] + label, input[type=checkbox] + label {
+      margin: 0 4px 0 2px;
+    }
+
+    textarea {
+      padding: 5px 6px;
+      border: 1px solid #d5d5d5;
+      line-height: 1.5;
+    }
+
+    .btnNormal, .btnSubmit{
+      font-family: 'Roboto', 'Nanum Gothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+    }
+
+    [class^='btnNormal'], a[class^='btnNormal'] {
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 2px 8px;
+      border: 1px solid #d5d5d5;
+      border-radius: 0;
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: normal;
+      text-decoration: none;
+      vertical-align: middle;
+      word-spacing: -0.5px;
+      letter-spacing: 0;
+      text-align: center;
+      white-space: nowrap;
+      color: #353535;
+      background-color: #fff;
+    }
+
+    [class^='btnSubmit'], a[class^='btnSubmit'] {
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 2px 8px;
+      border: 1px solid transparent;
+      border-radius: 0;
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: normal;
+      text-decoration: none;
+      vertical-align: middle;
+      word-spacing: -0.5px;
+      letter-spacing: 0;
+      text-align: center;
+      white-space: nowrap;
+      color: #fff;
+      background-color: #222;
+    }
+
+    [class^='btn'].sizeS {
+      padding: 6px 8px;
+    }
+
+    [class^='btn'][class*='Fix'].sizeS {
+      width: 96px;
+    }
+
+    .ec-base-button {
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .ec-base-button:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+
+    .ec-base-button .gLeft {
+      float: left;
+      text-align: left;
+    }
+
+    .ec-base-button .gRight {
+      float: right;
+      text-align: right;
+    }
+
+    .ec-base-table table {
+      position: relative;
+      margin: 10px 0 0;
+      border: 1px solid #e5e5e5;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    .ec-base-table thead th {
+      padding: 12px 0;
+      border-bottom: 1px solid #e5e5e5;
+      color: #353535;
+      vertical-align: middle;
+      font-size: 12px;
+      font-weight: 500;
+      background: #fff;
+    }
+
+    .ec-base-table tbody th {
+      padding: 12px 0 12px 18px;
+      border: 1px solid #e5e5e5;
+      border-bottom-width: 0;
+      color: #353535;
+      text-align: left;
+      font-weight: normal;
+      background-color: #fff;
+    }
+
+    .ec-base-table th:first-child {
+      border-left: 0;
+    }
+
+    .ec-base-table td {
+      padding: 12px 10px;
+      border-top: 1px solid #e5e5e5;
+      color: #353535;
+      font-size: 12px;
+      vertical-align: middle;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+
+    .ec-base-table td.clear {
+      padding: 0 !important;
+      border: 0 !important;
+    }
+
+    table {
+      width: 100%;
+      border: 0;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+
+    /* boWriteForm End */
+  </style>
+</head>
+<body>
+
+<header th:replace="header.html :: header"></header>
+
+<!-- boWrite 작성 -->
+
+<div id="container">
+  <div id="contents">
+      <div class="titleArea">
+        <h2>글쓰기</h2>
+        <p>　</p>
+      </div>
+
+        <div class="ec-base-table typeWrite ">
+          <form action="boWrite" method="POST" enctype="multipart/form-data">
+          <table>
+            <colgroup>
+              <col style="width:130px;"/>
+              <col style="width:auto;"/>
+            </colgroup>
+            <tbody>
+            <tr>
+              <th scope="row">제목</th>
+              <td><input name="boTitle" class="inputTypeText" maxLength="50" type="text" size="50"/></td>
+            </tr>
+            <tr class="">
+              <th scope="row">작성자</th>
+              <td>[[${session.login.userId}]]
+
+                <input name="boWriter" fw-filter="isFill" class="inputTypeText" maxLength="50" type="hidden" th:value="${session.login.userId}"/></td>
+            </tr>
+            <tr>
+              <td colspan="2" class="clear">
+                <textarea  style="width: 100%; height: 615px;" name="boContent" id="content" class="ec-fr-never-be-duplicated"></textarea>
+                <input type="hidden" id="content_hidden"/>
+              </td>
+            </tr>
+            </tbody>
+            <tbody class="">
+            <tr>
+              <th scope="row">첨부파일1</th>
+              <td><input name="boFile" type="file"/></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ec-base-button ">
+            <span class="gLeft">
+                <a href="/boList" class="btnNormalFix sizeS">목록</a>
+            </span>
+          <span class="gRight">
+                <input type="submit" class="btnSubmitFix sizeS" value="등록"/>
+                <a href="/boList" class="btnNormalFix sizeS">취소</a>
+            </span>
+        </div>
+      </div>
+      </form>
+  </div>
+
+<!-- boWrite End -->
+
+
+<!-- =========================================
+JavaScript Files
+========================================== -->
+
+<!-- jQuery JS -->
+<script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/js/assets/popper.min.js"></script>
+<script src="/js/assets/bootstrap.min.js"></script>
+
+<!-- Owl Slider -->
+<script src="/js/assets/owl.carousel.min.js"></script>
+
+<!-- Wow Animation -->
+<script src="/js/assets/wow.min.js"></script>
+
+<!-- Price Filter -->
+<script src="/js/assets/price-filter.js"></script>
+
+<!-- Mean Menu -->
+<script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/js/plugins.js"></script>
+<script src="/js/custom.js"></script>
+
+</form>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script>
+
+</script>
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/09-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:07:01 GMT -->
+</html>

@@ -1,0 +1,447 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/02-home-two.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:51 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>XeMart - Ecommerce Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/assets/bootstrap.min.css">
+
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="/css/assets/font-awesome.min.css">
+
+    <!-- Animate Css -->
+    <link rel="stylesheet" href="/css/assets/animate.css">
+
+    <!-- Owl Slider -->
+    <link rel="stylesheet" href="/css/assets/owl.carousel.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/css/assets/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/assets/responsive.css">
+
+</head>
+<body>
+
+<header th:replace="header.html :: header"></header>
+
+
+<!-- Feature Product Area -->
+<section class="feat-pro2">
+    <div class="container">
+        <h5>곧 마감되는 경매</h5>
+        <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+        <div th:if="${session.login ne null}">
+            <form method="post" action="/kakaoPay">
+                <button>카카오페이로 결제하기</button>
+            </form>
+
+            <form method="post" action="/send-one">
+                <button>영주형한테 스팸메세지보내기</button>
+            </form>
+
+        </div>
+        <script th:if="${session.login ne null}">
+            let cash = 5000;
+            $("#check_module").click(function () {
+                var IMP = window.IMP; // 생략가능
+                IMP.init('imp41670413');
+                // i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+                // ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
+                IMP.request_pay({
+                    pg: 'kakao',
+                    pay_method: 'card',
+                    merchant_uid: 'merchant_' + new Date().getTime(),
+                    /*
+                     *  merchant_uid에 경우
+                     *  https://docs.iamport.kr/implementation/payment
+                     *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+                     */
+                    name: '주문명 : 아메리카노',
+                    // 결제창에서 보여질 이름
+                    // name: '주문명 : ${auction.a_title}',
+                    // 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
+                    amount: cash,
+                    // amount: ${bid.b_bid},
+                    // 가격
+                    buyer_name: '이름',
+                    // 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
+                    // 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
+                    buyer_postcode: '123-456',
+                }, function (rsp) {
+                    console.log(rsp);
+                    if (rsp.success) {
+                        var msg = '결제가 완료되었습니다.';
+                        msg += '결제 금액 : ' + rsp.paid_amount;
+                        cashRecharge(cash);
+                        // success.submit();
+                        // 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
+                        // 자세한 설명은 구글링으로 보시는게 좋습니다.
+                    } else {
+                        var msg = '결제에 실패하였습니다.';
+                        msg += '에러내용 : ' + rsp.error_msg;
+                    }
+                    alert(msg);
+                });
+            });
+
+            function cashRecharge(cash) {
+
+                let userId = [[${session.login.userId}]];
+                $.ajax({
+                    type: "POST",
+                    url: "cashRecharge",
+                    data: {
+                        "userId": userId,
+                        "userCash": cash
+                    },
+                    dataType: "json",
+                    success: function (list) {
+                        alert('성공')
+                    },
+                    error: function () {
+                        alert('실패')
+                    }
+                });
+
+            }
+        </script>
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 padding-fix-l20">
+                        <div class="ftr-product">
+                            <div class="tab-box d-flex justify-content-end">
+                                <!-- Nav tabs -->
+
+                            </div>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="all" role="tabpanel">
+                                    <div class="tab-slider owl-carousel">
+                                        <div th:each="auList : ${auList}" class="col-lg-4 col-md-6"
+                                             style="display : inline">
+                                            <div class="tab-item">
+                                                <div class="tab-img">
+                                                    <a th:href="@{/auction/auView(auNum=${auList.auNum})}"><img
+                                                            class="main-img img-fluid"
+                                                            th:src="@{/auPhoto/{auPhoto}(auPhoto=${auList.auPhotoName})}"
+                                                            style="width:252.98px; height:252.98px;" alt=""></a>
+                                                    <div class="layer-box">
+                                                        <a href="#" class="it-comp" data-toggle="tooltip"
+                                                           data-placement="left"
+                                                           title="Compare"><img src="/images/it-comp.png" alt=""></a>
+                                                        <a href="#" class="it-fav" data-toggle="tooltip"
+                                                           data-placement="left"
+                                                           title="Favourite"><img src="/images/it-fav.png" alt=""></a>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-heading">
+                                                    <p><a th:href="@{/auction/auView(auNum=${auList.auNum})}"
+                                                          style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 230px; font-size : 20px">[[${auList.auName}]]</a>
+                                                    </p>
+                                                </div>
+                                                <div class="img-content d-flex justify-content-between"
+                                                     style="text-align: justify;">
+                                                    <div>
+                                                        <ul class="list-unstyled list-inline price">
+                                                            <li class="list-inline-item"
+                                                                style="padding-bottom : 6px; font-size : 18px">
+                                                                [[${auList.auPrice}]]원
+                                                            </li>
+                                                            <li class="list-inline-item"></li>
+                                                        </ul>
+
+                                                        <ul class="list-unstyled list-inline fav">
+                                                            <li class="list-inline-item">[[${auList.aucRegion}]]</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div style="text-align: right;">
+                                                        <ul class="list-unstyled list-inline fav"
+                                                            style="margin-bottom: 10px; margin-top:2px;">
+                                                            <li class="list-inline-item">[[${auList.aucDate}]] 마감</li>
+                                                        </ul>
+                                                        <ul class="list-unstyled list-inline fav">
+                                                            <li class="list-inline-item">좋아요수 [[${auList.auLike}]]</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Feature Product Area -->
+<section class="feat-pro2">
+    <div class="container">
+        <h5>최근 올라온 물품</h5>
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 padding-fix-l20">
+                        <div class="ftr-product">
+                            <div class="tab-box d-flex justify-content-end">
+                                <!-- Nav tabs -->
+
+                            </div>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="all" role="tabpanel">
+                                    <div class="tab-slider owl-carousel">
+                                        <div th:each="itemList : ${itemList}" class="col-lg-4 col-md-6"
+                                             style="display : inline">
+                                            <div class="tab-item">
+                                                <div class="tab-img">
+                                                    <a th:href="@{itemView(itemNum=${itemList.itemNum})}"><img
+                                                            class="main-img img-fluid"
+                                                            th:src="@{/itemPhoto/{itemPhoto}(itemPhoto=${itemList.itemPhotoName})}"
+                                                            th:href="@{itemView(itemNum=${itemList.itemNum})}"
+                                                            style="width:252.98px; height:252.98px;"
+                                                            alt="" onerror="this.src='/images/noimg.jpg';"></a>
+                                                    <div class="layer-box">
+                                                        <a href="#" class="it-comp" data-toggle="tooltip"
+                                                           data-placement="left"
+                                                           title="Compare"><img src="/images/it-comp.png" alt=""></a>
+                                                        <a href="#" class="it-fav" data-toggle="tooltip"
+                                                           data-placement="left"
+                                                           title="Favourite"><img src="/images/it-fav.png" alt=""></a>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-heading">
+                                                    <p><a th:href="@{itemView(itemNum=${itemList.itemNum})}"
+                                                          style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 230px; font-size : 20px">[[${itemList.itemName}]]</a>
+                                                    </p>
+                                                </div>
+                                                <div class="img-content d-flex justify-content-between"
+                                                     style="text-align: justify;">
+                                                    <div>
+                                                        <ul class="list-unstyled list-inline price">
+                                                            <li class="list-inline-item"
+                                                                style="padding-bottom : 6px; font-size : 18px">
+                                                                [[${itemList.itemPrice}]]원
+                                                            </li>
+                                                            <li class="list-inline-item"></li>
+                                                        </ul>
+                                                        <ul class="list-unstyled list-inline fav">
+                                                            <li class="list-inline-item">[[${itemList.itRegion}]]</li>
+                                                        </ul>
+
+                                                    </div>
+                                                    <div style="text-align: right;">
+                                                        <ul class="list-unstyled list-inline fav"
+                                                            style="margin-bottom: 10px; margin-top:2px;">
+                                                            <li class="list-inline-item">[[${itemList.itDate}]]</li>
+                                                        </ul>
+                                                        <ul class="list-unstyled list-inline fav">
+
+                                                            <li class="list-inline-item">좋아요수[[${itemList.itemLike}]]
+                                                            </li>
+                                                        </ul>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Brand area 2 -->
+<section class="brand2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tp-bnd owl-carousel">
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-01.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-02.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-03.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-04.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-05.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-06.png" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="bnd-items">
+                        <a href="#"><img src="/images/brand-07.png" alt="" class="img-fluid"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Brand area 2 -->
+
+<!-- Footer Area -->
+<section class="footer-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="f-contact">
+                    <h5>Contact Info</h5>
+                    <div class="f-add">
+                        <i class="fa fa-map-marker"></i>
+                        <span>Address :</span>
+                        <p>795 South Park Avenue, New York, NY USA 94107</p>
+                    </div>
+                    <div class="f-email">
+                        <i class="fa fa-envelope"></i>
+                        <span>Email :</span>
+                        <p>enquery@domain.com</p>
+                    </div>
+                    <div class="f-phn">
+                        <i class="fa fa-phone"></i>
+                        <span>Phone :</span>
+                        <p>+1 908 875 7678</p>
+                    </div>
+                    <div class="f-social">
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-cat">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Clothing</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Electronics</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Smartphones & Tablets</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Computer & Office</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Home Appliances</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Leather & Shoes</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Kids & Babies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-link">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Shopping Cart</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>My Wishlist</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Checkout</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Order History</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Log In</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Our Locations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="f-sup">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Payment Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Return Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Frequently asked questions</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Terms & Condition</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i>Delivery Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="footer-btm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Copyright &copy; 2020 | Designed With <i class="fa fa-heart"></i> by <a href="#" target="_blank">SnazzyTheme</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-right">
+                <img src="/images/payment.png" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="back-to-top text-center">
+        <img src="/images/backtotop.png" alt="" class="img-fluid">
+    </div>
+</section>
+<!-- End Footer Area -->
+
+
+<!-- =========================================
+JavaScript Files
+========================================== -->
+
+<!-- jQuery JS -->
+<script src="/js/assets/vendor/jquery-1.12.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/js/assets/popper.min.js"></script>
+<script src="/js/assets/bootstrap.min.js"></script>
+
+<!-- Owl Slider -->
+<script src="/js/assets/owl.carousel.min.js"></script>
+
+<!-- Wow Animation -->
+<script src="/js/assets/wow.min.js"></script>
+
+<!-- Price Filter -->
+<script src="/js/assets/price-filter.js"></script>
+
+<!-- Mean Menu -->
+<script src="/js/assets/jquery.meanmenu.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/js/plugins.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+
+<!-- Mirrored from www.thetahmid.com/themes/xemart-v1.0/02-home-two.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 02:06:54 GMT -->
+</html>

@@ -213,7 +213,7 @@
 	.about-us .wc-box h4,
 	.team .sec-title h4,
 	.contact-area .contact-box-tp h4,
-	.contact-area .contact-form h4, {
+	.contact-area .contact-form h4{
 		font-size: 20px;
 	}
 	.about-us .wc-box,
